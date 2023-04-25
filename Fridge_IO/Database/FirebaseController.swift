@@ -82,4 +82,8 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
         }
     }
+    
+    func resetPassword(email: String) {
+        authController.sendPasswordReset(withEmail: email)
+    }
 }

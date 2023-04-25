@@ -57,6 +57,29 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
         databaseController?.login(email: email, password: password)
     }
     
+    //Reset password
+    @IBAction func resetPassword(_ sender: Any) {
+        let alertController = UIAlertController(title: "Reset password", message: "Enter your email", preferredStyle: .alert)
+        
+        alertController.addTextField(configurationHandler: { textfield in
+            textfield.placeholder = "Enter an email..."
+        })
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            guard let email = alertController.textFields![0].text, !email.isEmpty else {
+                self.displayMessage(title: "Error", message: "Enter an email")
+                return
+            }
+            
+            self.databaseController?.resetPassword(email: email)
+            self.displayMessage(title: "Success", message: "A reset link has been sent to your email")
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     //Validation of the input fields
     func validateFields() -> (Bool, String, String) {
         guard let email = emailTextField.text, !email.isEmpty else {
