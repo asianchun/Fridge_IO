@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36188AB629F8B87500C73670 /* HomePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36188AB529F8B87500C73670 /* HomePageTableViewController.swift */; };
 		363C40F529F2499F00878662 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C40F429F2499F00878662 /* AppDelegate.swift */; };
 		363C40F729F2499F00878662 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C40F629F2499F00878662 /* SceneDelegate.swift */; };
 		363C40F929F2499F00878662 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C40F829F2499F00878662 /* LoginScreenViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36188AB529F8B87500C73670 /* HomePageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTableViewController.swift; sourceTree = "<group>"; };
 		363C40F129F2499F00878662 /* Fridge_IO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fridge_IO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		363C40F429F2499F00878662 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		363C40F629F2499F00878662 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				36ED925A29F798A600DE3CBC /* GoogleService-Info.plist */,
 				363C410229F249A000878662 /* Info.plist */,
 				363C410829F2830100878662 /* SignUpScreenViewController.swift */,
+				36188AB529F8B87500C73670 /* HomePageTableViewController.swift */,
 			);
 			path = Fridge_IO;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				36ED926029F799B200DE3CBC /* FirebaseController.swift in Sources */,
 				363C410929F2830100878662 /* SignUpScreenViewController.swift in Sources */,
 				36ED926229F799F500DE3CBC /* MulticastDelegate.swift in Sources */,
+				36188AB629F8B87500C73670 /* HomePageTableViewController.swift in Sources */,
 				363C40F929F2499F00878662 /* LoginScreenViewController.swift in Sources */,
 				363C40F529F2499F00878662 /* AppDelegate.swift in Sources */,
 				363C40F729F2499F00878662 /* SceneDelegate.swift in Sources */,

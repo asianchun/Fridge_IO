@@ -24,5 +24,6 @@ protocol DatabaseProtocol: AnyObject {
     //Authentication functions
     func login(email: String, password: String)
     func signup(email: String, password: String)
+    func logout()
     func resetPassword(email: String)
 }

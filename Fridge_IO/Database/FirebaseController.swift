@@ -83,6 +83,14 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    func logout() {
+        do {
+            try authController.signOut()
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
     func resetPassword(email: String) {
         authController.sendPasswordReset(withEmail: email)
     }
