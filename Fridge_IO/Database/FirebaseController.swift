@@ -15,6 +15,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     var authController: Auth
     var currentUser: FirebaseAuth.User?
+    var currentUserID: String?
     
     override init() {
         FirebaseApp.configure()
@@ -46,6 +47,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
             do {
                 let authResult = try await authController.signIn(withEmail: email, password: password)
                 currentUser = authResult.user
+                currentUserID = currentUser?.uid
                 
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
@@ -67,6 +69,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
             do {
                 let authResult = try await authController.createUser(withEmail: email, password: password)
                 currentUser = authResult.user
+                currentUserID = currentUser?.uid
                 
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
@@ -86,6 +89,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     func logout() {
         do {
             try authController.signOut()
+            currentUserID = nil
         } catch {
             print("Error: \(error)")
         }

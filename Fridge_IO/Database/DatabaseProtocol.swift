@@ -17,6 +17,7 @@ protocol DatabaseListener: AnyObject {
 }
 
 protocol DatabaseProtocol: AnyObject {
+    var currentUserID: String? {get set}
     //Listener functions
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)

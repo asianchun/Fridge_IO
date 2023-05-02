@@ -24,6 +24,18 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
         databaseController = appDelegate?.databaseController
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        let userDefaults = UserDefaults.standard
+        
+        let loggedIn = userDefaults.bool(forKey: "loggedIn")
+       
+        if loggedIn {
+            userDefaults.set(false, forKey: "loggedIn")
+            databaseController?.currentUserID = userDefaults.string(forKey: "userID")
+            performSegue(withIdentifier: "loginIdentifier", sender: self)
+        }
+    }
+    
     //Setup & Remove listeners
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
