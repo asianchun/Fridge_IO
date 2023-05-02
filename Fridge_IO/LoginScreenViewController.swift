@@ -126,5 +126,10 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
         
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    //Useless
+    func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
+        //Do nothing
+    }
 }
 
