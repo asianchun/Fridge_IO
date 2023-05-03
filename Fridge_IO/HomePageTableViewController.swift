@@ -68,7 +68,11 @@ class HomePageTableViewController: UITableViewController, DatabaseListener {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return allGroceries.count
+        if allGroceries.isEmpty {
+            return 1
+        } else {
+            return allGroceries.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

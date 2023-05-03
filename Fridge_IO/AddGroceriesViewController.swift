@@ -21,6 +21,9 @@ class AddGroceriesViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
+        
+        dateControl.minimumDate = Date()
+        dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
         // Do any additional setup after loading the view.
     }
     
@@ -30,12 +33,8 @@ class AddGroceriesViewController: UIViewController {
         }
         
         let date = dateControl.date
-        let currentDate = Date()
         
-        let difference = Calendar.current.dateComponents([Calendar.Component.day], from: date, to: currentDate)
-        
-        
-        if name.isEmpty || amount.isEmpty || difference.day! > 0 {
+        if name.isEmpty || amount.isEmpty {
             var errorMsg = "Please ensure all fields are filled : \n"
             
             if name.isEmpty {
@@ -44,9 +43,6 @@ class AddGroceriesViewController: UIViewController {
             if amount.isEmpty {
                 errorMsg += "- Must provide an amount \n"
             }
-            if difference.day! > 0 {
-                errorMsg += "- Must be a date in the future"
-            }
             
             displayMessage(title: "Not all fields filled", message: errorMsg)
             return
@@ -54,6 +50,25 @@ class AddGroceriesViewController: UIViewController {
         
         let _ = databaseController?.addGrocery(name: name, type: type, expiry: date, amount: amount)
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func typeValueChange(_ sender: Any) {
+        var type = Int(typeSegmentedControl.selectedSegmentIndex)
+        
+        switch type {
+        case 0:
+            dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
+        case 1:
+            dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
+        case 2:
+            dateControl.date = Calendar.current.date(byAdding: .day, value: 14, to: Date())!
+        case 3:
+            dateControl.date = Calendar.current.date(byAdding: .day, value: 300, to: Date())!
+        case 4:
+            dateControl.date = Calendar.current.date(byAdding: .day, value: 20, to: Date())!
+        default:
+            dateControl.date = Date()
+        }
     }
     
     func displayMessage(title: String, message: String) {
