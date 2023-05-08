@@ -17,7 +17,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var database: Firestore
     
     var currentUser: FirebaseAuth.User?
-    var currentUserID: String?
     
     var groceriesRef: CollectionReference?
     var groceryList: [Grocery]
@@ -61,7 +60,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
             do {
                 let authResult = try await authController.signIn(withEmail: email, password: password)
                 currentUser = authResult.user
-                currentUserID = currentUser?.uid
                 
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
@@ -85,7 +83,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
             do {
                 let authResult = try await authController.createUser(withEmail: email, password: password)
                 currentUser = authResult.user
-                currentUserID = currentUser?.uid
                 
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
@@ -107,7 +104,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
     func logout() {
         do {
             try authController.signOut()
-            currentUserID = nil
         } catch {
             print("Error: \(error)")
         }
@@ -143,15 +139,19 @@ class FirebaseController: NSObject, DatabaseProtocol {
     }
     
     func setupGroceryListener() {
-        groceriesRef = database.collection("groceries")
-
-        groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
-            guard let querySnapshot = querySnapshot else {
-                print("Failed to fetch documents with error: \(String(describing: error))")
-                return
-            }
+        if !listenerExists { //This is like this for now, it will change once the groceries are user specific
+            listenerExists = true
             
-            self.parseGroceriesSnapshot(snapshot: querySnapshot)
+            groceriesRef = database.collection("groceries")
+
+            groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
+                guard let querySnapshot = querySnapshot else {
+                    print("Failed to fetch documents with error: \(String(describing: error))")
+                    return
+                }
+                
+                self.parseGroceriesSnapshot(snapshot: querySnapshot)
+            }
         }
     }
     
