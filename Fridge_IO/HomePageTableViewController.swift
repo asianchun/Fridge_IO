@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomePageTableViewController: UITableViewController, DatabaseListener {
+class HomePageTableViewController: UITableViewController, UISearchBarDelegate ,DatabaseListener {
     
     weak var databaseController: DatabaseProtocol?
     
@@ -15,18 +15,58 @@ class HomePageTableViewController: UITableViewController, DatabaseListener {
     
     var listenerType = ListenerType.groceries
     var allGroceries: [Grocery] = []
+    var filteredGroceries: [Grocery] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.scopeBarActivation = .onSearchActivation
+        searchController.searchBar.scopeButtonTitles = ["All", "Dairy", "Veggies", "Meat", "Nuts", "Liquids"]
+        
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        filteredGroceries = allGroceries
+    }
+    
+    //Search bar functions
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        
+        let search = searchText.lowercased()
+        
+        filteredGroceries = allGroceries.filter({ (grocery: Grocery) -> Bool in
+            let name = grocery.name?.lowercased()
+            return (name?.contains(search) ?? false)
+        })
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        filteredGroceries = allGroceries
+        tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        if selectedScope != 0 {
+            filteredGroceries = allGroceries.filter({ (grocery: Grocery) -> Bool in
+                let scope = selectedScope - 1
+                return grocery.type == scope
+            })
+        } else {
+            filteredGroceries = allGroceries
+        }
+        
+        tableView.reloadData()
     }
     
     //Setup listeners
@@ -42,6 +82,7 @@ class HomePageTableViewController: UITableViewController, DatabaseListener {
     
     func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
         allGroceries = groceries
+        filteredGroceries = allGroceries
         tableView.reloadData()
     }
     
@@ -68,10 +109,10 @@ class HomePageTableViewController: UITableViewController, DatabaseListener {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if allGroceries.isEmpty {
+        if filteredGroceries.isEmpty {
             return 1
         } else {
-            return allGroceries.count
+            return filteredGroceries.count
         }
     }
 
@@ -80,11 +121,11 @@ class HomePageTableViewController: UITableViewController, DatabaseListener {
         
         var content = groceryCell.defaultContentConfiguration()
         
-        if allGroceries.isEmpty {
-            content.text = "No Groceries added. Tap + to add some"
+        if filteredGroceries.isEmpty {
+            content.text = "Groceries not found. Tap + to add some"
             content.secondaryText = ""
         } else {
-            let grocery = allGroceries[indexPath.row]
+            let grocery = filteredGroceries[indexPath.row]
 
             if let name = grocery.name, let amount = grocery.amount, let date = grocery.expiry {
                 let dateFormatter = DateFormatter()
@@ -107,7 +148,7 @@ class HomePageTableViewController: UITableViewController, DatabaseListener {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let grocery = allGroceries[indexPath.row]
+            let grocery = filteredGroceries[indexPath.row]
             databaseController?.deleteGrocery(grocery: grocery)
         }
     }
