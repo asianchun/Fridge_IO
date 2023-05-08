@@ -48,11 +48,13 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate ,D
             return (name?.contains(search) ?? false)
         })
         
+        searchBar.selectedScopeButtonIndex = 0
         tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         filteredGroceries = allGroceries
+        searchBar.selectedScopeButtonIndex = 0
         tableView.reloadData()
     }
     
@@ -66,6 +68,7 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate ,D
             filteredGroceries = allGroceries
         }
         
+        searchBar.text = ""
         tableView.reloadData()
     }
     
