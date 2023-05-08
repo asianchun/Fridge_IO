@@ -7,16 +7,26 @@
 
 import Foundation
 
+enum DatabaseChange {
+    case add
+    case remove
+    case update
+}
+
 enum ListenerType {
     case auth
+    case groceries
 }
 
 protocol DatabaseListener: AnyObject {
     var listenerType: ListenerType {get set}
     func onAuthChange(success: Bool, message: String?)
+    func onGroceriesChange(change: DatabaseChange, groceries: [Grocery])
 }
 
 protocol DatabaseProtocol: AnyObject {
+    var currentUserID: String? {get set}
+    
     //Listener functions
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
@@ -26,4 +36,8 @@ protocol DatabaseProtocol: AnyObject {
     func signup(email: String, password: String)
     func logout()
     func resetPassword(email: String)
+    
+    //Grocery functions
+    func addGrocery(name: String, type: GroceryType, expiry: Date, amount: String) -> Grocery
+    func deleteGrocery(grocery: Grocery)
 }
