@@ -14,6 +14,7 @@ enum CodingKeys: String, CodingKey {
     case type
     case expiry
     case amount
+    case user
 }
 
 enum GroceryType: Int {
@@ -31,6 +32,7 @@ class Grocery: NSObject, Codable {
     var type: Int?
     var expiry: Date?
     var amount: String?
+    var user: String?
 }
 
 extension Grocery {
