@@ -157,8 +157,23 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate ,D
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Open the next page (use code from articles api thing
+        //Open the edit page (use code from articles api thing
     }
+    
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
     
     //Useless
     func onAuthChange(success: Bool, message: String?) {
