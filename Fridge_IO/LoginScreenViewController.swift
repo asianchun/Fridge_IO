@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginScreenViewController: UIViewController, DatabaseListener {
     
@@ -15,6 +16,7 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
     
     //Other variables
     var listenerType = ListenerType.auth
+    var handle: AuthStateDidChangeListenerHandle?
     weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
@@ -24,22 +26,18 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
         databaseController = appDelegate?.databaseController
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        let userDefaults = UserDefaults.standard
-        
-        let loggedIn = userDefaults.bool(forKey: "loggedIn")
-       
-        if loggedIn {
-            userDefaults.set(false, forKey: "loggedIn")
-            databaseController?.currentUserID = userDefaults.string(forKey: "userID")
-            performSegue(withIdentifier: "loginIdentifier", sender: self)
-        }
-    }
-    
     //Setup & Remove listeners
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
+        
+        handle = Auth.auth().addStateDidChangeListener( { (auth, user) in
+            if (user != nil) {
+                self.performSegue(withIdentifier: "loginIdentifier", sender: nil)
+                self.databaseController?.currentUser = user
+                self.databaseController?.setupGroceryListener()
+            }
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {

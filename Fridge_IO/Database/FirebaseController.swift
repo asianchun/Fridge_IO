@@ -17,12 +17,12 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var database: Firestore
     
     var currentUser: FirebaseAuth.User?
-    var currentUserID: String?
+    var groceries: [Grocery]?
     
     var groceriesRef: CollectionReference?
     var groceryList: [Grocery]
     
-    var listenerExists = false
+    var listener: ListenerRegistration?
     
     override init() {
         FirebaseApp.configure()
@@ -31,14 +31,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         database = Firestore.firestore()
         
         groceryList = [Grocery]()
-        
-//        database = Firestore.firestore()
-//        heroList = [Superhero]()
-//        defaultTeam = Team()
-//
-//        usersRef = database.collection("users")
-//        teamsRef = database.collection("teams")
-        
+
         super.init()
     }
     
@@ -61,7 +54,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
             do {
                 let authResult = try await authController.signIn(withEmail: email, password: password)
                 currentUser = authResult.user
-                currentUserID = currentUser?.uid
                 
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
@@ -85,7 +77,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
             do {
                 let authResult = try await authController.createUser(withEmail: email, password: password)
                 currentUser = authResult.user
-                currentUserID = currentUser?.uid
                 
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
@@ -107,7 +98,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     func logout() {
         do {
             try authController.signOut()
-            currentUserID = nil
+            groceryList.removeAll()
         } catch {
             print("Error: \(error)")
         }
@@ -124,6 +115,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         grocery.type = type.rawValue
         grocery.expiry = expiry
         grocery.amount = amount
+        grocery.user = currentUser?.uid
         
         do {
             if let groceryRef = try groceriesRef?.addDocument(from: grocery) {
@@ -144,15 +136,16 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     func setupGroceryListener() {
         groceriesRef = database.collection("groceries")
+        listener?.remove()
 
-        groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
+        listener = (groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot else {
                 print("Failed to fetch documents with error: \(String(describing: error))")
                 return
             }
             
             self.parseGroceriesSnapshot(snapshot: querySnapshot)
-        }
+        })!
     }
     
     func parseGroceriesSnapshot(snapshot: QuerySnapshot) {
@@ -171,14 +164,18 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 return
             }
             
-            if change.type == .added {
-                groceryList.append(grocery)
-            } else if change.type == .modified {
-                groceryList[Int(change.oldIndex)] = grocery
-            } else if change.type == .removed {
-                groceryList.remove(at: Int(change.oldIndex))
+            if grocery.user == currentUser?.uid {
+                if change.type == .added {
+                    groceryList.append(grocery)
+                } else if change.type == .modified {
+                    groceryList[Int(change.oldIndex)] = grocery
+                } else if change.type == .removed {
+                    groceryList.remove(at: Int(change.oldIndex))
+                }
             }
         }
+        
+        groceries = groceryList
         
         listeners.invoke { (listener) in
             if listener.listenerType == .groceries {

@@ -7,83 +7,202 @@
 
 import UIKit
 
-class RecipePageTableViewController: UITableViewController {
-
+class RecipePageTableViewController: UITableViewController, UISearchBarDelegate {
+    
+    enum Status {
+        case standard
+        case notFound
+        case loading
+    }
+    
+    weak var databaseController: DatabaseProtocol?
+    
+    let CELL_RECIPE = "recipeCell"
+    
+    var recipes = [RecipeData]()
+    var indicator = UIActivityIndicatorView()
+    var allGroceries: [Grocery]?    
+    var status: Status = .standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        indicator.style = UIActivityIndicatorView.Style.large
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
+        
+        allGroceries = databaseController?.groceries
     }
+    
+    //Search bar function
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        
+        recipes.removeAll()
+        status = .loading
+        tableView.reloadData()
+        
+        navigationItem.searchController?.dismiss(animated: true)
+        indicator.startAnimating()
+        
+        URLSession.shared.invalidateAndCancel()
+        
+        Task {
+            await requestRecipes(searchText)
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        status = .standard
+        tableView.reloadData()
+    }
+    
+    //Api call
+    func requestRecipes(_ ingredients: String) async {
+        var searchURLComponents = URLComponents()
+        searchURLComponents.scheme = "https"
+        searchURLComponents.host = "api.edamam.com"
+        searchURLComponents.path = "/api/recipes/v2"
+        searchURLComponents.queryItems = [
+            URLQueryItem(name: "type", value: "public"),
+            URLQueryItem(name: "app_id", value: "9333305b"),
+            URLQueryItem(name: "app_key", value: "f057783ac2d77497fd46d9f1c286b0f6"),
+            URLQueryItem(name: "q", value: ingredients)
+        ]
+        
+        guard let requestURL = searchURLComponents.url else {
+            print("Invalid URL")
+            return
+        }
+        
+        let urlRequest = URLRequest(url: requestURL)
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+            }
+            
+            status = .notFound
+            tableView.reloadData()
 
+            do {
+                let decoder = JSONDecoder()
+                let volumeData = try decoder.decode(VolumeData.self, from: data)
+                
+                if let results = volumeData.recipes {
+                    DispatchQueue.main.async {
+                        for result in results {
+                            var matching = 0
+                            
+                            for grocery in self.allGroceries! {
+                                for ingredient in result.ingredients! {
+                                    if ingredient.lowercased().contains(grocery.name?.lowercased() ?? ""){
+                                        matching+=1
+                                    }
+                                }
+                            }
+                            
+                            if matching >= 2 {
+                                self.recipes.append(result)
+                                self.tableView.reloadData()
+                            }
+                            //Another way to reload data
+                            //self.tableView.insertRows(at: [IndexPath(row: self.newBooks.count - 1, section: 0)], with: .fade)
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            
+        } catch let error {
+            print(error)
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if recipes.isEmpty {
+            return 1
+        } else {
+            return recipes.count
+        }
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_RECIPE, for: indexPath)
+        
+        var content = cell.defaultContentConfiguration()
+        
+        if recipes.isEmpty {
+            switch status {
+            case .standard:
+                content.text = "Search to find some new recipes!"
+            case .notFound:
+                content.text = "No recipes found based on your fridge!"
+            case .loading:
+                content.text = "Looking for recipes..."
+            }
+        } else {
+            let recipe = recipes[indexPath.row]
+            
+            content.text = recipe.name
+            
+            if let diatary = recipe.diateries, diatary.isEmpty {
+                content.secondaryText = "Calories: \(recipe.calories ?? 0) | Best time: \(recipe.mealType ?? "Anytime")"
+            } else {
+                content.secondaryText = "Calories: \(recipe.calories ?? 0) | Contains: \(recipe.diateries ?? "None") | Best time: \(recipe.mealType ?? "Anytime")"
+            }
 
-        // Configure the cell...
-
+        }
+        
+        cell.contentConfiguration = content
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "recipeIdentifier", sender: indexPath)
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "recipeIdentifier" {
+            let sender = sender as! IndexPath
+            let destination = segue.destination as! RecipeViewController
+            
+            destination.recipe = recipes[sender.row]
+        }
     }
-    */
-
 }

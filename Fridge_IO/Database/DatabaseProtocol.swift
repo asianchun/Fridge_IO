@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 enum DatabaseChange {
     case add
@@ -25,7 +26,8 @@ protocol DatabaseListener: AnyObject {
 }
 
 protocol DatabaseProtocol: AnyObject {
-    var currentUserID: String? {get set}
+    var currentUser: FirebaseAuth.User? {get set}
+    var groceries: [Grocery]? {get set}
     
     //Listener functions
     func addListener(listener: DatabaseListener)
@@ -38,6 +40,7 @@ protocol DatabaseProtocol: AnyObject {
     func resetPassword(email: String)
     
     //Grocery functions
+    func setupGroceryListener()
     func addGrocery(name: String, type: GroceryType, expiry: Date, amount: String) -> Grocery
     func deleteGrocery(grocery: Grocery)
 }
