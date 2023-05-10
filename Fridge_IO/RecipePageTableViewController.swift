@@ -169,14 +169,18 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Transition to the recipe specific page
+        performSegue(withIdentifier: "recipeIdentifier", sender: indexPath)
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "recipeIdentifier" {
+            let sender = sender as! IndexPath
+            let destination = segue.destination as! RecipeViewController
+            
+            destination.recipe = recipes[sender.row]
+        }
     }
 }

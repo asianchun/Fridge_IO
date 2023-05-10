@@ -157,7 +157,7 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, D
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //Open the edit page (use code from articles api thing
+        performSegue(withIdentifier: "editIdentifier", sender: indexPath)
     }
     
     /*
@@ -180,15 +180,16 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, D
         //Do nothing
     }
     
-    
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "editIdentifier" {
+            let sender = sender as! IndexPath
+            let destination = segue.destination as! EditGroceryViewController
+            
+            destination.grocery = filteredGroceries[sender.row]
+        }
     }
-    */
 
 }

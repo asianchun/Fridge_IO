@@ -294,6 +294,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="TmD-Vq-NOp"/>
+                        <segue destination="TDZ-6Y-faM" kind="show" identifier="editIdentifier" id="Yd7-tl-mz6"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfq-qi-iS9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -409,7 +410,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqU-45-fFg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4843.5114503816794" y="343.66197183098592"/>
+            <point key="canvasLocation" x="4877" y="-128"/>
+        </scene>
+        <!--Edit Grocery-->
+        <scene sceneID="5jO-HV-WWg">
+            <objects>
+                <viewController id="TDZ-6Y-faM" customClass="EditGroceryViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TeJ-cG-8SD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Kqm-lx-Qjc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Grocery" id="dFy-3G-NGW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F9q-Fl-nDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4876" y="631"/>
         </scene>
         <!--Recipes-->
         <scene sceneID="zxS-Ig-Aie">
@@ -450,10 +467,29 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipes" id="7nK-Ys-aSg"/>
+                    <connections>
+                        <segue destination="Oia-fh-BzA" kind="show" identifier="recipeIdentifier" id="4L4-8H-MUJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XiM-14-dl0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3789" y="1080"/>
+        </scene>
+        <!--Recipe Name-->
+        <scene sceneID="gW0-7F-SUO">
+            <objects>
+                <viewController id="Oia-fh-BzA" customClass="RecipeViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xaQ-vF-v24">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="YF3-Ht-v08"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Recipe Name" id="L0G-D2-aMg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Uj-vT-kSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4876" y="1387"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IlY-VQ-dDp">
