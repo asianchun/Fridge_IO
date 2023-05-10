@@ -7,12 +7,16 @@
 
 import UIKit
 
-class RecipePageTableViewController: UITableViewController, UISearchBarDelegate {
+class RecipePageTableViewController: UITableViewController, UISearchBarDelegate, DatabaseListener {
+    
+    weak var databaseController: DatabaseProtocol?
     
     let CELL_RECIPE = "recipeCell"
     
-    var recipes: [String] = [] //Change this with RecipeData
+    var recipes = [RecipeData]()
     var indicator = UIActivityIndicatorView()
+    var listenerType = ListenerType.groceries
+    var allGroceries: [Grocery] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,24 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
         ])
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
+    }
+    
+    //Setup listeners
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
+        allGroceries = groceries
     }
     
     //Search bar function
@@ -53,11 +75,12 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         }
     }
     
+    //Api call
     func requestRecipes(_ ingredients: String) async {
         var searchURLComponents = URLComponents()
         searchURLComponents.scheme = "https"
         searchURLComponents.host = "api.edamam.com"
-        searchURLComponents.path = "api/recipes/v2"
+        searchURLComponents.path = "/api/recipes/v2"
         searchURLComponents.queryItems = [
             URLQueryItem(name: "type", value: "public"),
             URLQueryItem(name: "app_id", value: "9333305b"),
@@ -84,24 +107,19 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             }
             
             do {
-//                let decoder = JSONDecoder()
-//                let volumeData = try decoder.decode(VolumeData.self, from: data)
-//
-//                if let books = volumeData.books {
-//                    DispatchQueue.main.async {
-//                        for book in books {
-//                            self.newBooks.append(book)
-//                            self.tableView.insertRows(at: [IndexPath(row: self.newBooks.count - 1, section: 0)], with: .fade)
-//                        }
-//
-//                    }
-//
-//                    if books.count == MAX_ITEMS_PER_REQUEST, currentRequestIndex + 1 < MAX_REQUESTS {
-//                        currentRequestIndex += 1
-//                        await requestBooksNamed(bookName)
-//                    }
-//
-//                }
+                let decoder = JSONDecoder()
+                let volumeData = try decoder.decode(VolumeData.self, from: data)
+                
+                if let results = volumeData.recipes {
+                    DispatchQueue.main.async {
+                        for result in results {
+                            self.recipes.append(result)
+                            self.tableView.reloadData()
+                            //Another way to reload data
+                            //self.tableView.insertRows(at: [IndexPath(row: self.newBooks.count - 1, section: 0)], with: .fade)
+                        }
+                    }
+                }
             } catch {
                 print(error)
             }
@@ -138,8 +156,14 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         } else {
             let recipe = recipes[indexPath.row]
             
-            content.text = "Test"
-            content.secondaryText = "Test"
+            content.text = recipe.name
+            
+            if let diatary = recipe.diateries, diatary.isEmpty {
+                content.secondaryText = "Calories: \(recipe.calories ?? 0) | Best time: \(recipe.mealType ?? "Anytime")"
+            } else {
+                content.secondaryText = "Calories: \(recipe.calories ?? 0) | Contains: \(recipe.diateries ?? "None") | Best time: \(recipe.mealType ?? "Anytime")"
+            }
+
         }
         
         cell.contentConfiguration = content
@@ -156,5 +180,11 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+    }
+    
+    
+    //Useless
+    func onAuthChange(success: Bool, message: String?) {
+        //Do nothing
     }
 }

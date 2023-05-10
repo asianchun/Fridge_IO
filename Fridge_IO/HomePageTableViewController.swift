@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomePageTableViewController: UITableViewController, UISearchBarDelegate ,DatabaseListener {
+class HomePageTableViewController: UITableViewController, UISearchBarDelegate, DatabaseListener {
     
     weak var databaseController: DatabaseProtocol?
     

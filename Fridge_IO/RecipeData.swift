@@ -10,42 +10,64 @@ import UIKit
 class RecipeData: NSObject, Decodable {
     //All the needed variables
     
+    var name: String?
+    var imageURL: String?
+    var source: String?
+    var url: String?
+    var ingredientLines: [String]?
+    var ingredients: [String]?
+    var calories: Int?
+    var mealType: String?
+    var diateries: String?
+    
     private enum RootKeys: String, CodingKey {
         case recipe
     }
     
-    private enum InfoKeys: String, CodingKey {
-        //Replace with more layers
-        case recipe
+    private enum RecipeKeys: String, CodingKey {
+        case name = "label"
+        case imageURL = "image"
+        case source
+        case url
+        case ingredientLines
+        case ingredients
+        case calories
+        case mealType
+        case diateries = "cautions"
+    }
+    
+    private struct Ingredients: Decodable {
+        var food: String
     }
     
     required init(from decoder: Decoder) throws {
-//        //Get the root container
-//        let rootContainer = try decoder.container(keyedBy: RootKeys.self)
-//
-//        //Get the book container for most info
-//        let bookContainer = try rootContainer.nestedContainer(keyedBy: BookKeys.self, forKey: .volumeInfo)
-//
-//        //Get the image links container for the thumbnail
-//        let imageContainer = try? bookContainer.nestedContainer(keyedBy: ImageKeys.self, forKey: .imageLinks)
-//
-//        title = try bookContainer.decode(String.self, forKey: .title)
-//        publisher = try? bookContainer.decode(String.self, forKey: .publisher)
-//        publicationDate = try? bookContainer.decode(String.self, forKey: .publicationDate)
-//        bookDescription = try? bookContainer.decode(String.self, forKey: .bookDescription)
-//
-//        if let authorArray = try? bookContainer.decode([String].self, forKey: .authors) {
-//            authors = authorArray.joined(separator: ", ")
-//        }
-//
-//        if let isbnCodes = try? bookContainer.decode([ISBNCode].self, forKey: .industryIdentifiers) {
-//            for code in isbnCodes {
-//                if code.type == "ISBN_13" {
-//                    isbn13 = code.identifier
-//                }
-//            }
-//        }
-//
-//        imageURL = try? imageContainer?.decode(String.self, forKey: .smallThumbnail)
+        //Get the root container
+        let rootContainer = try decoder.container(keyedBy: RootKeys.self)
+
+        //Get the recipe container for most info
+        let recipeContainer = try rootContainer.nestedContainer(keyedBy: RecipeKeys.self, forKey: .recipe)
+        
+        name = try recipeContainer.decode(String.self, forKey: .name)
+        imageURL = try recipeContainer.decode(String.self, forKey: .imageURL)
+        source = try recipeContainer.decode(String.self, forKey: .source)
+        url = try recipeContainer.decode(String.self, forKey: .url)
+        ingredientLines = try recipeContainer.decode([String].self, forKey: .ingredientLines)
+        
+        let value = try recipeContainer.decode(Float.self, forKey: .calories)
+        calories = Int(floor(value))
+        
+        if let diateryArray = try? recipeContainer.decode([String].self, forKey: .diateries) {
+            diateries = diateryArray.joined(separator: ", ")
+        }
+
+        if let mealArray = try? recipeContainer.decode([String].self, forKey: .mealType) {
+            mealType = mealArray.joined(separator: ", ")
+        }
+        
+        if let ingredientList = try? recipeContainer.decode([Ingredients].self, forKey: .ingredients) {
+            for ingredient in ingredientList {
+                ingredients?.append(ingredient.food)
+            }
+        }
     }
 }
