@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipePageTableViewController: UITableViewController, UISearchBarDelegate, DatabaseListener {
+class RecipePageTableViewController: UITableViewController, UISearchBarDelegate {
     
     weak var databaseController: DatabaseProtocol?
     
@@ -15,8 +15,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
     
     var recipes = [RecipeData]()
     var indicator = UIActivityIndicatorView()
-    var listenerType = ListenerType.groceries
-    var allGroceries: [Grocery] = []
+    var allGroceries: [Grocery]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,21 +38,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
-    }
-    
-    //Setup listeners
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        databaseController?.addListener(listener: self)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        databaseController?.removeListener(listener: self)
-    }
-    
-    func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
-        allGroceries = groceries
+        
+        allGroceries = databaseController?.groceries
     }
     
     //Search bar function
@@ -113,8 +99,20 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
                 if let results = volumeData.recipes {
                     DispatchQueue.main.async {
                         for result in results {
-                            self.recipes.append(result)
-                            self.tableView.reloadData()
+                            var matching = 0
+                            
+                            for grocery in self.allGroceries! {
+                                for ingredient in result.ingredients! {
+                                    if ingredient.lowercased().contains(grocery.name?.lowercased() ?? ""){
+                                        matching+=1
+                                    }
+                                }
+                            }
+                            
+                            if matching >= 2 {
+                                self.recipes.append(result)
+                                self.tableView.reloadData()
+                            }
                             //Another way to reload data
                             //self.tableView.insertRows(at: [IndexPath(row: self.newBooks.count - 1, section: 0)], with: .fade)
                         }
@@ -180,11 +178,5 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-    }
-    
-    
-    //Useless
-    func onAuthChange(success: Bool, message: String?) {
-        //Do nothing
     }
 }

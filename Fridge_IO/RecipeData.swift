@@ -64,6 +64,7 @@ class RecipeData: NSObject, Decodable {
             mealType = mealArray.joined(separator: ", ")
         }
         
+        ingredients = []
         if let ingredientList = try? recipeContainer.decode([Ingredients].self, forKey: .ingredients) {
             for ingredient in ingredientList {
                 ingredients?.append(ingredient.food)

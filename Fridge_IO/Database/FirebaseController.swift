@@ -17,6 +17,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var database: Firestore
     
     var currentUser: FirebaseAuth.User?
+    var groceries: [Grocery]?
     
     var groceriesRef: CollectionReference?
     var groceryList: [Grocery]
@@ -173,6 +174,8 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 }
             }
         }
+        
+        groceries = groceryList
         
         listeners.invoke { (listener) in
             if listener.listenerType == .groceries {

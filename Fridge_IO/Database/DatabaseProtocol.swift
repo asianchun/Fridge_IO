@@ -27,6 +27,7 @@ protocol DatabaseListener: AnyObject {
 
 protocol DatabaseProtocol: AnyObject {
     var currentUser: FirebaseAuth.User? {get set}
+    var groceries: [Grocery]? {get set}
     
     //Listener functions
     func addListener(listener: DatabaseListener)
