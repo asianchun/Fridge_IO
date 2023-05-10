@@ -84,7 +84,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             URLQueryItem(name: "type", value: "public"),
             URLQueryItem(name: "app_id", value: "9333305b"),
             URLQueryItem(name: "app_key", value: "f057783ac2d77497fd46d9f1c286b0f6"),
-            URLQueryItem(name: "q", value: ingredients)
+            URLQueryItem(name: "q", value: ingredients),
+            URLQueryItem(name: "random", value: "true"),
         ]
         
         guard let requestURL = searchURLComponents.url else {
@@ -125,13 +126,17 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
                                 }
                             }
                             
-                            if matching >= 2 {
+                            if matching >= 2 && !self.recipes.contains(result) {
                                 self.recipes.append(result)
                                 self.tableView.reloadData()
                             }
                             //Another way to reload data
                             //self.tableView.insertRows(at: [IndexPath(row: self.newBooks.count - 1, section: 0)], with: .fade)
                         }
+                    }
+                    
+                    if recipes.count < 20 {
+                        await requestRecipes(ingredients)
                     }
                 }
             } catch {
