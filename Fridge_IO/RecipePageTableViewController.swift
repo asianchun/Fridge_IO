@@ -9,13 +9,20 @@ import UIKit
 
 class RecipePageTableViewController: UITableViewController, UISearchBarDelegate {
     
+    enum Status {
+        case standard
+        case notFound
+        case loading
+    }
+    
     weak var databaseController: DatabaseProtocol?
     
     let CELL_RECIPE = "recipeCell"
     
     var recipes = [RecipeData]()
     var indicator = UIActivityIndicatorView()
-    var allGroceries: [Grocery]?
+    var allGroceries: [Grocery]?    
+    var status: Status = .standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +51,13 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     
     //Search bar function
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        recipes.removeAll()
-        tableView.reloadData()
-        
         guard let searchText = searchBar.text, !searchText.isEmpty else {
             return
         }
+        
+        recipes.removeAll()
+        status = .loading
+        tableView.reloadData()
         
         navigationItem.searchController?.dismiss(animated: true)
         indicator.startAnimating()
@@ -59,6 +67,11 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         Task {
             await requestRecipes(searchText)
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        status = .standard
+        tableView.reloadData()
     }
     
     //Api call
@@ -92,6 +105,9 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
                 self.indicator.stopAnimating()
             }
             
+            status = .notFound
+            tableView.reloadData()
+
             do {
                 let decoder = JSONDecoder()
                 let volumeData = try decoder.decode(VolumeData.self, from: data)
@@ -149,8 +165,14 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         var content = cell.defaultContentConfiguration()
         
         if recipes.isEmpty {
-            content.text = "Search to find some new recipes!"
-            content.secondaryText = ""
+            switch status {
+            case .standard:
+                content.text = "Search to find some new recipes!"
+            case .notFound:
+                content.text = "No recipes found based on your fridge!"
+            case .loading:
+                content.text = "Looking for recipes..."
+            }
         } else {
             let recipe = recipes[indexPath.row]
             
