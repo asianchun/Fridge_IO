@@ -294,7 +294,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="TmD-Vq-NOp"/>
-                        <segue destination="TDZ-6Y-faM" kind="show" identifier="editIdentifier" id="Yd7-tl-mz6"/>
+                        <segue destination="Jac-gt-Mx0" kind="show" identifier="editIdentifier" id="KZh-i1-AhT"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfq-qi-iS9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -410,23 +410,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqU-45-fFg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4877" y="-128"/>
-        </scene>
-        <!--Edit Grocery-->
-        <scene sceneID="5jO-HV-WWg">
-            <objects>
-                <viewController id="TDZ-6Y-faM" customClass="EditGroceryViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TeJ-cG-8SD">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Kqm-lx-Qjc"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Edit Grocery" id="dFy-3G-NGW"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F9q-Fl-nDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4876" y="631"/>
+            <point key="canvasLocation" x="4851" y="-63"/>
         </scene>
         <!--Recipe Search-->
         <scene sceneID="zxS-Ig-Aie">
@@ -596,6 +580,114 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnE-va-SEj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2749" y="1080"/>
+        </scene>
+        <!--Edit Grocery-->
+        <scene sceneID="LdF-Se-9Lm">
+            <objects>
+                <viewController id="Jac-gt-Mx0" customClass="EditGroceryViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f29-g1-Ozk">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPh-Vg-JuO">
+                                <rect key="frame" x="20" y="116.33333333333331" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCS-T6-gnO">
+                                <rect key="frame" x="20" y="84" width="53" height="22.333333333333329"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aou-kH-NbO">
+                                <rect key="frame" x="19.999999999999996" y="170.33333333333334" width="41.666666666666657" height="22.333333333333343"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Amount:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEj-zf-FnN">
+                                <rect key="frame" x="20" y="254" width="92" height="22"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zpo-gW-Fpt">
+                                <rect key="frame" x="20" y="202.66666666666666" width="353" height="32"/>
+                                <segments>
+                                    <segment title="Dairy"/>
+                                    <segment title="Veggies"/>
+                                    <segment title="Meat"/>
+                                    <segment title="Nuts"/>
+                                    <segment title="Liquids"/>
+                                </segments>
+                            </segmentedControl>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 500g" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vIO-gH-hQs">
+                                <rect key="frame" x="20" y="285.66666666666669" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dh9-uG-Llq">
+                                <rect key="frame" x="19.999999999999993" y="339.66666666666669" width="97.333333333333314" height="22.333333333333314"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="left" ambiguous="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="6b5-no-h10">
+                                <rect key="frame" x="20" y="372" width="123" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AAL-un-SLB"/>
+                                </constraints>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="699440400">
+                                    <!--2023-03-02 09:00:00 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="StU-FQ-mw9">
+                                <rect key="frame" x="166" y="492" width="61" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Save"/>
+                                <connections>
+                                    <action selector="save:" destination="Jac-gt-Mx0" eventType="touchUpInside" id="ytx-G5-NWC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MO1-Pl-KZB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="StU-FQ-mw9" firstAttribute="centerX" secondItem="f29-g1-Ozk" secondAttribute="centerX" id="4Dr-Em-kzF"/>
+                            <constraint firstItem="FCS-T6-gnO" firstAttribute="top" secondItem="MO1-Pl-KZB" secondAttribute="top" constant="40" id="6kO-Yf-i8m"/>
+                            <constraint firstItem="zpo-gW-Fpt" firstAttribute="top" secondItem="aou-kH-NbO" secondAttribute="bottom" constant="10" id="6to-gj-2qS"/>
+                            <constraint firstItem="Dh9-uG-Llq" firstAttribute="top" secondItem="vIO-gH-hQs" secondAttribute="bottom" constant="20" id="99Y-L3-Z03"/>
+                            <constraint firstItem="vIO-gH-hQs" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="EDK-HO-ULv"/>
+                            <constraint firstItem="aou-kH-NbO" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="Ken-wu-KxU"/>
+                            <constraint firstItem="6b5-no-h10" firstAttribute="top" secondItem="Dh9-uG-Llq" secondAttribute="bottom" constant="10" id="O2Z-ul-KZc"/>
+                            <constraint firstItem="Dh9-uG-Llq" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="Ol0-fb-Sv7"/>
+                            <constraint firstItem="aou-kH-NbO" firstAttribute="top" secondItem="kPh-Vg-JuO" secondAttribute="bottom" constant="20" id="SM9-gU-bFu"/>
+                            <constraint firstItem="MO1-Pl-KZB" firstAttribute="trailing" secondItem="vIO-gH-hQs" secondAttribute="trailing" constant="20" id="SxL-01-za0"/>
+                            <constraint firstItem="FCS-T6-gnO" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="TNY-5B-klJ"/>
+                            <constraint firstItem="MO1-Pl-KZB" firstAttribute="trailing" secondItem="kPh-Vg-JuO" secondAttribute="trailing" constant="20" id="YIz-8i-3lS"/>
+                            <constraint firstItem="UEj-zf-FnN" firstAttribute="top" secondItem="zpo-gW-Fpt" secondAttribute="bottom" constant="20" id="ewJ-HS-RzX"/>
+                            <constraint firstItem="kPh-Vg-JuO" firstAttribute="top" secondItem="FCS-T6-gnO" secondAttribute="bottom" constant="10" id="gGQ-1a-euh"/>
+                            <constraint firstItem="kPh-Vg-JuO" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="gq1-Bi-viQ"/>
+                            <constraint firstItem="MO1-Pl-KZB" firstAttribute="trailing" secondItem="zpo-gW-Fpt" secondAttribute="trailing" constant="20" id="hie-4u-bxP"/>
+                            <constraint firstItem="UEj-zf-FnN" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="kyc-sA-wos"/>
+                            <constraint firstItem="6b5-no-h10" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="19" id="mKI-5N-V2e"/>
+                            <constraint firstItem="StU-FQ-mw9" firstAttribute="top" secondItem="6b5-no-h10" secondAttribute="bottom" constant="90" id="nDt-4t-sdy"/>
+                            <constraint firstItem="zpo-gW-Fpt" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="t26-1f-laV"/>
+                            <constraint firstItem="vIO-gH-hQs" firstAttribute="top" secondItem="UEj-zf-FnN" secondAttribute="bottom" constant="10" id="vZT-IX-6kV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit Grocery" id="Iz7-eI-NnK"/>
+                    <connections>
+                        <outlet property="amountTextField" destination="vIO-gH-hQs" id="Zgk-yE-q1G"/>
+                        <outlet property="dateControl" destination="6b5-no-h10" id="2gA-YI-LnP"/>
+                        <outlet property="nameTextField" destination="kPh-Vg-JuO" id="dRm-ow-GGZ"/>
+                        <outlet property="typeSegmentedControl" destination="zpo-gW-Fpt" id="sIJ-EZ-xK6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CIj-rg-3Go" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4876" y="630"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

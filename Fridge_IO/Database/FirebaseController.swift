@@ -122,10 +122,23 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 grocery.id = groceryRef.documentID
             }
         } catch {
-            print("Failed to serialize hero")
+            print("Failed to serialize the grocery")
         }
         
         return grocery
+    }
+    
+    func editGrocery(grocery: Grocery, name: String, type: GroceryType, expiry: Date, amount: String) {
+        if let groceryID = grocery.id {
+            groceriesRef?.document(groceryID).updateData([
+                "name": name,
+                "type": type.rawValue,
+                "expiry": expiry,
+                "amount": amount
+            ]) { err in
+                print("Error updating document: \(String(describing: err))")
+            }
+        }
     }
     
     func deleteGrocery(grocery: Grocery) {

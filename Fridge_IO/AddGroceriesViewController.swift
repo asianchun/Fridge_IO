@@ -53,7 +53,7 @@ class AddGroceriesViewController: UIViewController {
     }
     
     @IBAction func typeValueChange(_ sender: Any) {
-        var type = Int(typeSegmentedControl.selectedSegmentIndex)
+        let type = Int(typeSegmentedControl.selectedSegmentIndex)
         
         switch type {
         case 0:

@@ -42,5 +42,6 @@ protocol DatabaseProtocol: AnyObject {
     //Grocery functions
     func setupGroceryListener()
     func addGrocery(name: String, type: GroceryType, expiry: Date, amount: String) -> Grocery
+    func editGrocery(grocery: Grocery, name: String, type: GroceryType, expiry: Date, amount: String)
     func deleteGrocery(grocery: Grocery)
 }

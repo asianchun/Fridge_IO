@@ -189,6 +189,7 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, D
             let destination = segue.destination as! EditGroceryViewController
             
             destination.grocery = filteredGroceries[sender.row]
+            navigationItem.backButtonTitle = "Back"
         }
     }
 
