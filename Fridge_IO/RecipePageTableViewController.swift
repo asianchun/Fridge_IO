@@ -184,9 +184,9 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             content.text = recipe.name
             
             if let diatary = recipe.diateries, diatary.isEmpty {
-                content.secondaryText = "Calories: \(recipe.calories ?? 0) | Best time: \(recipe.mealType ?? "Anytime")"
+                content.secondaryText = "Calories: \(recipe.calories ?? 0) | This recipe contains no diateries"
             } else {
-                content.secondaryText = "Calories: \(recipe.calories ?? 0) | Contains: \(recipe.diateries ?? "None") | Best time: \(recipe.mealType ?? "Anytime")"
+                content.secondaryText = "Calories: \(recipe.calories ?? 0) | Contains: \(recipe.diateries ?? "None")"
             }
 
         }
