@@ -49,7 +49,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         allGroceries = databaseController?.groceries
     }
     
-    //Search bar function
+    // MARK: - Search bar function
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else {
             return
@@ -74,7 +75,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         tableView.reloadData()
     }
     
-    //Api call
+    // MARK: - Api call
+    
     func requestRecipes(_ ingredients: String) async {
         var searchURLComponents = URLComponents()
         searchURLComponents.scheme = "https"
@@ -148,7 +150,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         }
     }
     
-    // MARK: - Table view data source
+    // MARK: - Table view setup
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -170,6 +172,9 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         var content = cell.defaultContentConfiguration()
         
         if recipes.isEmpty {
+            cell.selectionStyle = .none
+            tableView.allowsSelection = false
+            
             switch status {
             case .standard:
                 content.text = "Search to find some new recipes!"
@@ -179,8 +184,9 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
                 content.text = "Looking for recipes..."
             }
         } else {
-            let recipe = recipes[indexPath.row]
+            tableView.allowsSelection = true
             
+            let recipe = recipes[indexPath.row]
             content.text = recipe.name
             
             if let diatary = recipe.diateries, diatary.isEmpty {
@@ -188,7 +194,6 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             } else {
                 content.secondaryText = "Calories: \(recipe.calories ?? 0) | Contains: \(recipe.diateries ?? "None")"
             }
-
         }
         
         cell.contentConfiguration = content
@@ -198,14 +203,31 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "recipeIdentifier", sender: indexPath)
     }
+    
+    //MARK: - Long Tap Gesture
+    
+    @IBAction func handleLongPress(recognizer: UILongPressGestureRecognizer) {
+        if recognizer.state == .began {
+            let touchPoint = recognizer.location(in: tableView)
+            
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                performSegue(withIdentifier: "popupIdentifier", sender: indexPath)
+                //tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+    }
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipeIdentifier" {
             let sender = sender as! IndexPath
             let destination = segue.destination as! RecipeViewController
+            
+            destination.recipe = recipes[sender.row]
+        } else if segue.identifier == "popupIdentifier" {
+            let sender = sender as! IndexPath
+            let destination = segue.destination as! RecipePopUpViewController
             
             destination.recipe = recipes[sender.row]
         }

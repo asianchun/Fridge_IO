@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36188AB629F8B87500C73670 /* HomePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36188AB529F8B87500C73670 /* HomePageTableViewController.swift */; };
+		36188AB629F8B87500C73670 /* GroceryPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36188AB529F8B87500C73670 /* GroceryPageTableViewController.swift */; };
 		363C40F529F2499F00878662 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C40F429F2499F00878662 /* AppDelegate.swift */; };
 		363C40F729F2499F00878662 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C40F629F2499F00878662 /* SceneDelegate.swift */; };
 		363C40F929F2499F00878662 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C40F829F2499F00878662 /* LoginScreenViewController.swift */; };
@@ -19,9 +19,10 @@
 		36A887332A0A1E7000AB6A3D /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887322A0A1E7000AB6A3D /* RecipeData.swift */; };
 		36A887352A0B467500AB6A3D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887342A0B467500AB6A3D /* RecipeViewController.swift */; };
 		36A887372A0B47B000AB6A3D /* EditGroceryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887362A0B47B000AB6A3D /* EditGroceryViewController.swift */; };
+		36D5CDF12A13576B006C2FD0 /* RecipePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */; };
 		36E20E872A00E4F800A4FEB0 /* RecipePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */; };
 		36E20E892A0101B300A4FEB0 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E20E882A0101B300A4FEB0 /* Grocery.swift */; };
-		36E20E8B2A01460F00A4FEB0 /* AddGroceriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E20E8A2A01460F00A4FEB0 /* AddGroceriesViewController.swift */; };
+		36E20E8B2A01460F00A4FEB0 /* AddGroceryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E20E8A2A01460F00A4FEB0 /* AddGroceryViewController.swift */; };
 		36ED925529F7966500DE3CBC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 36ED925429F7966500DE3CBC /* FirebaseAuth */; };
 		36ED925729F7966500DE3CBC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 36ED925629F7966500DE3CBC /* FirebaseFirestore */; };
 		36ED925929F7966500DE3CBC /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 36ED925829F7966500DE3CBC /* FirebaseFirestoreSwift */; };
@@ -32,7 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36188AB529F8B87500C73670 /* HomePageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTableViewController.swift; sourceTree = "<group>"; };
+		36188AB529F8B87500C73670 /* GroceryPageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryPageTableViewController.swift; sourceTree = "<group>"; };
 		363C40F129F2499F00878662 /* Fridge_IO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fridge_IO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		363C40F429F2499F00878662 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		363C40F629F2499F00878662 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,9 +47,10 @@
 		36A887322A0A1E7000AB6A3D /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		36A887342A0B467500AB6A3D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		36A887362A0B47B000AB6A3D /* EditGroceryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroceryViewController.swift; sourceTree = "<group>"; };
+		36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePopUpViewController.swift; sourceTree = "<group>"; };
 		36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePageTableViewController.swift; sourceTree = "<group>"; };
 		36E20E882A0101B300A4FEB0 /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
-		36E20E8A2A01460F00A4FEB0 /* AddGroceriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroceriesViewController.swift; sourceTree = "<group>"; };
+		36E20E8A2A01460F00A4FEB0 /* AddGroceryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroceryViewController.swift; sourceTree = "<group>"; };
 		36ED925A29F798A600DE3CBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		36ED925D29F7999E00DE3CBC /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		36ED925F29F799B200DE3CBC /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
@@ -91,21 +93,22 @@
 				36ED925C29F7998400DE3CBC /* Database */,
 				363C40F429F2499F00878662 /* AppDelegate.swift */,
 				363C40F629F2499F00878662 /* SceneDelegate.swift */,
-				363C40F829F2499F00878662 /* LoginScreenViewController.swift */,
 				363C40FA29F2499F00878662 /* Main.storyboard */,
 				363C40FD29F249A000878662 /* Assets.xcassets */,
 				363C40FF29F249A000878662 /* LaunchScreen.storyboard */,
 				36ED925A29F798A600DE3CBC /* GoogleService-Info.plist */,
 				363C410229F249A000878662 /* Info.plist */,
-				363C410829F2830100878662 /* SignUpScreenViewController.swift */,
-				36188AB529F8B87500C73670 /* HomePageTableViewController.swift */,
-				36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */,
 				36E20E882A0101B300A4FEB0 /* Grocery.swift */,
-				36E20E8A2A01460F00A4FEB0 /* AddGroceriesViewController.swift */,
 				36A887302A0A1E5000AB6A3D /* VolumeData.swift */,
 				36A887322A0A1E7000AB6A3D /* RecipeData.swift */,
-				36A887342A0B467500AB6A3D /* RecipeViewController.swift */,
+				363C40F829F2499F00878662 /* LoginScreenViewController.swift */,
+				363C410829F2830100878662 /* SignUpScreenViewController.swift */,
+				36188AB529F8B87500C73670 /* GroceryPageTableViewController.swift */,
+				36E20E8A2A01460F00A4FEB0 /* AddGroceryViewController.swift */,
 				36A887362A0B47B000AB6A3D /* EditGroceryViewController.swift */,
+				36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */,
+				36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */,
+				36A887342A0B467500AB6A3D /* RecipeViewController.swift */,
 			);
 			path = Fridge_IO;
 			sourceTree = "<group>";
@@ -204,12 +207,13 @@
 				36A887312A0A1E5000AB6A3D /* VolumeData.swift in Sources */,
 				36A887352A0B467500AB6A3D /* RecipeViewController.swift in Sources */,
 				36A887372A0B47B000AB6A3D /* EditGroceryViewController.swift in Sources */,
-				36E20E8B2A01460F00A4FEB0 /* AddGroceriesViewController.swift in Sources */,
+				36E20E8B2A01460F00A4FEB0 /* AddGroceryViewController.swift in Sources */,
+				36D5CDF12A13576B006C2FD0 /* RecipePopUpViewController.swift in Sources */,
 				36A887332A0A1E7000AB6A3D /* RecipeData.swift in Sources */,
 				363C410929F2830100878662 /* SignUpScreenViewController.swift in Sources */,
 				36ED926229F799F500DE3CBC /* MulticastDelegate.swift in Sources */,
 				36E20E872A00E4F800A4FEB0 /* RecipePageTableViewController.swift in Sources */,
-				36188AB629F8B87500C73670 /* HomePageTableViewController.swift in Sources */,
+				36188AB629F8B87500C73670 /* GroceryPageTableViewController.swift in Sources */,
 				363C40F929F2499F00878662 /* LoginScreenViewController.swift in Sources */,
 				363C40F529F2499F00878662 /* AppDelegate.swift in Sources */,
 				363C40F729F2499F00878662 /* SceneDelegate.swift in Sources */,

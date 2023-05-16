@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddGroceriesViewController: UIViewController {
+class AddGroceryViewController: UIViewController {
 
     weak var databaseController: DatabaseProtocol?
     
