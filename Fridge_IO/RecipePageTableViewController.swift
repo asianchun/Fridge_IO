@@ -220,15 +220,13 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let sender = sender as! IndexPath
+        
         if segue.identifier == "recipeIdentifier" {
-            let sender = sender as! IndexPath
             let destination = segue.destination as! RecipeViewController
-            
             destination.recipe = recipes[sender.row]
         } else if segue.identifier == "popupIdentifier" {
-            let sender = sender as! IndexPath
             let destination = segue.destination as! RecipePopUpViewController
-            
             destination.recipe = recipes[sender.row]
         }
     }
