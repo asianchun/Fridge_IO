@@ -121,7 +121,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
                             for grocery in self.allGroceries! {
                                 for ingredient in result.ingredients! {
                                     if ingredient.lowercased().contains(grocery.name?.lowercased() ?? ""){
-                                        matching+=1
+                                        matching += 1
                                     }
                                 }
                             }

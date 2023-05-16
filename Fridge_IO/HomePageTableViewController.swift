@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomePageTableViewController: UITableViewController, UISearchBarDelegate, DatabaseListener {
+class HomePageTableViewController: UITableViewController, UISearchBarDelegate, UITableViewDragDelegate, DatabaseListener {
     
     weak var databaseController: DatabaseProtocol?
     
@@ -19,6 +19,11 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, D
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dragDelegate = self
+        tableView.dragInteractionEnabled = true
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
@@ -103,6 +108,14 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, D
         self.present(alertController, animated: true, completion: nil)
     }
     
+    //Rearange the groceries
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let dragGrocery = UIDragItem(itemProvider: NSItemProvider())
+        dragGrocery.localObject = filteredGroceries[indexPath.row]
+        
+        return [dragGrocery]
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -160,20 +173,18 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, D
         performSegue(withIdentifier: "editIdentifier", sender: indexPath)
     }
     
-    /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        let grocery = filteredGroceries[fromIndexPath.row]
+        filteredGroceries.remove(at: fromIndexPath.row)
+        filteredGroceries.insert(grocery, at: to.row)
     }
-    */
 
-    /*
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
+
     
     //Useless
     func onAuthChange(success: Bool, message: String?) {
