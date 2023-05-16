@@ -165,7 +165,12 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, U
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let grocery = filteredGroceries[indexPath.row]
+            filteredGroceries.remove(at: indexPath.row)
             databaseController?.deleteGrocery(grocery: grocery)
+            
+            for (index, filteredGrocery) in filteredGroceries.enumerated() {
+                databaseController?.editGroceryOrder(grocery: filteredGrocery, newOrder: index)
+            }
         }
     }
     
@@ -178,6 +183,11 @@ class HomePageTableViewController: UITableViewController, UISearchBarDelegate, U
         let grocery = filteredGroceries[fromIndexPath.row]
         filteredGroceries.remove(at: fromIndexPath.row)
         filteredGroceries.insert(grocery, at: to.row)
+        
+        for (index, filteredGrocery) in filteredGroceries.enumerated() {
+            databaseController?.editGroceryOrder(grocery: filteredGrocery, newOrder: index)
+        }
+        tableView.reloadData()
     }
 
     // Override to support conditional rearranging of the table view.

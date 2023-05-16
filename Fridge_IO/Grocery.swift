@@ -33,6 +33,7 @@ class Grocery: NSObject, Codable {
     var expiry: Date?
     var amount: String?
     var user: String?
+    var order: Int?
 }
 
 extension Grocery {

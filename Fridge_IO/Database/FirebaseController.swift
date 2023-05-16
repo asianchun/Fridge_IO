@@ -116,6 +116,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         grocery.expiry = expiry
         grocery.amount = amount
         grocery.user = currentUser?.uid
+        grocery.order = groceryList.count
         
         do {
             if let groceryRef = try groceriesRef?.addDocument(from: grocery) {
@@ -135,9 +136,15 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 "type": type.rawValue,
                 "expiry": expiry,
                 "amount": amount
-            ]) { err in
-                print("Error updating document: \(String(describing: err))")
-            }
+            ])
+        }
+    }
+    
+    func editGroceryOrder(grocery: Grocery, newOrder: Int) {
+        if let groceryID = grocery.id {
+            groceriesRef?.document(groceryID).updateData([
+                "order": newOrder
+            ])
         }
     }
     
@@ -181,11 +188,15 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 if change.type == .added {
                     groceryList.append(grocery)
                 } else if change.type == .modified {
-                    groceryList[Int(change.oldIndex)] = grocery
+                    groceryList[grocery.order!] = grocery
                 } else if change.type == .removed {
                     groceryList.remove(at: Int(change.oldIndex))
                 }
             }
+        }
+        
+        groceryList.sort {
+            $0.order! < $1.order!
         }
         
         groceries = groceryList
