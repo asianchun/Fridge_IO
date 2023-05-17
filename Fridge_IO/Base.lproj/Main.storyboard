@@ -452,9 +452,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe Search" id="7nK-Ys-aSg">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" style="plain" id="8w2-ft-kyC"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" style="plain" id="8w2-ft-kyC">
+                            <connections>
+                                <action selector="showFavourites:" destination="Zuz-5b-1ll" id="HHX-qT-sJs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favouritesButton" destination="8w2-ft-kyC" id="6vC-SY-0wU"/>
                         <segue destination="Oia-fh-BzA" kind="show" identifier="recipeIdentifier" id="4L4-8H-MUJ"/>
                         <segue destination="W0o-mh-5ww" kind="presentation" identifier="popupIdentifier" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="TAr-Pd-g5a"/>
                     </connections>
@@ -662,11 +667,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recipe Name" id="L0G-D2-aMg">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="star" catalog="system" style="plain" id="wBC-jH-rec"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="star" catalog="system" style="plain" id="wBC-jH-rec">
+                            <connections>
+                                <action selector="addToFavourites:" destination="Oia-fh-BzA" id="qmq-fz-iAP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="caloriesText" destination="6w0-uP-ghW" id="7hN-zU-HsK"/>
                         <outlet property="containsText" destination="oI5-Lf-41d" id="eYB-39-UZA"/>
+                        <outlet property="favouritesButton" destination="wBC-jH-rec" id="p6v-c9-gze"/>
                         <outlet property="imageView" destination="ylF-Yt-WAN" id="g5o-2L-1e3"/>
                         <outlet property="ingredientLinesText" destination="lwU-zv-brR" id="q1N-3m-JUr"/>
                         <outlet property="mealTypeText" destination="gYA-nl-6my" id="4kT-ug-IuG"/>

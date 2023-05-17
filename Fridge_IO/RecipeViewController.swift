@@ -16,6 +16,7 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var containsText: UITextView!
     @IBOutlet weak var caloriesText: UITextView!
     @IBOutlet weak var ingredientLinesText: UITextView!
+    @IBOutlet weak var favouritesButton: UIBarButtonItem!
     
     var recipe: RecipeData?
     
@@ -59,7 +60,28 @@ class RecipeViewController: UIViewController {
         }
     }
     
+    @IBAction func addToFavourites(_ sender: Any) {
+        //Unfavourite
+        if favouritesButton.tintColor == .systemYellow {
+            favouritesButton.tintColor = .systemBlue
+        } else {
+            favouritesButton.tintColor = .systemYellow
+            
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentDirectory = paths[0]
+            let fileURL = documentDirectory.appendingPathComponent("/myData.plist")
+            let encoder = PropertyListEncoder()
+            encoder.outputFormat = .xml
 
+            do {
+                let data = try encoder.encode(recipe)
+                try data.write(to: fileURL)
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

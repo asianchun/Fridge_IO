@@ -20,9 +20,12 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     let CELL_RECIPE = "recipeCell"
     
     var recipes = [RecipeData]()
+    var previousRecipes = [RecipeData]()
     var indicator = UIActivityIndicatorView()
     var allGroceries: [Grocery]?    
     var status: Status = .standard
+    
+    @IBOutlet weak var favouritesButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +75,37 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         status = .standard
+        indicator.stopAnimating()
+        tableView.reloadData()
+    }
+    
+    //MARK: - Favourites button
+    @IBAction func showFavourites(_ sender: Any) {
+        if favouritesButton.tintColor == .systemYellow {
+            favouritesButton.tintColor = .systemBlue
+            recipes = previousRecipes
+            navigationItem.title = "Recipe Search"
+        } else {
+            favouritesButton.tintColor = .systemYellow
+            previousRecipes = recipes
+            navigationItem.title = "Favourite Recipes"
+            
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentDirectory = paths[0]
+            let fileURL = documentDirectory.appendingPathComponent("/myData.plist")
+
+            do {
+                let data = try Data(contentsOf: fileURL)
+                let decoder = PropertyListDecoder()
+                let favourite = try decoder.decode(RecipeData.self, from: data)
+
+                recipes.removeAll()
+                recipes.append(favourite)
+            } catch {
+                print(error)
+            }
+        }
+        
         tableView.reloadData()
     }
     
@@ -225,6 +259,10 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         if segue.identifier == "recipeIdentifier" {
             let destination = segue.destination as! RecipeViewController
             destination.recipe = recipes[sender.row]
+            
+            if favouritesButton.tintColor == .systemYellow {
+                destination.favouritesButton.tintColor = .systemYellow
+            }
         } else if segue.identifier == "popupIdentifier" {
             let destination = segue.destination as! RecipePopUpViewController
             destination.recipe = recipes[sender.row]

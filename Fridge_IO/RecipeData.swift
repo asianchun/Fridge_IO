@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipeData: NSObject, Decodable {
+class RecipeData: NSObject, Decodable, Encodable {
     //All the needed variables
     
     var name: String?
@@ -41,34 +41,48 @@ class RecipeData: NSObject, Decodable {
     }
     
     required init(from decoder: Decoder) throws {
-        //Get the root container
-        let rootContainer = try decoder.container(keyedBy: RootKeys.self)
+        if !decoder.codingPath.isEmpty {
+            //Get the root container
+            let rootContainer = try decoder.container(keyedBy: RootKeys.self)
 
-        //Get the recipe container for most info
-        let recipeContainer = try rootContainer.nestedContainer(keyedBy: RecipeKeys.self, forKey: .recipe)
-        
-        name = try recipeContainer.decode(String.self, forKey: .name)
-        imageURL = try recipeContainer.decode(String.self, forKey: .imageURL)
-        source = try recipeContainer.decode(String.self, forKey: .source)
-        url = try recipeContainer.decode(String.self, forKey: .url)
-        ingredientLines = try recipeContainer.decode([String].self, forKey: .ingredientLines)
-        
-        let value = try recipeContainer.decode(Float.self, forKey: .calories)
-        calories = Int(floor(value))
-        
-        if let diateryArray = try? recipeContainer.decode([String].self, forKey: .diateries) {
-            diateries = diateryArray.joined(separator: ", ")
-        }
-
-        if let mealArray = try? recipeContainer.decode([String].self, forKey: .mealType) {
-            mealType = mealArray.joined(separator: ", ")
-        }
-        
-        ingredients = []
-        if let ingredientList = try? recipeContainer.decode([Ingredients].self, forKey: .ingredients) {
-            for ingredient in ingredientList {
-                ingredients?.append(ingredient.food)
+            //Get the recipe container for most info
+            let recipeContainer = try rootContainer.nestedContainer(keyedBy: RecipeKeys.self, forKey: .recipe)
+            
+            name = try recipeContainer.decode(String.self, forKey: .name)
+            imageURL = try recipeContainer.decode(String.self, forKey: .imageURL)
+            source = try recipeContainer.decode(String.self, forKey: .source)
+            url = try recipeContainer.decode(String.self, forKey: .url)
+            ingredientLines = try recipeContainer.decode([String].self, forKey: .ingredientLines)
+            
+            let value = try recipeContainer.decode(Float.self, forKey: .calories)
+            calories = Int(floor(value))
+            
+            if let diateryArray = try? recipeContainer.decode([String].self, forKey: .diateries) {
+                diateries = diateryArray.joined(separator: ", ")
             }
+
+            if let mealArray = try? recipeContainer.decode([String].self, forKey: .mealType) {
+                mealType = mealArray.joined(separator: ", ")
+            }
+            
+            ingredients = []
+            if let ingredientList = try? recipeContainer.decode([Ingredients].self, forKey: .ingredients) {
+                for ingredient in ingredientList {
+                    ingredients?.append(ingredient.food)
+                }
+            }
+        } else {
+            let rootContainer = try decoder.container(keyedBy: CodingKeys.self)
+            
+            name = try rootContainer.decode(String.self, forKey: .name)
+            imageURL = try rootContainer.decode(String.self, forKey: .imageURL)
+            source = try rootContainer.decode(String.self, forKey: .source)
+            url = try rootContainer.decode(String.self, forKey: .url)
+            ingredientLines = try rootContainer.decode([String].self, forKey: .ingredientLines)
+            calories = try rootContainer.decode(Int.self, forKey: .calories)
+            diateries = try rootContainer.decode(String.self, forKey: .diateries)
+            mealType = try rootContainer.decode(String.self, forKey: .mealType)
+            ingredients = try rootContainer.decode([String].self, forKey: .ingredients)
         }
     }
 }
