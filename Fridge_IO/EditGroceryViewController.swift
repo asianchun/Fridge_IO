@@ -28,6 +28,9 @@ class EditGroceryViewController: UIViewController {
         dateControl.date = grocery?.expiry ?? Date()
         dateControl.minimumDate = Date()
         
+        dateControl.semanticContentAttribute = .forceRightToLeft
+        dateControl.subviews.first?.semanticContentAttribute = .forceRightToLeft
+        
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
     }

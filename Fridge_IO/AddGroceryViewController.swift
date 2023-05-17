@@ -24,6 +24,8 @@ class AddGroceryViewController: UIViewController {
         
         dateControl.minimumDate = Date()
         dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
+        dateControl.semanticContentAttribute = .forceRightToLeft
+        dateControl.subviews.first?.semanticContentAttribute = .forceRightToLeft
         // Do any additional setup after loading the view.
     }
     
