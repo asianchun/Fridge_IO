@@ -83,6 +83,7 @@ class RecipeViewController: UIViewController {
             for (index, favourite) in favourites.enumerated() {
                 if favourite.name == recipe?.name {
                     favourites.remove(at: index)
+                    break
                 }
             }
             
