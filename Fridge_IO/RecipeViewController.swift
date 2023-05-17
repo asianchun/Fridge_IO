@@ -61,24 +61,44 @@ class RecipeViewController: UIViewController {
     }
     
     @IBAction func addToFavourites(_ sender: Any) {
+        var favourites = [RecipeData]()
+        
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = paths[0]
+        let fileURL = documentDirectory.appendingPathComponent("/myData.plist")
+        
+        do {
+            let data = try Data(contentsOf: fileURL)
+            let decoder = PropertyListDecoder()
+            favourites = try decoder.decode(Array<RecipeData>.self, from: data)
+        } catch {
+            print(error)
+        }
+        
         //Unfavourite
         if favouritesButton.tintColor == .systemYellow {
             favouritesButton.tintColor = .systemBlue
-        } else {
+            
+            for (index, favourite) in favourites.enumerated() {
+                if favourite.name == recipe?.name {
+                    favourites.remove(at: index)
+                }
+            }
+            
+        } else { //Favourite
             favouritesButton.tintColor = .systemYellow
             
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let documentDirectory = paths[0]
-            let fileURL = documentDirectory.appendingPathComponent("/myData.plist")
-            let encoder = PropertyListEncoder()
-            encoder.outputFormat = .xml
+            favourites.append(recipe!)
+        }
+        
+        let encoder = PropertyListEncoder()
+        encoder.outputFormat = .xml
 
-            do {
-                let data = try encoder.encode(recipe)
-                try data.write(to: fileURL)
-            } catch {
-                print(error)
-            }
+        do {
+            let data = try encoder.encode(favourites)
+            try data.write(to: fileURL)
+        } catch {
+            print(error)
         }
     }
     

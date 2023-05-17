@@ -13,6 +13,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         case standard
         case notFound
         case loading
+        case noFavourites
     }
     
     weak var databaseController: DatabaseProtocol?
@@ -62,6 +63,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
         recipes.removeAll()
         status = .loading
         tableView.reloadData()
+        favouritesButton.tintColor = .systemBlue
         
         navigationItem.searchController?.dismiss(animated: true)
         indicator.startAnimating()
@@ -80,12 +82,14 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
     }
     
     //MARK: - Favourites button
+    
     @IBAction func showFavourites(_ sender: Any) {
+        //Hide favourites
         if favouritesButton.tintColor == .systemYellow {
             favouritesButton.tintColor = .systemBlue
             recipes = previousRecipes
             navigationItem.title = "Recipe Search"
-        } else {
+        } else { //Show favourites
             favouritesButton.tintColor = .systemYellow
             previousRecipes = recipes
             navigationItem.title = "Favourite Recipes"
@@ -97,10 +101,11 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             do {
                 let data = try Data(contentsOf: fileURL)
                 let decoder = PropertyListDecoder()
-                let favourite = try decoder.decode(RecipeData.self, from: data)
-
-                recipes.removeAll()
-                recipes.append(favourite)
+                let favourite = try decoder.decode(Array<RecipeData>.self, from: data)
+                
+                recipes = favourite
+                status = .noFavourites
+                
             } catch {
                 print(error)
             }
@@ -216,6 +221,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
                 content.text = "No recipes found based on your fridge!"
             case .loading:
                 content.text = "Looking for recipes..."
+            case .noFavourites:
+                content.text = "No favourite recipes saved."
             }
         } else {
             tableView.allowsSelection = true

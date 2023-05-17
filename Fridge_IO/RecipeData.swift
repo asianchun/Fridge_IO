@@ -41,7 +41,7 @@ class RecipeData: NSObject, Decodable, Encodable {
     }
     
     required init(from decoder: Decoder) throws {
-        if !decoder.codingPath.isEmpty {
+        if decoder.codingPath.count == 2 {
             //Get the root container
             let rootContainer = try decoder.container(keyedBy: RootKeys.self)
 
