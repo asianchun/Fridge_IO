@@ -18,6 +18,7 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var ingredientLinesText: UITextView!
     @IBOutlet weak var favouritesButton: UIBarButtonItem!
     
+    weak var favouritesDelegate: FavouritesDelegate?
     var recipe: RecipeData?
     
     override func viewDidLoad() {
@@ -84,6 +85,8 @@ class RecipeViewController: UIViewController {
                     favourites.remove(at: index)
                 }
             }
+            
+            favouritesDelegate?.favouritesChanged(favourites)
             
         } else { //Favourite
             favouritesButton.tintColor = .systemYellow

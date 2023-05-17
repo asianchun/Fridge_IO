@@ -7,8 +7,8 @@
 
 import UIKit
 
-class RecipePageTableViewController: UITableViewController, UISearchBarDelegate {
-    
+class RecipePageTableViewController: UITableViewController, UISearchBarDelegate, FavouritesDelegate {
+
     enum Status {
         case standard
         case notFound
@@ -89,10 +89,12 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             favouritesButton.tintColor = .systemBlue
             recipes = previousRecipes
             navigationItem.title = "Recipe Search"
+            status = .standard
         } else { //Show favourites
             favouritesButton.tintColor = .systemYellow
             previousRecipes = recipes
             navigationItem.title = "Favourite Recipes"
+            status = .noFavourites
             
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentDirectory = paths[0]
@@ -104,14 +106,19 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
                 let favourite = try decoder.decode(Array<RecipeData>.self, from: data)
                 
                 recipes = favourite
-                status = .noFavourites
-                
             } catch {
                 print(error)
             }
         }
         
         tableView.reloadData()
+    }
+    
+    func favouritesChanged(_ newFavourites: [RecipeData]) {
+        if favouritesButton.tintColor == .systemYellow {
+            recipes = newFavourites
+            tableView.reloadData()
+        }
     }
     
     // MARK: - Api call
@@ -270,6 +277,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate 
             if favouritesButton.tintColor == .systemYellow {
                 destination.favouritesButton.tintColor = .systemYellow
             }
+            
+            destination.favouritesDelegate = self
         } else if segue.identifier == "popupIdentifier" {
             let destination = segue.destination as! RecipePopUpViewController
             destination.recipe = recipes[sender.row]
