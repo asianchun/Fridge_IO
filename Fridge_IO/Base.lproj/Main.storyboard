@@ -490,11 +490,11 @@
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ylF-Yt-WAN">
                                                 <rect key="frame" x="28" y="20" width="337" height="262"/>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Ingredients placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwU-zv-brR">
-                                                <rect key="frame" x="30" y="632" width="343" height="80"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Contains placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwU-zv-brR">
+                                                <rect key="frame" x="30" y="682" width="343" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="80" id="8wj-fO-ypo"/>
+                                                    <constraint firstAttribute="height" constant="30" id="8wj-fO-ypo"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -509,8 +509,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe URL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgK-wZ-dPV">
-                                                <rect key="frame" x="27.999999999999993" y="732" width="92.333333333333314" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Meal Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EgK-wZ-dPV">
+                                                <rect key="frame" x="28" y="732" width="123" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="zhd-wq-F3N"/>
                                                 </constraints>
@@ -518,8 +518,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best Meal Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fF6-lq-A3j">
-                                                <rect key="frame" x="28" y="530" width="123" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fF6-lq-A3j">
+                                                <rect key="frame" x="28" y="580" width="69" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="uOr-yy-3Yd"/>
                                                 </constraints>
@@ -527,8 +527,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AI-Co-UG6">
-                                                <rect key="frame" x="27.999999999999993" y="606" width="90.333333333333314" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contains:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AI-Co-UG6">
+                                                <rect key="frame" x="27.999999999999993" y="656" width="72.333333333333314" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="Hpc-KI-NJV"/>
                                                 </constraints>
@@ -536,8 +536,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calories:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqc-d8-ndO">
-                                                <rect key="frame" x="28" y="378" width="69" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe URL:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqc-d8-ndO">
+                                                <rect key="frame" x="28" y="378" width="93" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="peT-BS-uFu"/>
                                                 </constraints>
@@ -545,8 +545,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contains:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7U-pV-vHl">
-                                                <rect key="frame" x="27.999999999999993" y="454" width="72.333333333333314" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7U-pV-vHl">
+                                                <rect key="frame" x="28" y="454" width="91" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="35M-Db-TFQ"/>
                                                 </constraints>
@@ -554,17 +554,17 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Contains placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oI5-Lf-41d">
-                                                <rect key="frame" x="30" y="480" width="343" height="30"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Ingredients placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oI5-Lf-41d">
+                                                <rect key="frame" x="30" y="480" width="343" height="80"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="UcY-uL-ldD"/>
+                                                    <constraint firstAttribute="height" constant="80" id="UcY-uL-ldD"/>
                                                 </constraints>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" scrollEnabled="NO" editable="NO" text="Calories placaholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6w0-uP-ghW">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" scrollEnabled="NO" editable="NO" text="Recipe url placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="6w0-uP-ghW">
                                                 <rect key="frame" x="30" y="404" width="343" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -573,6 +573,7 @@
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Source placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kO-Ok-7Zq">
                                                 <rect key="frame" x="30" y="328" width="343" height="30"/>
@@ -584,8 +585,8 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Meal type placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYA-nl-6my">
-                                                <rect key="frame" x="30" y="556" width="343" height="30"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Calories placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYA-nl-6my">
+                                                <rect key="frame" x="30" y="606" width="343" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="5rZ-U5-ZgS"/>
@@ -594,7 +595,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="URL placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="W8W-tB-D3q">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Best Meal Time placeholder" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8W-tB-D3q">
                                                 <rect key="frame" x="30" y="758" width="343" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -603,7 +604,6 @@
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -674,14 +674,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="caloriesText" destination="6w0-uP-ghW" id="7hN-zU-HsK"/>
-                        <outlet property="containsText" destination="oI5-Lf-41d" id="eYB-39-UZA"/>
+                        <outlet property="caloriesText" destination="gYA-nl-6my" id="YkX-Gs-66O"/>
+                        <outlet property="containsText" destination="lwU-zv-brR" id="uqu-hV-1iZ"/>
                         <outlet property="favouritesButton" destination="wBC-jH-rec" id="p6v-c9-gze"/>
                         <outlet property="imageView" destination="ylF-Yt-WAN" id="g5o-2L-1e3"/>
-                        <outlet property="ingredientLinesText" destination="lwU-zv-brR" id="q1N-3m-JUr"/>
-                        <outlet property="mealTypeText" destination="gYA-nl-6my" id="4kT-ug-IuG"/>
-                        <outlet property="sourceText" destination="3kO-Ok-7Zq" id="qKf-gK-OH0"/>
-                        <outlet property="urlText" destination="W8W-tB-D3q" id="D8B-LD-9rk"/>
+                        <outlet property="ingredientLinesText" destination="oI5-Lf-41d" id="gg2-qM-oTH"/>
+                        <outlet property="mealTypeText" destination="W8W-tB-D3q" id="SLp-aZ-L0q"/>
+                        <outlet property="sourceText" destination="3kO-Ok-7Zq" id="dgb-TY-YeY"/>
+                        <outlet property="urlText" destination="6w0-uP-ghW" id="hS7-br-qgM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Uj-vT-kSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
