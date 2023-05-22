@@ -283,14 +283,22 @@
                                 <action selector="logout:" destination="0RT-xk-xev" id="d4d-TU-Tum"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="2wa-eu-taX">
-                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
-                            <connections>
-                                <segue destination="drb-Eo-Wn3" kind="show" id="qSm-Ej-XMy"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="2wa-eu-taX">
+                                <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
+                                <connections>
+                                    <segue destination="drb-Eo-Wn3" kind="show" id="qSm-Ej-XMy"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" style="plain" id="nDm-AE-8RO">
+                                <connections>
+                                    <action selector="editGroceries:" destination="0RT-xk-xev" id="hiZ-9a-MMa"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editBtn" destination="nDm-AE-8RO" id="dKH-dU-dkm"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="TmD-Vq-NOp"/>
                         <segue destination="Jac-gt-Mx0" kind="show" identifier="editIdentifier" id="KZh-i1-AhT"/>
                     </connections>

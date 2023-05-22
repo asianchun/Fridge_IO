@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate, UITableViewDragDelegate, DatabaseListener {
+class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate, DatabaseListener {
     
     weak var databaseController: DatabaseProtocol?
     
@@ -17,14 +17,11 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     var allGroceries: [Grocery] = []
     var filteredGroceries: [Grocery] = []
 
+    @IBOutlet weak var editBtn: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.dragDelegate = self
-        tableView.dragInteractionEnabled = true
-        
+
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -109,11 +106,14 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     }
     
     //Rearange the groceries
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragGrocery = UIDragItem(itemProvider: NSItemProvider())
-        dragGrocery.localObject = filteredGroceries[indexPath.row]
+    @IBAction func editGroceries(_ sender: Any) {
+        tableView.isEditing = !tableView.isEditing
         
-        return [dragGrocery]
+        if tableView.isEditing {
+            editBtn.title = "Save"
+        } else {
+            editBtn.title = "Edit"
+        }
     }
     
     // MARK: - Table view data source
