@@ -19,10 +19,14 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var favouritesButton: UIBarButtonItem!
     
     weak var favouritesDelegate: FavouritesDelegate?
+    weak var databaseController: DatabaseProtocol?
     var recipe: RecipeData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
 
         navigationItem.title = recipe?.name ?? ""
         imageView.layer.cornerRadius = 8.0
@@ -64,9 +68,13 @@ class RecipeViewController: UIViewController {
     @IBAction func addToFavourites(_ sender: Any) {
         var favourites = [RecipeData]()
         
+        guard let userID = databaseController?.currentUser?.uid else {
+            return
+        }
+
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = paths[0]
-        let fileURL = documentDirectory.appendingPathComponent("/myData.plist")
+        let fileURL = documentDirectory.appendingPathComponent("\(userID)myData.plist")
         
         do {
             let data = try Data(contentsOf: fileURL)

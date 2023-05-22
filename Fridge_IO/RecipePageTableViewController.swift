@@ -96,9 +96,13 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
             navigationItem.title = "Favourite Recipes"
             status = .noFavourites
             
+            guard let userID = databaseController?.currentUser?.uid else {
+                return
+            }
+            
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentDirectory = paths[0]
-            let fileURL = documentDirectory.appendingPathComponent("/myData.plist")
+            let fileURL = documentDirectory.appendingPathComponent("\(userID)myData.plist")
 
             do {
                 let data = try Data(contentsOf: fileURL)
@@ -174,7 +178,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
                                 }
                             }
                             
-                            if matching >= 2 && !self.recipes.contains(result) {
+                            if matching >= 1 && !self.recipes.contains(result) {
                                 self.recipes.append(result)
                                 self.tableView.reloadData()
                             }
