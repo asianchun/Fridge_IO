@@ -178,7 +178,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
                                 }
                             }
                             
-                            if matching >= 1 && !self.recipes.contains(result) {
+                            if matching >= 2 && !self.recipes.contains(result) {
                                 self.recipes.append(result)
                                 self.tableView.reloadData()
                             }
