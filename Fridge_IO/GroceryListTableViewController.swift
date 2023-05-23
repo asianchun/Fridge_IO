@@ -19,12 +19,40 @@ class GroceryListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @IBAction func addListEntry(_ sender: Any) {
+        groceryList.append("")
+        tableView.reloadData()
+    }
+    
+    @IBAction func beginEditing(_ sender: Any) {
+        let sender = sender as! UITextField
+        currentIndex = NSIndexPath(row: sender.tag, section: SECTION_LIST)
+    }
+    
+    @IBAction func finishedEditing(_ sender: Any) {
+        let sender = sender as! UITextField
+        let index = NSIndexPath(row: sender.tag, section: SECTION_LIST)
+        
+        if let cell = tableView.cellForRow(at: index as IndexPath) as? GroceryListTableViewCell {
+            if let textField = cell.listTextField {
+                groceryList[index.row] = textField.text ?? ""
+            }
+        }
+    }
+    
+    @IBAction func onEnter(_ sender: Any) {
+        groceryList.append("")
+        tableView.reloadData()
+    }
+    
+    @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
+        if let cell = tableView.cellForRow(at: currentIndex! as IndexPath) as? GroceryListTableViewCell {
+            if let textField = cell.listTextField {
+                textField.resignFirstResponder()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -40,7 +68,11 @@ class GroceryListTableViewController: UITableViewController {
         case SECTION_LIST:
             return groceryList.count
         case SECTION_INFO:
-            return 1
+            if groceryList.isEmpty {
+                return 1
+            } else {
+                return 0
+            }
         default:
             return 0
         }
@@ -72,51 +104,28 @@ class GroceryListTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func addListEntry(_ sender: Any) {
-        groceryList.append("")
-        tableView.reloadData()
-    }
-    
-    @IBAction func finishedEditing(_ sender: Any) {
-        let sender = sender as! UITextField
-        let index = NSIndexPath(row: sender.tag, section: SECTION_LIST)
-        
-        if let cell = tableView.cellForRow(at: index as IndexPath) as? GroceryListTableViewCell {
-            if let textField = cell.listTextField {
-                groceryList[index.row] = textField.text ?? ""
-            }
-        }
-    }
-    
-    @IBAction func testing(_ sender: Any) {
-        print("Is this what i want?")
-    }
-    
-    @IBAction func onEnter(_ sender: Any) {
-        groceryList.append("")
-        tableView.reloadData()
-    }
-
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        if indexPath.section == SECTION_LIST {
+            return true
+        } else {
+            return false
+        }
     }
-    */
-
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+            tableView.reloadData()
+            
+            groceryList.remove(at: indexPath.row)
+            tableView.reloadData()
 
+            //databaseController?.deleteGrocery(grocery: grocery)
+        }
+    }
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

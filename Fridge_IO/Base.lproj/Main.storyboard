@@ -757,6 +757,7 @@
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
+                                                <action selector="beginEditing:" destination="zds-NS-Gfl" eventType="editingDidBegin" id="nWN-p6-bcq"/>
                                                 <action selector="finishedEditing:" destination="zds-NS-Gfl" eventType="editingDidEnd" id="wOx-pW-Zk6"/>
                                                 <action selector="onEnter:" destination="zds-NS-Gfl" eventType="primaryActionTriggered" id="3Ln-CU-QlJ"/>
                                             </connections>
@@ -793,6 +794,7 @@
                         <connections>
                             <outlet property="dataSource" destination="zds-NS-Gfl" id="64f-tw-8IE"/>
                             <outlet property="delegate" destination="zds-NS-Gfl" id="H2y-j8-eQJ"/>
+                            <outletCollection property="gestureRecognizers" destination="NUM-lg-AKf" appends="YES" id="L5Y-EP-dty"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Grocery List" id="7So-k1-Zi7">
@@ -804,6 +806,11 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VPb-If-xHq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="NUM-lg-AKf">
+                    <connections>
+                        <action selector="handleTapWithRecognizer:" destination="zds-NS-Gfl" id="bp2-b5-kAQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3788.5496183206105" y="1648.5915492957747"/>
         </scene>

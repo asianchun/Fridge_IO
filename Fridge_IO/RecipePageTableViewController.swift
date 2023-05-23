@@ -263,8 +263,9 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
             let touchPoint = recognizer.location(in: tableView)
             
             if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                performSegue(withIdentifier: "popupIdentifier", sender: indexPath)
-                //tableView.deselectRow(at: indexPath, animated: true)
+                if !recipes.isEmpty {
+                    performSegue(withIdentifier: "popupIdentifier", sender: indexPath)
+                }
             }
         }
     }
