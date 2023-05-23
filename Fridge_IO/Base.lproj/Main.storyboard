@@ -814,6 +814,52 @@
             </objects>
             <point key="canvasLocation" x="3788.5496183206105" y="1648.5915492957747"/>
         </scene>
+        <!--Grocery Lists-->
+        <scene sceneID="xy7-DW-isW">
+            <objects>
+                <tableViewController id="anD-PL-ikx" customClass="AllGroceryListsTableViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="W8X-yD-dpr">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" textLabel="5if-nY-iK3" style="IBUITableViewCellStyleDefault" id="XKl-1g-zEc">
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XKl-1g-zEc" id="g7l-PT-DqC">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5if-nY-iK3">
+                                            <rect key="frame" x="20" y="0.0" width="313" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="anD-PL-ikx" id="UvU-hi-gZi"/>
+                            <outlet property="delegate" destination="anD-PL-ikx" id="jzk-3l-ZLF"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Grocery Lists" id="Ro9-Tt-z4U">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="kgw-ic-y8a">
+                            <connections>
+                                <action selector="addGroceryList:" destination="anD-PL-ikx" id="pIb-ve-QgM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="zds-NS-Gfl" kind="show" identifier="groceryListIdentifier" id="S0b-Yw-MdV"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zXd-ds-8Id" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2680" y="1649"/>
+        </scene>
         <!--Recipes-->
         <scene sceneID="0Db-Jm-1dO">
             <objects>
@@ -996,7 +1042,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNR-bN-0og" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4876" y="1573"/>
+            <point key="canvasLocation" x="4876" y="1649"/>
         </scene>
         <!--Grocery List-->
         <scene sceneID="zUg-MB-uSa">
@@ -1010,12 +1056,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="zds-NS-Gfl" kind="relationship" relationship="rootViewController" id="MjX-eG-d2g"/>
+                        <segue destination="anD-PL-ikx" kind="relationship" relationship="rootViewController" id="Pgr-SH-VnS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bUI-DS-BBR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2749" y="1649"/>
+            <point key="canvasLocation" x="1581" y="1649"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

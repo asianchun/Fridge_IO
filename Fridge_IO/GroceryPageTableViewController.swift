@@ -138,9 +138,14 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
         var content = groceryCell.defaultContentConfiguration()
         
         if filteredGroceries.isEmpty {
+            groceryCell.selectionStyle = .none
+            tableView.allowsSelection = false
+            
             content.text = "Groceries not found. Tap + to add some"
             content.secondaryText = ""
         } else {
+            tableView.allowsSelection = true
+            
             let grocery = filteredGroceries[indexPath.row]
 
             if let name = grocery.name, let amount = grocery.amount, let date = grocery.expiry {
@@ -158,7 +163,11 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if filteredGroceries.isEmpty {
+            return false
+        } else {
+            return true
+        }
     }
     
     // Override to support editing the table view.
@@ -198,6 +207,10 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     
     //Useless
     func onAuthChange(success: Bool, message: String?) {
+        //Do nothing
+    }
+    
+    func onGroceryListsChange(change: DatabaseChange, groceryLists: [GroceryList]) {
         //Do nothing
     }
     

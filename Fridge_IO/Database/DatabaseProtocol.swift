@@ -23,6 +23,7 @@ protocol DatabaseListener: AnyObject {
     var listenerType: ListenerType {get set}
     func onAuthChange(success: Bool, message: String?)
     func onGroceriesChange(change: DatabaseChange, groceries: [Grocery])
+    func onGroceryListsChange(change: DatabaseChange, groceryLists: [GroceryList])
 }
 
 protocol DatabaseProtocol: AnyObject {
@@ -45,4 +46,8 @@ protocol DatabaseProtocol: AnyObject {
     func editGrocery(grocery: Grocery, name: String, type: GroceryType, expiry: Date, amount: String)
     func editGroceryOrder(grocery: Grocery, newOrder: Int)
     func deleteGrocery(grocery: Grocery)
+    
+    //Grocery List functions
+    func addGroceryList() -> GroceryList
+    func deleteGroceryList()
 }

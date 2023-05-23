@@ -113,6 +113,10 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         //Do nothing
     }
     
+    func onGroceryListsChange(change: DatabaseChange, groceryLists: [GroceryList]) {
+        //Do nothing
+    }
+    
     /*
     // MARK: - Navigation
 

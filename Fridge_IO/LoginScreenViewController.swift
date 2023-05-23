@@ -129,5 +129,9 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
     func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
         //Do nothing
     }
+    
+    func onGroceryListsChange(change: DatabaseChange, groceryLists: [GroceryList]) {
+        //Do nothing
+    }
 }
 

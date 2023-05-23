@@ -20,9 +20,11 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var groceries: [Grocery]?
     
     var groceriesRef: CollectionReference?
+    var groceryListsRef: CollectionReference?
     var groceryList: [Grocery]
     
-    var listener: ListenerRegistration?
+    var groceryListener: ListenerRegistration?
+    var groceryListListener: ListenerRegistration?
     
     override init() {
         FirebaseApp.configure()
@@ -156,9 +158,9 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     func setupGroceryListener() {
         groceriesRef = database.collection("groceries")
-        listener?.remove()
+        groceryListener?.remove()
 
-        listener = (groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
+        groceryListener = (groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot else {
                 print("Failed to fetch documents with error: \(String(describing: error))")
                 return
@@ -212,6 +214,25 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Grocery List functions
+    func setupGroceryListListener() {
+        
+    }
+    
+    func parseGroceryListsSnapshot(snapshot: QuerySnapshot) {
+        
+    }
+    
+    func addGroceryList() -> GroceryList {
+        //Sth
+        return GroceryList()
+    }
+    
+    func deleteGroceryList() {
+        //Sth
+    }
+    
+    //Notifcation setup
     func requestNotificationsOn(_ grocery: Grocery) {
         // Create a notification content object
         let notificationContent = UNMutableNotificationContent()
