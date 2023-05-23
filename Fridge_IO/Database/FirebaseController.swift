@@ -185,10 +185,14 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
             
             if grocery.user == currentUser?.uid {
+                removeNotificationOn(grocery)
+                
                 if change.type == .added {
                     groceryList.append(grocery)
+                    requestNotificationsOn(grocery)
                 } else if change.type == .modified {
                     groceryList[grocery.order!] = grocery
+                    requestNotificationsOn(grocery)
                 } else if change.type == .removed {
                     groceryList.remove(at: Int(change.oldIndex))
                 }
@@ -206,5 +210,33 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 listener.onGroceriesChange(change: .update, groceries: groceryList)
             }
         }
+    }
+    
+    func requestNotificationsOn(_ grocery: Grocery) {
+        // Create a notification content object
+        let notificationContent = UNMutableNotificationContent()
+
+        // Create its details
+        notificationContent.title = "Fridge_IO"
+        notificationContent.subtitle = "Your \(grocery.name ?? "") is about to expire! Cook it now!"
+        
+        //Create the trigger
+        let date = Calendar.current.date(byAdding: .day, value: -1, to: grocery.expiry!)
+        
+        var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date!)
+        dateComponents.hour = 17
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+
+        // Create our request
+        let request = UNNotificationRequest(identifier: grocery.id!,
+             content: notificationContent, trigger: trigger)
+
+        //Add the notification to the centre
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
+    
+    func removeNotificationOn(_ grocery: Grocery) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [grocery.id!])
     }
 }

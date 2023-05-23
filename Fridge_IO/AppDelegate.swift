@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         databaseController = FirebaseController()
+        
+        //Ask permission
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert])
+        { (granted, error) in
+             if !granted {
+                 print("Permission was not granted!")
+                 return
+             }
+        }
+        
         return true
     }
 
