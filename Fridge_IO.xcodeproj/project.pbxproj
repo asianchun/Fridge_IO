@@ -19,6 +19,8 @@
 		36A887332A0A1E7000AB6A3D /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887322A0A1E7000AB6A3D /* RecipeData.swift */; };
 		36A887352A0B467500AB6A3D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887342A0B467500AB6A3D /* RecipeViewController.swift */; };
 		36A887372A0B47B000AB6A3D /* EditGroceryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887362A0B47B000AB6A3D /* EditGroceryViewController.swift */; };
+		36AA81622A1C5B9A00D0672E /* GroceryListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AA81612A1C5B9A00D0672E /* GroceryListTableViewController.swift */; };
+		36AA81642A1C724700D0672E /* GroceryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36AA81632A1C724700D0672E /* GroceryListTableViewCell.swift */; };
 		36D5CDF12A13576B006C2FD0 /* RecipePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */; };
 		36D5CDF92A14736B006C2FD0 /* FavouritesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D5CDF82A14736B006C2FD0 /* FavouritesDelegate.swift */; };
 		36E20E872A00E4F800A4FEB0 /* RecipePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */; };
@@ -48,6 +50,8 @@
 		36A887322A0A1E7000AB6A3D /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		36A887342A0B467500AB6A3D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		36A887362A0B47B000AB6A3D /* EditGroceryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroceryViewController.swift; sourceTree = "<group>"; };
+		36AA81612A1C5B9A00D0672E /* GroceryListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTableViewController.swift; sourceTree = "<group>"; };
+		36AA81632A1C724700D0672E /* GroceryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroceryListTableViewCell.swift; sourceTree = "<group>"; };
 		36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePopUpViewController.swift; sourceTree = "<group>"; };
 		36D5CDF82A14736B006C2FD0 /* FavouritesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDelegate.swift; sourceTree = "<group>"; };
 		36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePageTableViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 				36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */,
 				36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */,
 				36A887342A0B467500AB6A3D /* RecipeViewController.swift */,
+				36AA81612A1C5B9A00D0672E /* GroceryListTableViewController.swift */,
+				36AA81632A1C724700D0672E /* GroceryListTableViewCell.swift */,
 				36D5CDF82A14736B006C2FD0 /* FavouritesDelegate.swift */,
 			);
 			path = Fridge_IO;
@@ -210,9 +216,11 @@
 				36A887312A0A1E5000AB6A3D /* VolumeData.swift in Sources */,
 				36A887352A0B467500AB6A3D /* RecipeViewController.swift in Sources */,
 				36A887372A0B47B000AB6A3D /* EditGroceryViewController.swift in Sources */,
+				36AA81642A1C724700D0672E /* GroceryListTableViewCell.swift in Sources */,
 				36E20E8B2A01460F00A4FEB0 /* AddGroceryViewController.swift in Sources */,
 				36D5CDF12A13576B006C2FD0 /* RecipePopUpViewController.swift in Sources */,
 				36A887332A0A1E7000AB6A3D /* RecipeData.swift in Sources */,
+				36AA81622A1C5B9A00D0672E /* GroceryListTableViewController.swift in Sources */,
 				363C410929F2830100878662 /* SignUpScreenViewController.swift in Sources */,
 				36ED926229F799F500DE3CBC /* MulticastDelegate.swift in Sources */,
 				36D5CDF92A14736B006C2FD0 /* FavouritesDelegate.swift in Sources */,

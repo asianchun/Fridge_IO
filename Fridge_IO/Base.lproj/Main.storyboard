@@ -238,7 +238,7 @@
             </objects>
             <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
         </scene>
-        <!--Groceries-->
+        <!--Fridge-->
         <scene sceneID="4Zx-Fk-Mn7">
             <objects>
                 <tableViewController id="0RT-xk-xev" customClass="GroceryPageTableViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
@@ -276,7 +276,7 @@
                             <outlet property="delegate" destination="0RT-xk-xev" id="zf7-aR-FSG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Groceries" id="bGv-t6-E0e">
+                    <navigationItem key="navigationItem" title="Fridge" id="bGv-t6-E0e">
                         <barButtonItem key="leftBarButtonItem" title="Log out" style="plain" id="rSd-4V-Eu3">
                             <imageReference key="image" image="rectangle.portrait.and.arrow.right" catalog="system" symbolScale="default"/>
                             <connections>
@@ -305,7 +305,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfq-qi-iS9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3790" y="344"/>
+            <point key="canvasLocation" x="3789" y="-37"/>
         </scene>
         <!--Add Grocery-->
         <scene sceneID="4cS-tc-8No">
@@ -418,7 +418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqU-45-fFg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4849.6183206106871" y="-63.380281690140848"/>
+            <point key="canvasLocation" x="4876" y="-396"/>
         </scene>
         <!--Recipe Search-->
         <scene sceneID="zxS-Ig-Aie">
@@ -479,7 +479,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3788.5496183206105" y="1079.5774647887324"/>
+            <point key="canvasLocation" x="3789" y="720"/>
         </scene>
         <!--Recipe Name-->
         <scene sceneID="gW0-7F-SUO">
@@ -694,7 +694,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Uj-vT-kSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4875.5725190839694" y="1386.6197183098593"/>
+            <point key="canvasLocation" x="4876" y="918"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="IlY-VQ-dDp">
@@ -708,6 +708,7 @@
                     <connections>
                         <segue destination="1LB-jn-UXC" kind="relationship" relationship="viewControllers" id="61V-HJ-So1"/>
                         <segue destination="RN8-zr-yXS" kind="relationship" relationship="viewControllers" id="TjZ-aV-hgC"/>
+                        <segue destination="QI9-nO-iov" kind="relationship" relationship="viewControllers" id="85Y-R1-gRX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ANd-ue-zyp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -731,7 +732,80 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVV-mi-BBh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2750" y="344"/>
+            <point key="canvasLocation" x="2749" y="-36"/>
+        </scene>
+        <!--Grocery List-->
+        <scene sceneID="sVq-2H-cqd">
+            <objects>
+                <tableViewController id="zds-NS-Gfl" customClass="GroceryListTableViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="QZV-zw-al6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="listCell" id="ibo-Px-03P" customClass="GroceryListTableViewCell" customModule="Fridge_IO" customModuleProvider="target">
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ibo-Px-03P" id="rwa-y9-3Ob">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aRL-qV-eDB">
+                                            <rect key="frame" x="20" y="0.0" width="328" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="uiO-dC-vqe"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="finishedEditing:" destination="zds-NS-Gfl" eventType="editingDidEnd" id="wOx-pW-Zk6"/>
+                                                <action selector="onEnter:" destination="zds-NS-Gfl" eventType="primaryActionTriggered" id="3Ln-CU-QlJ"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="aRL-qV-eDB" firstAttribute="leading" secondItem="rwa-y9-3Ob" secondAttribute="leading" constant="20" id="T2g-bN-a3a"/>
+                                        <constraint firstAttribute="trailing" secondItem="aRL-qV-eDB" secondAttribute="trailing" constant="5" id="VFW-90-eJN"/>
+                                        <constraint firstItem="aRL-qV-eDB" firstAttribute="top" secondItem="rwa-y9-3Ob" secondAttribute="top" id="gPU-4z-Phq"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="listTextField" destination="aRL-qV-eDB" id="9nx-X2-vMR"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="infoCell" textLabel="f3Q-O5-S6b" style="IBUITableViewCellStyleDefault" id="GX1-Hl-6rl">
+                                <rect key="frame" x="20" y="99" width="353" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GX1-Hl-6rl" id="jOe-tW-SLW">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3Q-O5-S6b">
+                                            <rect key="frame" x="20" y="0.0" width="313" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zds-NS-Gfl" id="64f-tw-8IE"/>
+                            <outlet property="delegate" destination="zds-NS-Gfl" id="H2y-j8-eQJ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Grocery List" id="7So-k1-Zi7">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Ovy-VV-BBo">
+                            <connections>
+                                <action selector="addListEntry:" destination="zds-NS-Gfl" id="dpw-Vj-weq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VPb-If-xHq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3788.5496183206105" y="1648.5915492957747"/>
         </scene>
         <!--Recipes-->
         <scene sceneID="0Db-Jm-1dO">
@@ -750,7 +824,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dnE-va-SEj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2749" y="1080"/>
+            <point key="canvasLocation" x="2749" y="720"/>
         </scene>
         <!--Edit Grocery-->
         <scene sceneID="LdF-Se-9Lm">
@@ -860,7 +934,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIj-rg-3Go" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4875.5725190839694" y="629.57746478873241"/>
+            <point key="canvasLocation" x="4876" y="245"/>
         </scene>
         <!--Recipe Pop Up View Controller-->
         <scene sceneID="MB3-0J-wbM">
@@ -915,7 +989,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DNR-bN-0og" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3788.5496183206105" y="1893.661971830986"/>
+            <point key="canvasLocation" x="4876" y="1573"/>
+        </scene>
+        <!--Grocery List-->
+        <scene sceneID="zUg-MB-uSa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QI9-nO-iov" customClass="GroceryList" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Grocery List" image="list.bullet.clipboard" catalog="system" id="Bmc-T3-uVC"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TZw-yc-OXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zds-NS-Gfl" kind="relationship" relationship="rootViewController" id="MjX-eG-d2g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bUI-DS-BBR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2749" y="1649"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -925,6 +1018,7 @@
         <image name="bookmark" catalog="system" width="110" height="128"/>
         <image name="fork.knife" catalog="system" width="94" height="128"/>
         <image name="frying.pan" catalog="system" width="128" height="81"/>
+        <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="109"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
