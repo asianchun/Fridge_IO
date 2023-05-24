@@ -316,6 +316,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date!)
         dateComponents.hour = 17
+        dateComponents.minute = 25 //For testing purposes
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
 

@@ -123,16 +123,20 @@ class GroceryListTableViewController: UITableViewController {
         }
     }
     
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let acceptAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             tableView.reloadData()
+            self.groceryList?.listItems!.remove(at: indexPath.row)
             
-            groceryList?.listItems!.remove(at: indexPath.row)
             tableView.reloadData()
-
-            //databaseController?.deleteGrocery(grocery: grocery)
+            completionHandler(true)
         }
+        
+        acceptAction.image = UIImage(systemName: "checkmark")
+        acceptAction.backgroundColor = .systemGreen
+        
+        let configuration = UISwipeActionsConfiguration(actions: [acceptAction])
+        return configuration
     }
     
     /*
