@@ -289,7 +289,11 @@ class FirebaseController: NSObject, DatabaseProtocol {
     }
     
     func editGroceryList(groceryList: GroceryList, listItems: [String]) {
-        //Sth
+        if let listID = groceryList.id {
+            groceryListsRef?.document(listID).updateData([
+                "listItems": listItems
+            ])
+        }
     }
     
     func deleteGroceryList(groceryList: GroceryList) {

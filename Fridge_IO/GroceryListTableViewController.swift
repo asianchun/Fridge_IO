@@ -9,6 +9,8 @@ import UIKit
 
 class GroceryListTableViewController: UITableViewController {
     
+    weak var databaseController: DatabaseProtocol?
+    
     let SECTION_LIST = 0
     let SECTION_INFO = 1
     let CELL_LIST = "listCell"
@@ -21,6 +23,9 @@ class GroceryListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         navigationItem.title = groceryList?.name
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
     }
     
     @IBAction func addListEntry(_ sender: Any) {
@@ -42,6 +47,8 @@ class GroceryListTableViewController: UITableViewController {
                 groceryList?.listItems![index.row] = textField.text ?? ""
             }
         }
+        
+        databaseController?.editGroceryList(groceryList: groceryList!, listItems: (groceryList?.listItems!)!)
     }
     
     @IBAction func onEnter(_ sender: Any) {
