@@ -14,15 +14,17 @@ class GroceryListTableViewController: UITableViewController {
     let CELL_LIST = "listCell"
     let CELL_INFO = "infoCell"
     
-    var groceryList: [String] = []
+    var groceryList: GroceryList?
     var currentIndex: NSIndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = groceryList?.name
     }
     
     @IBAction func addListEntry(_ sender: Any) {
-        groceryList.append("")
+        groceryList?.listItems!.append("")
         tableView.reloadData()
     }
     
@@ -37,13 +39,13 @@ class GroceryListTableViewController: UITableViewController {
         
         if let cell = tableView.cellForRow(at: index as IndexPath) as? GroceryListTableViewCell {
             if let textField = cell.listTextField {
-                groceryList[index.row] = textField.text ?? ""
+                groceryList?.listItems![index.row] = textField.text ?? ""
             }
         }
     }
     
     @IBAction func onEnter(_ sender: Any) {
-        groceryList.append("")
+        groceryList?.listItems!.append("")
         tableView.reloadData()
     }
     
@@ -66,9 +68,9 @@ class GroceryListTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case SECTION_LIST:
-            return groceryList.count
+            return (groceryList?.listItems!.count)!
         case SECTION_INFO:
-            if groceryList.isEmpty {
+            if groceryList?.listItems!.isEmpty ?? true {
                 return 1
             } else {
                 return 0
@@ -82,12 +84,12 @@ class GroceryListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == SECTION_LIST {
             let listCell = tableView.dequeueReusableCell(withIdentifier: CELL_LIST, for: indexPath) as! GroceryListTableViewCell
-            let listValue = groceryList[indexPath.row]
+            let listValue = groceryList?.listItems![indexPath.row]
             
             listCell.listTextField.tag = indexPath.row
             listCell.listTextField.text = listValue
             
-            if indexPath.row == groceryList.count - 1 {
+            if indexPath.row == (groceryList?.listItems!.count)! - 1 {
                 listCell.listTextField.becomeFirstResponder()
             }
 
@@ -119,7 +121,7 @@ class GroceryListTableViewController: UITableViewController {
         if editingStyle == .delete {
             tableView.reloadData()
             
-            groceryList.remove(at: indexPath.row)
+            groceryList?.listItems!.remove(at: indexPath.row)
             tableView.reloadData()
 
             //databaseController?.deleteGrocery(grocery: grocery)

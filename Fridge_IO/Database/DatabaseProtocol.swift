@@ -17,6 +17,7 @@ enum DatabaseChange {
 enum ListenerType {
     case auth
     case groceries
+    case groceryLists
 }
 
 protocol DatabaseListener: AnyObject {

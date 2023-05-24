@@ -7,15 +7,36 @@
 
 import UIKit
 
-class AllGroceryListsTableViewController: UITableViewController {
+class AllGroceryListsTableViewController: UITableViewController, DatabaseListener {
+    
+    weak var databaseController: DatabaseProtocol?
     
     let CELL_LIST = "listCell"
     
-    var groceryLists: [GroceryList] = []
+    var allLists: [GroceryList] = []
+    var listenerType = ListenerType.groceryLists
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
+    }
+    
+    //Setup listeners
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    func onGroceryListsChange(change: DatabaseChange, groceryLists: [GroceryList]) {
+        allLists = groceryLists
+        tableView.reloadData()
     }
 
     @IBAction func addGroceryList(_ sender: Any) {
@@ -36,8 +57,8 @@ class AllGroceryListsTableViewController: UITableViewController {
                 groceryListName = "Default"
             }
             
-            for groceryList in self.groceryLists {
-                if groceryList.name == groceryListName {
+            for list in self.allLists {
+                if list.name == groceryListName {
                     self.displayError(title: "Error", message: "Grocery list already exists")
                     return
                 }
@@ -66,10 +87,10 @@ class AllGroceryListsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if groceryLists.isEmpty {
+        if allLists.isEmpty {
             return 1
         } else {
-            return groceryLists.count
+            return allLists.count
         }
     }
 
@@ -79,7 +100,7 @@ class AllGroceryListsTableViewController: UITableViewController {
         
         var content = cell.defaultContentConfiguration()
         
-        if groceryLists.isEmpty {
+        if allLists.isEmpty {
             cell.selectionStyle = .none
             tableView.allowsSelection = false
             
@@ -87,7 +108,7 @@ class AllGroceryListsTableViewController: UITableViewController {
         } else {
             tableView.allowsSelection = true
             
-            let groceryList = groceryLists[indexPath.row]
+            let groceryList = allLists[indexPath.row]
             content.text = groceryList.name
         }
         
@@ -137,7 +158,22 @@ class AllGroceryListsTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         navigationItem.backButtonTitle = "Back"
+        
+        if segue.identifier == "groceryListIdentifier" {
+            let sender = sender as! IndexPath
+            let destination = segue.destination as! GroceryListTableViewController
+            
+            destination.groceryList = allLists[sender.row]
+        }
     }
 
+    //Useless
+    func onAuthChange(success: Bool, message: String?) {
+        //Do nothing
+    }
+    
+    func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
+        //Do nothing
+    }
 
 }

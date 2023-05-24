@@ -22,6 +22,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var groceriesRef: CollectionReference?
     var groceryListsRef: CollectionReference?
     var groceryList: [Grocery]
+    var groceryLists: [GroceryList]
     
     var groceryListener: ListenerRegistration?
     var groceryListListener: ListenerRegistration?
@@ -33,6 +34,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         database = Firestore.firestore()
         
         groceryList = [Grocery]()
+        groceryLists = [GroceryList]()
 
         super.init()
     }
@@ -43,6 +45,10 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
         if listener.listenerType == .groceries {
             listener.onGroceriesChange(change: .update, groceries: groceryList)
+        }
+        
+        if listener.listenerType == .groceryLists {
+            listener.onGroceryListsChange(change: .update, groceryLists: groceryLists)
         }
     }
     
@@ -168,6 +174,8 @@ class FirebaseController: NSObject, DatabaseProtocol {
             
             self.parseGroceriesSnapshot(snapshot: querySnapshot)
         })!
+        
+        setupGroceryListListener()
     }
     
     func parseGroceriesSnapshot(snapshot: QuerySnapshot) {
@@ -216,11 +224,51 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     //Grocery List functions
     func setupGroceryListListener() {
-        
+        groceryListsRef = database.collection("groceryLists")
+        groceryListListener?.remove()
+
+        groceryListListener = (groceryListsRef?.addSnapshotListener() { (querySnapshot, error) in
+            guard let querySnapshot = querySnapshot else {
+                print("Failed to fetch documents with error: \(String(describing: error))")
+                return
+            }
+            
+            self.parseGroceryListsSnapshot(snapshot: querySnapshot)
+        })!
     }
     
     func parseGroceryListsSnapshot(snapshot: QuerySnapshot) {
+        snapshot.documentChanges.forEach { (change) in
+            var parsedGroceryList: GroceryList?
+            
+            do {
+                parsedGroceryList = try change.document.data(as: GroceryList.self)
+            } catch {
+                print("Unable to decode grocery. Is the hero malformed?")
+                return
+            }
+            
+            guard let groceryList = parsedGroceryList else {
+                print("Document doesn't exist")
+                return
+            }
+            
+            if groceryList.user == currentUser?.uid {
+                if change.type == .added {
+                    groceryLists.append(groceryList)
+                } else if change.type == .modified {
+                    groceryLists[Int(change.oldIndex)] = groceryList
+                } else if change.type == .removed {
+                    groceryLists.remove(at: Int(change.oldIndex))
+                }
+            }
+        }
         
+        listeners.invoke { (listener) in
+            if listener.listenerType == .groceryLists {
+                listener.onGroceryListsChange(change: .update, groceryLists: groceryLists)
+            }
+        }
     }
     
     func addGroceryList() -> GroceryList {
