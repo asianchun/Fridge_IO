@@ -271,13 +271,31 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
-    func addGroceryList() -> GroceryList {
-        //Sth
-        return GroceryList()
+    func addGroceryList(name: String) -> GroceryList {
+        let groceryList = GroceryList()
+        groceryList.name = name
+        groceryList.user = currentUser?.uid
+        groceryList.listItems = [String]()
+        
+        do {
+            if let groceryListRef = try groceryListsRef?.addDocument(from: groceryList) {
+                groceryList.id = groceryListRef.documentID
+            }
+        } catch {
+            print("Failed to serialize hero")
+        }
+        
+        return groceryList
     }
     
-    func deleteGroceryList() {
+    func editGroceryList(groceryList: GroceryList, listItems: [String]) {
         //Sth
+    }
+    
+    func deleteGroceryList(groceryList: GroceryList) {
+        if let listID = groceryList.id {
+            groceryListsRef?.document(listID).delete()
+        }
     }
     
     //Notifcation setup

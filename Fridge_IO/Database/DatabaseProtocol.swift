@@ -49,6 +49,7 @@ protocol DatabaseProtocol: AnyObject {
     func deleteGrocery(grocery: Grocery)
     
     //Grocery List functions
-    func addGroceryList() -> GroceryList
-    func deleteGroceryList()
+    func addGroceryList(name: String) -> GroceryList
+    func editGroceryList(groceryList: GroceryList, listItems: [String])
+    func deleteGroceryList(groceryList: GroceryList)
 }
