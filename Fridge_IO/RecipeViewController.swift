@@ -114,6 +114,27 @@ class RecipeViewController: UIViewController {
         }
     }
     
+    @IBAction func addToGroceryList(_ sender: Any) {
+        displayMessage(title: "Add to Grocery List", message: "Are you sure you want to add '\(recipe?.name ?? "")' to your grocery list?")
+    }
+    
+    func displayMessage(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let messageController = UIAlertController(title: "Success", message: "Recipe successfully added to your grocery list", preferredStyle: .alert)
+        
+        messageController.addAction(UIAlertAction(title: "Dismiss", style: .default,
+        handler: nil))
+        
+        alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+            let _ = self.databaseController?.addGroceryList(name: (self.recipe?.name!)!, listItems: (self.recipe?.ingredientLines!)!)
+            
+            self.present(messageController, animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

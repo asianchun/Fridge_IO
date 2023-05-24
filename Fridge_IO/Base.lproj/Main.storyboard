@@ -675,11 +675,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recipe Name" id="L0G-D2-aMg">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="star" catalog="system" style="plain" id="wBC-jH-rec">
-                            <connections>
-                                <action selector="addToFavourites:" destination="Oia-fh-BzA" id="qmq-fz-iAP"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="star" catalog="system" style="plain" id="wBC-jH-rec">
+                                <connections>
+                                    <action selector="addToFavourites:" destination="Oia-fh-BzA" id="qmq-fz-iAP"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="add" id="nMn-aO-A2f">
+                                <connections>
+                                    <action selector="addToGroceryList:" destination="Oia-fh-BzA" id="HWP-ei-iAt"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="caloriesText" destination="gYA-nl-6my" id="YkX-Gs-66O"/>

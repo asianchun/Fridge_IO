@@ -64,7 +64,7 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
                 }
             }
             
-            let _ = self.databaseController?.addGroceryList(name: groceryListName)
+            let _ = self.databaseController?.addGroceryList(name: groceryListName, listItems: [String]())
         }))
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))

@@ -271,11 +271,11 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
-    func addGroceryList(name: String) -> GroceryList {
+    func addGroceryList(name: String, listItems: [String]) -> GroceryList {
         let groceryList = GroceryList()
         groceryList.name = name
         groceryList.user = currentUser?.uid
-        groceryList.listItems = [String]()
+        groceryList.listItems = listItems
         
         do {
             if let groceryListRef = try groceryListsRef?.addDocument(from: groceryList) {
