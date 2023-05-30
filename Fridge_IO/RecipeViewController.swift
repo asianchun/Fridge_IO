@@ -9,6 +9,7 @@ import UIKit
 
 class RecipeViewController: UIViewController {
     
+    @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var urlText: UITextView!
     @IBOutlet weak var sourceText: UITextView!
@@ -20,10 +21,21 @@ class RecipeViewController: UIViewController {
     
     weak var favouritesDelegate: FavouritesDelegate?
     weak var databaseController: DatabaseProtocol?
+    
     var recipe: RecipeData?
+    var indicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        indicator.style = UIActivityIndicatorView.Style.large
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        imageContainer.addSubview(indicator)
+        
+        NSLayoutConstraint.activate([
+            indicator.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor)
+        ])
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
@@ -46,14 +58,19 @@ class RecipeViewController: UIViewController {
         }
         
         if let imageURL = recipe?.imageURL {
-            let url = URL(string: imageURL)!
+            indicator.startAnimating()
             
+            let url = URL(string: imageURL)!
             Task {
                 do {
                     let (data, response) = try await URLSession.shared.data(from: url)
                     
                     guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                         return
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.indicator.stopAnimating()
                     }
                     
                     if let image = UIImage(data: data) {
