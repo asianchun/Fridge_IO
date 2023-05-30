@@ -17,11 +17,10 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var database: Firestore
     
     var currentUser: FirebaseAuth.User?
-    var groceries: [Grocery]?
+    var groceries: [Grocery]
     
     var groceriesRef: CollectionReference?
     var groceryListsRef: CollectionReference?
-    var groceryList: [Grocery]
     var groceryLists: [GroceryList]
     
     var groceryListener: ListenerRegistration?
@@ -33,7 +32,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         authController = Auth.auth()
         database = Firestore.firestore()
         
-        groceryList = [Grocery]()
+        groceries = [Grocery]()
         groceryLists = [GroceryList]()
 
         super.init()
@@ -44,7 +43,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         listeners.addDelegate(listener)
         
         if listener.listenerType == .groceries {
-            listener.onGroceriesChange(change: .update, groceries: groceryList)
+            listener.onGroceriesChange(change: .update, groceries: groceries)
         }
         
         if listener.listenerType == .groceryLists {
@@ -106,7 +105,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     func logout() {
         do {
             try authController.signOut()
-            groceryList.removeAll()
+            groceries.removeAll()
         } catch {
             print("Error: \(error)")
         }
@@ -124,7 +123,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         grocery.expiry = expiry
         grocery.amount = amount
         grocery.user = currentUser?.uid
-        grocery.order = groceryList.count
+        grocery.order = groceries.count
         
         do {
             if let groceryRef = try groceriesRef?.addDocument(from: grocery) {
@@ -198,26 +197,24 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 removeNotificationOn(grocery)
                 
                 if change.type == .added {
-                    groceryList.append(grocery)
+                    groceries.append(grocery)
                     requestNotificationsOn(grocery)
                 } else if change.type == .modified {
-                    groceryList[grocery.order!] = grocery
+                    groceries[grocery.order!] = grocery
                     requestNotificationsOn(grocery)
                 } else if change.type == .removed {
-                    groceryList.remove(at: Int(change.oldIndex))
+                    groceries.remove(at: Int(change.oldIndex))
                 }
             }
         }
         
-        groceryList.sort {
+        groceries.sort {
             $0.order! < $1.order!
         }
         
-        groceries = groceryList
-        
         listeners.invoke { (listener) in
             if listener.listenerType == .groceries {
-                listener.onGroceriesChange(change: .update, groceries: groceryList)
+                listener.onGroceriesChange(change: .update, groceries: groceries)
             }
         }
     }
