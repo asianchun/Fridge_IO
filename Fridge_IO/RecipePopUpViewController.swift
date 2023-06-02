@@ -20,6 +20,8 @@ class RecipePopUpViewController: UIViewController {
         
         popupView.layer.cornerRadius = 10.0
         imageView.layer.cornerRadius = 10.0
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.systemGray2.cgColor
         view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
         
         indicator.style = UIActivityIndicatorView.Style.large

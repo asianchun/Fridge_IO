@@ -64,6 +64,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         status = .loading
         tableView.reloadData()
         favouritesButton.tintColor = .systemBlue
+        navigationItem.title = "Recipe Search"
         
         navigationItem.searchController?.dismiss(animated: true)
         indicator.startAnimating()
