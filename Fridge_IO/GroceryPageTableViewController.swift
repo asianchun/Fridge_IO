@@ -155,6 +155,10 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
                 content.text = "\(name) x\(amount)"
                 content.secondaryText = "Expiry Date: \(dateFormatter.string(from: date))"
             }
+            
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor(named: "selected")
+            groceryCell.selectedBackgroundView = backgroundView
         }
         
         groceryCell.contentConfiguration = content

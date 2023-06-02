@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -91,7 +92,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uYh-LE-mzs"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="3Pq-al-Obj" firstAttribute="top" secondItem="yO5-3y-Yiq" secondAttribute="bottom" constant="10" id="0y6-Rm-0xM"/>
                             <constraint firstItem="PtD-xD-gYf" firstAttribute="centerX" secondItem="c6G-JP-kYh" secondAttribute="centerX" id="3pl-1b-OfF"/>
@@ -205,7 +206,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="Jmu-Pg-D0w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="110" id="6Wq-oo-hmL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NJp-qi-eQG" secondAttribute="trailing" constant="8" id="Hlk-kz-3D7"/>
@@ -242,33 +243,36 @@
         <scene sceneID="4Zx-Fk-Mn7">
             <objects>
                 <tableViewController id="0RT-xk-xev" customClass="GroceryPageTableViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="ZZi-nf-A1a">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="ZZi-nf-A1a">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <color key="separatorColor" name="buttons"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryCell" textLabel="LTh-pE-2ML" detailTextLabel="1hz-ZZ-3Dc" style="IBUITableViewCellStyleSubtitle" id="e8y-gu-RjH">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e8y-gu-RjH" id="qPX-7e-bMf">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LTh-pE-2ML">
                                             <rect key="frame" x="20" y="6.0000000000000009" width="25" height="14.333333333333334"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" name="buttons"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1hz-ZZ-3Dc">
                                             <rect key="frame" x="19.999999999999996" y="22.333333333333336" width="43.666666666666664" height="14.333333333333334"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" name="buttons"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="cellColor"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -279,6 +283,7 @@
                     <navigationItem key="navigationItem" title="Fridge" id="bGv-t6-E0e">
                         <barButtonItem key="leftBarButtonItem" title="Log out" style="plain" id="rSd-4V-Eu3">
                             <imageReference key="image" image="rectangle.portrait.and.arrow.right" catalog="system" symbolScale="default"/>
+                            <color key="tintColor" name="buttons"/>
                             <connections>
                                 <action selector="logout:" destination="0RT-xk-xev" id="d4d-TU-Tum"/>
                             </connections>
@@ -286,11 +291,13 @@
                         <rightBarButtonItems>
                             <barButtonItem style="plain" systemItem="add" id="2wa-eu-taX">
                                 <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="2"/>
+                                <color key="tintColor" name="buttons"/>
                                 <connections>
                                     <segue destination="drb-Eo-Wn3" kind="show" id="qSm-Ej-XMy"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Edit" style="plain" id="nDm-AE-8RO">
+                                <color key="tintColor" name="buttons"/>
                                 <connections>
                                     <action selector="editGroceries:" destination="0RT-xk-xev" id="hiZ-9a-MMa"/>
                                 </connections>
@@ -385,7 +392,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zqf-Uo-AXv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="vLx-6p-AFN" firstAttribute="top" secondItem="xrT-Ea-GcS" secondAttribute="bottom" constant="20" id="0Ub-2K-Rfw"/>
                             <constraint firstItem="OhA-FO-ZhK" firstAttribute="top" secondItem="HTd-lf-aFh" secondAttribute="bottom" constant="10" id="5QF-cc-Gef"/>
@@ -426,15 +433,17 @@
         <scene sceneID="zxS-Ig-Aie">
             <objects>
                 <tableViewController id="Zuz-5b-1ll" customClass="RecipePageTableViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="W84-OQ-LF3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="W84-OQ-LF3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <color key="separatorColor" name="buttons"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" textLabel="KbT-hf-SDo" detailTextLabel="Dqb-MI-HKO" style="IBUITableViewCellStyleSubtitle" id="FHk-TB-9eT">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FHk-TB-9eT" id="EbF-mt-nL4">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KbT-hf-SDo">
@@ -453,6 +462,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="cellColor"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -463,6 +473,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe Search" id="7nK-Ys-aSg">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" style="plain" id="8w2-ft-kyC">
+                            <color key="tintColor" name="buttons"/>
                             <connections>
                                 <action selector="showFavourites:" destination="Zuz-5b-1ll" id="HHX-qT-sJs"/>
                             </connections>
@@ -679,7 +690,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YF3-Ht-v08"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="a5F-lD-l72" firstAttribute="top" secondItem="xaQ-vF-v24" secondAttribute="top" id="AQI-uP-T8N"/>
                             <constraint firstAttribute="trailing" secondItem="a5F-lD-l72" secondAttribute="trailing" id="DVI-pR-I0m"/>
@@ -691,11 +702,13 @@
                     <navigationItem key="navigationItem" title="Recipe Name" id="L0G-D2-aMg">
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="star" catalog="system" style="plain" id="wBC-jH-rec">
+                                <color key="tintColor" name="buttons"/>
                                 <connections>
                                     <action selector="addToFavourites:" destination="Oia-fh-BzA" id="qmq-fz-iAP"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem style="plain" systemItem="add" id="nMn-aO-A2f">
+                                <color key="tintColor" name="buttons"/>
                                 <connections>
                                     <action selector="addToGroceryList:" destination="Oia-fh-BzA" id="HWP-ei-iAt"/>
                                 </connections>
@@ -726,6 +739,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="buttons"/>
                     </tabBar>
                     <connections>
                         <segue destination="1LB-jn-UXC" kind="relationship" relationship="viewControllers" id="61V-HJ-So1"/>
@@ -760,19 +774,21 @@
         <scene sceneID="sVq-2H-cqd">
             <objects>
                 <tableViewController id="zds-NS-Gfl" customClass="GroceryListTableViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="QZV-zw-al6">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="QZV-zw-al6">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <color key="separatorColor" name="buttons"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="listCell" id="ibo-Px-03P" customClass="GroceryListTableViewCell" customModule="Fridge_IO" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ibo-Px-03P" id="rwa-y9-3Ob">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aRL-qV-eDB">
-                                            <rect key="frame" x="20" y="0.0" width="368" height="40"/>
+                                            <rect key="frame" x="20" y="0.0" width="328" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="uiO-dC-vqe"/>
                                             </constraints>
@@ -785,32 +801,36 @@
                                             </connections>
                                         </textField>
                                     </subviews>
+                                    <color key="backgroundColor" name="cellColor"/>
                                     <constraints>
                                         <constraint firstItem="aRL-qV-eDB" firstAttribute="leading" secondItem="rwa-y9-3Ob" secondAttribute="leading" constant="20" id="T2g-bN-a3a"/>
                                         <constraint firstAttribute="trailing" secondItem="aRL-qV-eDB" secondAttribute="trailing" constant="5" id="VFW-90-eJN"/>
                                         <constraint firstItem="aRL-qV-eDB" firstAttribute="top" secondItem="rwa-y9-3Ob" secondAttribute="top" id="gPU-4z-Phq"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="cellColor"/>
                                 <connections>
                                     <outlet property="listTextField" destination="aRL-qV-eDB" id="9nx-X2-vMR"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="infoCell" textLabel="f3Q-O5-S6b" style="IBUITableViewCellStyleDefault" id="GX1-Hl-6rl">
-                                <rect key="frame" x="0.0" y="93.666667938232422" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="20" y="99" width="353" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GX1-Hl-6rl" id="jOe-tW-SLW">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f3Q-O5-S6b">
-                                            <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
+                                            <rect key="frame" x="20" y="0.0" width="313" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" name="cellColor"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="cellColor"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -821,6 +841,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Grocery List" id="7So-k1-Zi7">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="Ovy-VV-BBo">
+                            <color key="tintColor" name="buttons"/>
                             <connections>
                                 <action selector="addListEntry:" destination="zds-NS-Gfl" id="dpw-Vj-weq"/>
                             </connections>
@@ -840,26 +861,30 @@
         <scene sceneID="xy7-DW-isW">
             <objects>
                 <tableViewController id="anD-PL-ikx" customClass="AllGroceryListsTableViewController" customModule="Fridge_IO" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="W8X-yD-dpr">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="W8X-yD-dpr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <color key="separatorColor" name="buttons"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" textLabel="5if-nY-iK3" style="IBUITableViewCellStyleDefault" id="XKl-1g-zEc">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XKl-1g-zEc" id="g7l-PT-DqC">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5if-nY-iK3">
-                                            <rect key="frame" x="20" y="0.0" width="353" height="43.666667938232422"/>
+                                            <rect key="frame" x="20" y="0.0" width="313" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" name="cellColor"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" name="cellColor"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -869,6 +894,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Grocery Lists" id="Ro9-Tt-z4U">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="kgw-ic-y8a">
+                            <color key="tintColor" name="buttons"/>
                             <connections>
                                 <action selector="addGroceryList:" destination="anD-PL-ikx" id="pIb-ve-QgM"/>
                             </connections>
@@ -976,7 +1002,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MO1-Pl-KZB"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="StU-FQ-mw9" firstAttribute="centerX" secondItem="f29-g1-Ozk" secondAttribute="centerX" id="4Dr-Em-kzF"/>
                             <constraint firstItem="FCS-T6-gnO" firstAttribute="top" secondItem="MO1-Pl-KZB" secondAttribute="top" constant="40" id="6kO-Yf-i8m"/>
@@ -1091,6 +1117,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="V28-DD-BuN"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" name="buttons"/>
     <resources>
         <image name="bookmark" catalog="system" width="110" height="128"/>
         <image name="fork.knife" catalog="system" width="94" height="128"/>
@@ -1098,6 +1125,15 @@
         <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="109"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <namedColor name="Background">
+            <color red="0.93725490196078431" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="buttons">
+            <color red="0.023529411764705882" green="0.27843137254901962" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="cellColor">
+            <color red="0.7803921568627451" green="0.89803921568627454" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -113,6 +113,10 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
             content.text = groceryList.name
         }
         
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor(named: "selected")
+        cell.selectedBackgroundView = backgroundView
+        
         cell.contentConfiguration = content
         return cell
     }

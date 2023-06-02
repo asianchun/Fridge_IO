@@ -247,6 +247,10 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
             } else {
                 content.secondaryText = "Calories: \(recipe.calories ?? 0) | Contains: \(recipe.diateries ?? "None")"
             }
+            
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor(named: "selected")
+            cell.selectedBackgroundView = backgroundView
         }
         
         cell.contentConfiguration = content
