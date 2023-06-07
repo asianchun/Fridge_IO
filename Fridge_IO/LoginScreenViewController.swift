@@ -24,6 +24,14 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
+        
+        emailTextField.layer.borderWidth = 1
+        emailTextField.layer.cornerRadius = 5
+        emailTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.layer.cornerRadius = 5
+        passwordTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
     }
     
     //Setup & Remove listeners

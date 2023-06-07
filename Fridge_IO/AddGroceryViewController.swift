@@ -26,7 +26,14 @@ class AddGroceryViewController: UIViewController {
         dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
         dateControl.semanticContentAttribute = .forceRightToLeft
         dateControl.subviews.first?.semanticContentAttribute = .forceRightToLeft
-        // Do any additional setup after loading the view.
+        
+        nameTextField.layer.borderWidth = 1
+        nameTextField.layer.cornerRadius = 5
+        nameTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        amountField.layer.borderWidth = 1
+        amountField.layer.cornerRadius = 5
+        amountField.layer.borderColor = UIColor(named: "buttons")?.cgColor
     }
     
     @IBAction func add(_ sender: Any) {

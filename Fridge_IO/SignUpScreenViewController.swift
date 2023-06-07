@@ -25,6 +25,22 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
 
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
+        
+        emailTextField.layer.borderWidth = 1
+        emailTextField.layer.cornerRadius = 5
+        emailTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.layer.cornerRadius = 5
+        passwordTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        confirmEmailTextField.layer.borderWidth = 1
+        confirmEmailTextField.layer.cornerRadius = 5
+        confirmEmailTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        confirmPasswordTextField.layer.borderWidth = 1
+        confirmPasswordTextField.layer.cornerRadius = 5
+        confirmPasswordTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
     }
     
     override func viewWillAppear(_ animated: Bool) {

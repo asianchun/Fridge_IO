@@ -33,6 +33,14 @@ class EditGroceryViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
+        
+        nameTextField.layer.borderWidth = 1
+        nameTextField.layer.cornerRadius = 5
+        nameTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        amountTextField.layer.borderWidth = 1
+        amountTextField.layer.cornerRadius = 5
+        amountTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
     }
     
     @IBAction func save(_ sender: Any) {

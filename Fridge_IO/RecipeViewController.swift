@@ -42,6 +42,8 @@ class RecipeViewController: UIViewController {
 
         navigationItem.title = recipe?.name ?? ""
         imageView.layer.cornerRadius = 8.0
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = UIColor(named: "imageBorder")?.cgColor
         
         sourceText.text = recipe?.source
         caloriesText.text = "\(recipe?.calories ?? 0) calories"
