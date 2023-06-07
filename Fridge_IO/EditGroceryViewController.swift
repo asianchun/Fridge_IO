@@ -10,21 +10,23 @@ import UIKit
 class EditGroceryViewController: UIViewController {
     
     var grocery: Grocery?
+    var type: GroceryType?
 
     @IBOutlet weak var dateControl: UIDatePicker!
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var typeControl: UIButton!
     
     weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupPopup()
 
         navigationItem.title = "Edit \(grocery?.name ?? "")"
         nameTextField.text = grocery?.name ?? ""
         amountTextField.text = grocery?.amount ?? ""
-        typeSegmentedControl.selectedSegmentIndex = grocery?.type ?? 0
+        //typeSegmentedControl.selectedSegmentIndex = grocery?.type ?? 0
         dateControl.date = grocery?.expiry ?? Date()
         dateControl.minimumDate = Date()
         
@@ -44,7 +46,7 @@ class EditGroceryViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        guard let name = nameTextField.text, let amount = amountTextField.text, let type = GroceryType(rawValue: Int(typeSegmentedControl.selectedSegmentIndex)) else {
+        guard let name = nameTextField.text, let amount = amountTextField.text, let type = type else {
             return
         }
         
@@ -66,6 +68,68 @@ class EditGroceryViewController: UIViewController {
         
         databaseController?.editGrocery(grocery: grocery!, name: name, type: type, expiry: date, amount: amount)
         navigationController?.popViewController(animated: true)
+    }
+    
+    func setupPopup() {
+        let optionClosure = {(action: UIAction) in
+            switch action.title {
+            case "Dairy":
+                self.type = GroceryType(rawValue: 0)
+            case "Fruits & Veggies":
+                self.type = GroceryType(rawValue: 1)
+            case "Meat":
+                self.type = GroceryType(rawValue: 2)
+            case "Seafood":
+                self.type = GroceryType(rawValue: 3)
+            case "Condiments":
+                self.type = GroceryType(rawValue: 4)
+            case "Other":
+                self.type = GroceryType(rawValue: 5)
+            default:
+                print("Error")
+            }
+        }
+        
+        
+        typeControl.menu = UIMenu(children: [
+            createAction("Dairy", handler: optionClosure),
+            createAction("Fruits & Veggies", handler: optionClosure),
+            createAction("Meat", handler: optionClosure),
+            createAction("Seafood", handler: optionClosure),
+            createAction("Condiments", handler: optionClosure),
+            createAction("Other", handler: optionClosure)
+        ])
+        
+        typeControl.showsMenuAsPrimaryAction = true
+        typeControl.changesSelectionAsPrimaryAction = true
+    }
+    
+    func createAction(_ name: String, handler: @escaping UIActionHandler) -> UIAction {
+        let action = UIAction(title: name, handler: handler)
+        var tempType = GroceryType(rawValue: 0)
+        
+        switch name {
+        case "Dairy":
+             tempType = GroceryType(rawValue: 0)
+        case "Fruits & Veggies":
+            tempType = GroceryType(rawValue: 1)
+        case "Meat":
+            tempType = GroceryType(rawValue: 2)
+        case "Seafood":
+            tempType = GroceryType(rawValue: 3)
+        case "Condiments":
+            tempType = GroceryType(rawValue: 4)
+        case "Other":
+            tempType = GroceryType(rawValue: 5)
+        default:
+            print("Error")
+        }
+        
+        if tempType == GroceryType(rawValue: grocery?.type ?? 0) {
+            action.state = .on
+        }
+        
+        return action
     }
     
     func displayMessage(title: String, message: String) {

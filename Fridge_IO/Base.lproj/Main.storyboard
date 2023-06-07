@@ -7,6 +7,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -347,41 +348,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount/Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLx-6p-AFN">
-                                <rect key="frame" x="20" y="253.66666666666663" width="129" height="23"/>
+                                <rect key="frame" x="20" y="256.66666666666669" width="129" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xrT-Ea-GcS">
-                                <rect key="frame" x="20" y="202.66666666666666" width="353" height="32"/>
-                                <color key="backgroundColor" name="Background"/>
-                                <segments>
-                                    <segment title="Dairy"/>
-                                    <segment title="Veggies"/>
-                                    <segment title="Meat"/>
-                                    <segment title="Nuts"/>
-                                    <segment title="Liquids"/>
-                                </segments>
-                                <connections>
-                                    <action selector="typeValueChange:" destination="drb-Eo-Wn3" eventType="valueChanged" id="R63-MR-QdK"/>
-                                </connections>
-                            </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 500g" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c1J-G6-Tpk">
-                                <rect key="frame" x="20" y="286.66666666666669" width="353" height="34"/>
+                                <rect key="frame" x="20" y="289.66666666666669" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ux-Xa-sIe">
-                                <rect key="frame" x="19.999999999999993" y="340.66666666666669" width="97.333333333333314" height="22.333333333333314"/>
+                                <rect key="frame" x="19.999999999999993" y="343.66666666666669" width="97.333333333333314" height="22.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="M7E-Aq-JYi">
-                                <rect key="frame" x="19" y="373" width="130" height="30"/>
+                                <rect key="frame" x="19" y="376" width="130" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="7Yq-kd-loN"/>
+                                    <constraint firstAttribute="height" constant="34" id="7Yq-kd-loN"/>
                                     <constraint firstAttribute="width" constant="130" id="vIn-QX-PDJ"/>
                                 </constraints>
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="699440400">
@@ -390,7 +377,7 @@
                                 <locale key="locale" localeIdentifier="en_AU"/>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zjY-0a-9fZ">
-                                <rect key="frame" x="168" y="493" width="57" height="36.333333333333371"/>
+                                <rect key="frame" x="168" y="499.99999999999994" width="57" height="36.333333333333314"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Add">
                                     <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -400,20 +387,35 @@
                                     <action selector="add:" destination="drb-Eo-Wn3" eventType="touchUpInside" id="uWG-EM-25C"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iFn-7V-Oj5">
+                                <rect key="frame" x="20" y="202.66666666666666" width="87" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="V4J-KN-nF3"/>
+                                </constraints>
+                                <menu key="menu" id="KbN-fO-Fy9">
+                                    <children>
+                                        <command title="Item 1" id="JRH-UJ-Opu"/>
+                                        <command title="Item 2" id="9AG-WU-wsg"/>
+                                    </children>
+                                </menu>
+                                <state key="normal" title="Item 1"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Item 1">
+                                    <color key="baseForegroundColor" name="Accent"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zqf-Uo-AXv"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="vLx-6p-AFN" firstAttribute="top" secondItem="xrT-Ea-GcS" secondAttribute="bottom" constant="20" id="0Ub-2K-Rfw"/>
+                            <constraint firstItem="iFn-7V-Oj5" firstAttribute="top" secondItem="WkL-Wi-gRg" secondAttribute="bottom" constant="10" id="2fY-R2-oOS"/>
                             <constraint firstItem="OhA-FO-ZhK" firstAttribute="top" secondItem="HTd-lf-aFh" secondAttribute="bottom" constant="10" id="5QF-cc-Gef"/>
-                            <constraint firstItem="xrT-Ea-GcS" firstAttribute="top" secondItem="WkL-Wi-gRg" secondAttribute="bottom" constant="10" id="A3S-h7-uzq"/>
                             <constraint firstItem="M7E-Aq-JYi" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="19" id="CbQ-7g-HMw"/>
                             <constraint firstItem="Zqf-Uo-AXv" firstAttribute="trailing" secondItem="OhA-FO-ZhK" secondAttribute="trailing" constant="20" id="Jdw-iI-Hdh"/>
                             <constraint firstItem="WkL-Wi-gRg" firstAttribute="top" secondItem="OhA-FO-ZhK" secondAttribute="bottom" constant="20" id="KX3-1s-gr9"/>
-                            <constraint firstItem="Zqf-Uo-AXv" firstAttribute="trailing" secondItem="xrT-Ea-GcS" secondAttribute="trailing" constant="20" id="NGP-8o-DMb"/>
                             <constraint firstItem="zjY-0a-9fZ" firstAttribute="top" secondItem="M7E-Aq-JYi" secondAttribute="bottom" constant="90" id="Qgy-Ej-Yw6"/>
                             <constraint firstItem="zjY-0a-9fZ" firstAttribute="centerX" secondItem="g1Z-In-itO" secondAttribute="centerX" id="Trc-QG-ZMB"/>
                             <constraint firstItem="vLx-6p-AFN" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="20" id="VCc-5O-jUN"/>
+                            <constraint firstItem="vLx-6p-AFN" firstAttribute="top" secondItem="iFn-7V-Oj5" secondAttribute="bottom" constant="20" id="aGy-ke-MSL"/>
                             <constraint firstItem="Zqf-Uo-AXv" firstAttribute="trailing" secondItem="c1J-G6-Tpk" secondAttribute="trailing" constant="20" id="amX-vA-Lrt"/>
                             <constraint firstItem="c1J-G6-Tpk" firstAttribute="top" secondItem="vLx-6p-AFN" secondAttribute="bottom" constant="10" id="c7V-mj-ucM"/>
                             <constraint firstItem="7Ux-Xa-sIe" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="20" id="f4x-NT-GsD"/>
@@ -422,7 +424,7 @@
                             <constraint firstItem="M7E-Aq-JYi" firstAttribute="top" secondItem="7Ux-Xa-sIe" secondAttribute="bottom" constant="10" id="irZ-by-OE4"/>
                             <constraint firstItem="7Ux-Xa-sIe" firstAttribute="top" secondItem="c1J-G6-Tpk" secondAttribute="bottom" constant="20" id="ofp-il-gYx"/>
                             <constraint firstItem="c1J-G6-Tpk" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="20" id="qRI-JC-njh"/>
-                            <constraint firstItem="xrT-Ea-GcS" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="20" id="qvZ-9m-6uY"/>
+                            <constraint firstItem="iFn-7V-Oj5" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="20" id="sV5-as-CEv"/>
                             <constraint firstItem="WkL-Wi-gRg" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="20" id="w7r-sq-39A"/>
                             <constraint firstItem="OhA-FO-ZhK" firstAttribute="leading" secondItem="Zqf-Uo-AXv" secondAttribute="leading" constant="20" id="yTh-6O-I0Q"/>
                         </constraints>
@@ -432,7 +434,7 @@
                         <outlet property="amountField" destination="c1J-G6-Tpk" id="Ih1-LI-DbL"/>
                         <outlet property="dateControl" destination="M7E-Aq-JYi" id="cRI-sU-nmz"/>
                         <outlet property="nameTextField" destination="OhA-FO-ZhK" id="WvV-we-i8g"/>
-                        <outlet property="typeSegmentedControl" destination="xrT-Ea-GcS" id="YYt-Yc-QrA"/>
+                        <outlet property="typeControl" destination="iFn-7V-Oj5" id="K2v-Ef-Vp6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqU-45-fFg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -968,37 +970,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount/Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UEj-zf-FnN">
-                                <rect key="frame" x="20" y="253.66666666666663" width="129" height="23"/>
+                                <rect key="frame" x="20" y="256.66666666666669" width="129" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zpo-gW-Fpt">
-                                <rect key="frame" x="20" y="202.66666666666666" width="353" height="32"/>
-                                <segments>
-                                    <segment title="Dairy"/>
-                                    <segment title="Veggies"/>
-                                    <segment title="Meat"/>
-                                    <segment title="Nuts"/>
-                                    <segment title="Liquids"/>
-                                </segments>
-                            </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 500g" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vIO-gH-hQs">
-                                <rect key="frame" x="20" y="286.66666666666669" width="353" height="34"/>
+                                <rect key="frame" x="20" y="289.66666666666669" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expiry Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dh9-uG-Llq">
-                                <rect key="frame" x="19.999999999999993" y="340.66666666666669" width="97.333333333333314" height="22.333333333333314"/>
+                                <rect key="frame" x="19.999999999999993" y="343.66666666666669" width="97.333333333333314" height="22.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="6b5-no-h10">
-                                <rect key="frame" x="19" y="373" width="130" height="30"/>
+                                <rect key="frame" x="19" y="376" width="130" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="AAL-un-SLB"/>
+                                    <constraint firstAttribute="height" constant="34" id="AAL-un-SLB"/>
                                     <constraint firstAttribute="width" constant="130" id="opP-hu-FkX"/>
                                 </constraints>
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="699440400">
@@ -1007,7 +999,7 @@
                                 <locale key="locale" localeIdentifier="en_AU"/>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="StU-FQ-mw9">
-                                <rect key="frame" x="165.66666666666666" y="493" width="62" height="36.333333333333371"/>
+                                <rect key="frame" x="165.66666666666666" y="499.99999999999994" width="62" height="36.333333333333314"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Save">
                                     <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -1016,30 +1008,45 @@
                                     <action selector="save:" destination="Jac-gt-Mx0" eventType="touchUpInside" id="ytx-G5-NWC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AeJ-dN-cfE">
+                                <rect key="frame" x="20" y="202.66666666666666" width="87" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Rlv-AG-soS"/>
+                                </constraints>
+                                <menu key="menu" id="2Yn-Un-Iah">
+                                    <children>
+                                        <command title="Item 1" id="rPg-94-bRl"/>
+                                        <command title="Item 2" id="bx4-ej-ISq"/>
+                                    </children>
+                                </menu>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Button">
+                                    <color key="baseForegroundColor" name="Accent"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MO1-Pl-KZB"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="StU-FQ-mw9" firstAttribute="centerX" secondItem="f29-g1-Ozk" secondAttribute="centerX" id="4Dr-Em-kzF"/>
+                            <constraint firstItem="UEj-zf-FnN" firstAttribute="top" secondItem="AeJ-dN-cfE" secondAttribute="bottom" constant="20" id="5fH-dc-HYC"/>
                             <constraint firstItem="FCS-T6-gnO" firstAttribute="top" secondItem="MO1-Pl-KZB" secondAttribute="top" constant="40" id="6kO-Yf-i8m"/>
-                            <constraint firstItem="zpo-gW-Fpt" firstAttribute="top" secondItem="aou-kH-NbO" secondAttribute="bottom" constant="10" id="6to-gj-2qS"/>
                             <constraint firstItem="Dh9-uG-Llq" firstAttribute="top" secondItem="vIO-gH-hQs" secondAttribute="bottom" constant="20" id="99Y-L3-Z03"/>
                             <constraint firstItem="vIO-gH-hQs" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="EDK-HO-ULv"/>
+                            <constraint firstItem="AeJ-dN-cfE" firstAttribute="top" secondItem="aou-kH-NbO" secondAttribute="bottom" constant="10" id="JG9-uG-bhN"/>
                             <constraint firstItem="aou-kH-NbO" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="Ken-wu-KxU"/>
+                            <constraint firstItem="AeJ-dN-cfE" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="NKS-Bb-eH2"/>
                             <constraint firstItem="6b5-no-h10" firstAttribute="top" secondItem="Dh9-uG-Llq" secondAttribute="bottom" constant="10" id="O2Z-ul-KZc"/>
                             <constraint firstItem="Dh9-uG-Llq" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="Ol0-fb-Sv7"/>
                             <constraint firstItem="aou-kH-NbO" firstAttribute="top" secondItem="kPh-Vg-JuO" secondAttribute="bottom" constant="20" id="SM9-gU-bFu"/>
                             <constraint firstItem="MO1-Pl-KZB" firstAttribute="trailing" secondItem="vIO-gH-hQs" secondAttribute="trailing" constant="20" id="SxL-01-za0"/>
                             <constraint firstItem="FCS-T6-gnO" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="TNY-5B-klJ"/>
                             <constraint firstItem="MO1-Pl-KZB" firstAttribute="trailing" secondItem="kPh-Vg-JuO" secondAttribute="trailing" constant="20" id="YIz-8i-3lS"/>
-                            <constraint firstItem="UEj-zf-FnN" firstAttribute="top" secondItem="zpo-gW-Fpt" secondAttribute="bottom" constant="20" id="ewJ-HS-RzX"/>
                             <constraint firstItem="kPh-Vg-JuO" firstAttribute="top" secondItem="FCS-T6-gnO" secondAttribute="bottom" constant="10" id="gGQ-1a-euh"/>
                             <constraint firstItem="kPh-Vg-JuO" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="gq1-Bi-viQ"/>
-                            <constraint firstItem="MO1-Pl-KZB" firstAttribute="trailing" secondItem="zpo-gW-Fpt" secondAttribute="trailing" constant="20" id="hie-4u-bxP"/>
                             <constraint firstItem="UEj-zf-FnN" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="kyc-sA-wos"/>
                             <constraint firstItem="6b5-no-h10" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="19" id="mKI-5N-V2e"/>
                             <constraint firstItem="StU-FQ-mw9" firstAttribute="top" secondItem="6b5-no-h10" secondAttribute="bottom" constant="90" id="nDt-4t-sdy"/>
-                            <constraint firstItem="zpo-gW-Fpt" firstAttribute="leading" secondItem="MO1-Pl-KZB" secondAttribute="leading" constant="20" id="t26-1f-laV"/>
                             <constraint firstItem="vIO-gH-hQs" firstAttribute="top" secondItem="UEj-zf-FnN" secondAttribute="bottom" constant="10" id="vZT-IX-6kV"/>
                         </constraints>
                     </view>
@@ -1048,12 +1055,12 @@
                         <outlet property="amountTextField" destination="vIO-gH-hQs" id="Zgk-yE-q1G"/>
                         <outlet property="dateControl" destination="6b5-no-h10" id="2gA-YI-LnP"/>
                         <outlet property="nameTextField" destination="kPh-Vg-JuO" id="dRm-ow-GGZ"/>
-                        <outlet property="typeSegmentedControl" destination="zpo-gW-Fpt" id="sIJ-EZ-xK6"/>
+                        <outlet property="typeControl" destination="AeJ-dN-cfE" id="AfA-fA-hDl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIj-rg-3Go" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4876" y="245"/>
+            <point key="canvasLocation" x="4875.5725190839694" y="244.36619718309859"/>
         </scene>
         <!--Recipe Pop Up View Controller-->
         <scene sceneID="MB3-0J-wbM">
@@ -1142,6 +1149,9 @@
         <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
         <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="109"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <namedColor name="Accent">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="Background">
             <color red="0.93725490196078431" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -14,10 +14,13 @@ class AddGroceryViewController: UIViewController {
     @IBOutlet weak var dateControl: UIDatePicker!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountField: UITextField!
-    @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var typeControl: UIButton!
+    
+    var type: GroceryType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupPopup()
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
@@ -34,10 +37,12 @@ class AddGroceryViewController: UIViewController {
         amountField.layer.borderWidth = 1
         amountField.layer.cornerRadius = 5
         amountField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        type = GroceryType(rawValue: 0)
     }
     
     @IBAction func add(_ sender: Any) {
-        guard let name = nameTextField.text, let amount = amountField.text, let type = GroceryType(rawValue: Int(typeSegmentedControl.selectedSegmentIndex)) else {
+        guard let name = nameTextField.text, let amount = amountField.text, let type = type else {
             return
         }
         
@@ -61,23 +66,37 @@ class AddGroceryViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func typeValueChange(_ sender: Any) {
-        let type = Int(typeSegmentedControl.selectedSegmentIndex)
-        
-        switch type {
-        case 0:
-            dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
-        case 1:
-            dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
-        case 2:
-            dateControl.date = Calendar.current.date(byAdding: .day, value: 14, to: Date())!
-        case 3:
-            dateControl.date = Calendar.current.date(byAdding: .day, value: 300, to: Date())!
-        case 4:
-            dateControl.date = Calendar.current.date(byAdding: .day, value: 20, to: Date())!
-        default:
-            dateControl.date = Date()
+    func setupPopup() {
+        let optionClosure = {(action: UIAction) in
+            switch action.title {
+            case "Dairy":
+                self.type = GroceryType(rawValue: 0)
+            case "Fruits & Veggies":
+                self.type = GroceryType(rawValue: 1)
+            case "Meat":
+                self.type = GroceryType(rawValue: 2)
+            case "Seafood":
+                self.type = GroceryType(rawValue: 3)
+            case "Condiments":
+                self.type = GroceryType(rawValue: 4)
+            case "Other":
+                self.type = GroceryType(rawValue: 5)
+            default:
+                print("Error")
+            }
         }
+        
+        typeControl.menu = UIMenu(children: [
+            UIAction(title: "Dairy", state: .on, handler: optionClosure),
+            UIAction(title: "Fruits & Veggies", handler: optionClosure),
+            UIAction(title: "Meat", handler: optionClosure),
+            UIAction(title: "Seafood", handler: optionClosure),
+            UIAction(title: "Condiments", handler: optionClosure),
+            UIAction(title: "Other", handler: optionClosure),
+        ])
+        
+        typeControl.showsMenuAsPrimaryAction = true
+        typeControl.changesSelectionAsPrimaryAction = true
     }
     
     func displayMessage(title: String, message: String) {

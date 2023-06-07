@@ -29,7 +29,7 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.scopeBarActivation = .onSearchActivation
-        searchController.searchBar.scopeButtonTitles = ["All", "Dairy", "Veggies", "Meat", "Nuts", "Liquids"]
+        searchController.searchBar.scopeButtonTitles = ["All", "Dairy", "Fruits & Veggies", "Meat", "Seafood", "Condiments", "Other"]
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController

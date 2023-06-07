@@ -19,10 +19,11 @@ enum CodingKeys: String, CodingKey {
 
 enum GroceryType: Int {
     case dairy = 0
-    case vegetables = 1
+    case fruitsAndVegetables = 1
     case meat = 2
-    case nuts = 3
-    case liquids = 4
+    case seafood = 3
+    case condiments = 4
+    case other = 5
 }
 
 class Grocery: NSObject, Codable {
