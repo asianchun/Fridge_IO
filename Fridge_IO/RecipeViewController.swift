@@ -17,6 +17,8 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var containsText: UITextView!
     @IBOutlet weak var caloriesText: UITextView!
     @IBOutlet weak var ingredientLinesText: UITextView!
+    @IBOutlet weak var ingredientLinesTextHC: NSLayoutConstraint!
+    @IBOutlet weak var contentViewHC: NSLayoutConstraint!
     @IBOutlet weak var favouritesButton: UIBarButtonItem!
     
     weak var favouritesDelegate: FavouritesDelegate?
@@ -50,8 +52,10 @@ class RecipeViewController: UIViewController {
         urlText.text = recipe?.url ?? "No url"
         mealTypeText.text = recipe?.mealType ?? "Can enjoy it anytime!"
         
-        let ingredients = recipe?.ingredientLines?.joined(separator: "\n")
+        let ingredients = recipe?.ingredientLines?.joined(separator: "  >>  ")
         ingredientLinesText.text = ingredients
+        contentViewHC.constant = contentViewHC.constant + ingredientLinesText.contentSize.height
+        ingredientLinesTextHC.constant = ingredientLinesText.contentSize.height
 
         if let diatary = recipe?.diateries, !diatary.isEmpty {
             containsText.text = diatary
