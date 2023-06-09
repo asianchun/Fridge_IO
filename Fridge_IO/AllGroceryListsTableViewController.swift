@@ -12,12 +12,17 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
     weak var databaseController: DatabaseProtocol?
     
     let CELL_LIST = "listCell"
+    let ABOUT = "About Fridge.IO"
+    let LOGOUT = "Log Out"
     
     var allLists: [GroceryList] = []
     var listenerType = ListenerType.groceryLists
 
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSettings()
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
@@ -80,6 +85,33 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
         self.present(alertController, animated: true, completion: nil)
     }
 
+    //Settings
+    func setupSettings() {
+        let optionClosure = {(action: UIAction) in
+            switch action.title {
+            case self.ABOUT:
+                self.performSegue(withIdentifier: "aboutIdentifier", sender: nil)
+            case self.LOGOUT:
+                let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to logout?", preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self.databaseController?.logout()
+                    self.performSegue(withIdentifier: "logoutIdentifier", sender: self)
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                
+                self.present(alertController, animated: true, completion: nil)
+            default:
+                print("Error")
+            }
+        }
+        
+        settingsButton.menu = UIMenu(children: [
+            UIAction(title: ABOUT, handler: optionClosure),
+            UIAction(title: LOGOUT, handler: optionClosure),
+        ])
+    }
     
     // MARK: - Table view data source
 

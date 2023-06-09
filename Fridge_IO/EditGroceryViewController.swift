@@ -9,15 +9,22 @@ import UIKit
 
 class EditGroceryViewController: UIViewController {
     
-    var grocery: Grocery?
-    var type: GroceryType?
+    weak var databaseController: DatabaseProtocol?
 
     @IBOutlet weak var dateControl: UIDatePicker!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var typeControl: UIButton!
     
-    weak var databaseController: DatabaseProtocol?
+    let DAIRY = "Dairy"
+    let FRUITS_AND_VEGETABLES = "Fruits & Veggies"
+    let MEAT = "Meat"
+    let SEAFOOD = "Seafood"
+    let CONDIMENTS = "Condiments"
+    let OTHER = "Other"
+    
+    var grocery: Grocery?
+    var type: GroceryType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,17 +78,17 @@ class EditGroceryViewController: UIViewController {
     func setupPopup() {
         let optionClosure = {(action: UIAction) in
             switch action.title {
-            case "Dairy":
+            case self.DAIRY:
                 self.type = GroceryType(rawValue: 0)
-            case "Fruits & Veggies":
+            case self.FRUITS_AND_VEGETABLES:
                 self.type = GroceryType(rawValue: 1)
-            case "Meat":
+            case self.MEAT:
                 self.type = GroceryType(rawValue: 2)
-            case "Seafood":
+            case self.SEAFOOD:
                 self.type = GroceryType(rawValue: 3)
-            case "Condiments":
+            case self.CONDIMENTS:
                 self.type = GroceryType(rawValue: 4)
-            case "Other":
+            case self.OTHER:
                 self.type = GroceryType(rawValue: 5)
             default:
                 print("Error")
@@ -90,12 +97,12 @@ class EditGroceryViewController: UIViewController {
         
         
         typeControl.menu = UIMenu(children: [
-            createAction("Dairy", handler: optionClosure),
-            createAction("Fruits & Veggies", handler: optionClosure),
-            createAction("Meat", handler: optionClosure),
-            createAction("Seafood", handler: optionClosure),
-            createAction("Condiments", handler: optionClosure),
-            createAction("Other", handler: optionClosure)
+            createAction(DAIRY, handler: optionClosure),
+            createAction(FRUITS_AND_VEGETABLES, handler: optionClosure),
+            createAction(MEAT, handler: optionClosure),
+            createAction(SEAFOOD, handler: optionClosure),
+            createAction(CONDIMENTS, handler: optionClosure),
+            createAction(OTHER, handler: optionClosure)
         ])
         
         typeControl.showsMenuAsPrimaryAction = true
@@ -107,17 +114,17 @@ class EditGroceryViewController: UIViewController {
         var tempType: GroceryType?
         
         switch name {
-        case "Dairy":
+        case DAIRY:
              tempType = GroceryType(rawValue: 0)
-        case "Fruits & Veggies":
+        case FRUITS_AND_VEGETABLES:
             tempType = GroceryType(rawValue: 1)
-        case "Meat":
+        case MEAT:
             tempType = GroceryType(rawValue: 2)
-        case "Seafood":
+        case SEAFOOD:
             tempType = GroceryType(rawValue: 3)
-        case "Condiments":
+        case CONDIMENTS:
             tempType = GroceryType(rawValue: 4)
-        case "Other":
+        case OTHER:
             tempType = GroceryType(rawValue: 5)
         default:
             print("Error")
@@ -140,15 +147,4 @@ class EditGroceryViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

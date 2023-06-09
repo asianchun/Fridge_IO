@@ -19,6 +19,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
     weak var databaseController: DatabaseProtocol?
     
     let CELL_RECIPE = "recipeCell"
+    let ABOUT = "About Fridge.IO"
+    let LOGOUT = "Log Out"
     
     var recipes = [RecipeData]()
     var previousRecipes = [RecipeData]()
@@ -27,9 +29,11 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
     var status: Status = .standard
     
     @IBOutlet weak var favouritesButton: UIBarButtonItem!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSettings()
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
@@ -124,6 +128,34 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
             recipes = newFavourites
             tableView.reloadData()
         }
+    }
+    
+    //Settings
+    func setupSettings() {
+        let optionClosure = {(action: UIAction) in
+            switch action.title {
+            case self.ABOUT:
+                self.performSegue(withIdentifier: "aboutIdentifier", sender: nil)
+            case self.LOGOUT:
+                let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to logout?", preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self.databaseController?.logout()
+                    self.performSegue(withIdentifier: "logoutIdentifier", sender: self)
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                
+                self.present(alertController, animated: true, completion: nil)
+            default:
+                print("Error")
+            }
+        }
+        
+        settingsButton.menu = UIMenu(children: [
+            UIAction(title: ABOUT, handler: optionClosure),
+            UIAction(title: LOGOUT, handler: optionClosure),
+        ])
     }
     
     // MARK: - Api call
@@ -279,9 +311,11 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let sender = sender as! IndexPath
+        navigationItem.backButtonTitle = "Back"
         
         if segue.identifier == "recipeIdentifier" {
+            let sender = sender as! IndexPath
+            
             let destination = segue.destination as! RecipeViewController
             destination.recipe = recipes[sender.row]
             
@@ -291,6 +325,8 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
             
             destination.favouritesDelegate = self
         } else if segue.identifier == "popupIdentifier" {
+            let sender = sender as! IndexPath
+            
             let destination = segue.destination as! RecipePopUpViewController
             destination.recipe = recipes[sender.row]
         }

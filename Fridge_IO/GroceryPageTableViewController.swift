@@ -12,6 +12,8 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     weak var databaseController: DatabaseProtocol?
     
     let CELL_GROCERY = "groceryCell"
+    let ABOUT = "About Fridge.IO"
+    let LOGOUT = "Log Out"
     
     var listenerType = ListenerType.groceries
     var allGroceries: [Grocery] = []
@@ -20,9 +22,11 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     let searchController = UISearchController(searchResultsController: nil)
 
     @IBOutlet weak var editBtn: UIBarButtonItem!
+    @IBOutlet weak var settingsBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSettings()
 
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -92,18 +96,32 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
         tableView.reloadData()
     }
     
-    //Log out
-    @IBAction func logout(_ sender: Any) {
-        let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to logout?", preferredStyle: .alert)
+    //Settings
+    func setupSettings() {
+        let optionClosure = {(action: UIAction) in
+            switch action.title {
+            case self.ABOUT:
+                self.performSegue(withIdentifier: "aboutIdentifier", sender: nil)
+            case self.LOGOUT:
+                let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to logout?", preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self.databaseController?.logout()
+                    self.performSegue(withIdentifier: "logoutIdentifier", sender: self)
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                
+                self.present(alertController, animated: true, completion: nil)
+            default:
+                print("Error")
+            }
+        }
         
-        alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
-            self.databaseController?.logout()
-            self.performSegue(withIdentifier: "logoutIdentifier", sender: self)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
-        self.present(alertController, animated: true, completion: nil)
+        settingsBtn.menu = UIMenu(children: [
+            UIAction(title: ABOUT, handler: optionClosure),
+            UIAction(title: LOGOUT, handler: optionClosure),
+        ])
     }
     
     //Rearange the groceries
@@ -233,12 +251,13 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        navigationItem.backButtonTitle = "Back"
+        
         if segue.identifier == "editIdentifier" {
             let sender = sender as! IndexPath
             let destination = segue.destination as! EditGroceryViewController
             
             destination.grocery = filteredGroceries[sender.row]
-            navigationItem.backButtonTitle = "Back"
         }
     }
 

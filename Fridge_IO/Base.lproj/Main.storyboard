@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -149,31 +148,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sr9-e0-As1">
-                                <rect key="frame" x="20" y="236" width="47" height="22.333333333333314"/>
+                                <rect key="frame" x="20" y="297" width="47" height="22.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnH-DR-gei">
-                                <rect key="frame" x="20" y="322.33333333333331" width="78" height="23"/>
+                                <rect key="frame" x="20" y="383.33333333333331" width="78" height="23"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="example@mail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Utf-gO-qII">
-                                <rect key="frame" x="20" y="268.33333333333331" width="353" height="34"/>
+                                <rect key="frame" x="20" y="329.33333333333331" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="******" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3gM-1G-8qr">
-                                <rect key="frame" x="20" y="355.33333333333331" width="353" height="34"/>
+                                <rect key="frame" x="20" y="416.33333333333331" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7k0-V4-p6s">
-                                <rect key="frame" x="163.66666666666666" y="459.33333333333331" width="65.666666666666657" height="37"/>
+                                <rect key="frame" x="163.66666666666666" y="520.33333333333337" width="65.666666666666657" height="37"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Login">
                                     <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -183,7 +182,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSU-0M-aAa">
-                                <rect key="frame" x="153.66666666666666" y="498.33333333333326" width="86" height="37"/>
+                                <rect key="frame" x="153.66666666666666" y="559.33333333333337" width="86" height="37"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign Up">
                                     <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -193,7 +192,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome To Fridge.IO" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jmu-Pg-D0w">
-                                <rect key="frame" x="60" y="110" width="273" height="86"/>
+                                <rect key="frame" x="60" y="171" width="273" height="86"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="273" id="uoq-fi-UkJ"/>
                                 </constraints>
@@ -202,7 +201,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJp-qi-eQG">
-                                <rect key="frame" x="241" y="389.33333333333331" width="144" height="34"/>
+                                <rect key="frame" x="241" y="450.33333333333331" width="144" height="34"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Forgot Password?" titleAlignment="leading">
                                     <fontDescription key="titleFontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
@@ -211,11 +210,17 @@
                                     <action selector="resetPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0cN-12-k9G"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fridge" translatesAutoresizingMaskIntoConstraints="NO" id="wAK-F4-ZSe">
+                                <rect key="frame" x="77.666666666666686" y="100" width="238" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="238" id="75u-9S-bB3"/>
+                                    <constraint firstAttribute="height" constant="61" id="NJT-fo-99C"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="Jmu-Pg-D0w" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="110" id="6Wq-oo-hmL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NJp-qi-eQG" secondAttribute="trailing" constant="8" id="Hlk-kz-3D7"/>
                             <constraint firstItem="Utf-gO-qII" firstAttribute="top" secondItem="Sr9-e0-As1" secondAttribute="bottom" constant="10" id="KvM-mG-iim"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3gM-1G-8qr" secondAttribute="trailing" constant="20" id="Lhx-tf-YpP"/>
@@ -224,13 +229,16 @@
                             <constraint firstItem="7k0-V4-p6s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xh0-1g-HzL"/>
                             <constraint firstItem="Jmu-Pg-D0w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ygz-ne-AA3"/>
                             <constraint firstItem="7k0-V4-p6s" firstAttribute="top" secondItem="3gM-1G-8qr" secondAttribute="bottom" constant="70" id="Yl8-J6-gn7"/>
+                            <constraint firstItem="Jmu-Pg-D0w" firstAttribute="top" secondItem="wAK-F4-ZSe" secondAttribute="bottom" constant="10" id="aPL-ZX-ZP8"/>
                             <constraint firstItem="Sr9-e0-As1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dSy-dm-6sG"/>
                             <constraint firstItem="GnH-DR-gei" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="eOb-RR-bPH"/>
                             <constraint firstItem="3gM-1G-8qr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fA9-se-9Ng"/>
                             <constraint firstItem="3gM-1G-8qr" firstAttribute="top" secondItem="GnH-DR-gei" secondAttribute="bottom" constant="10" id="guN-tN-wa8"/>
                             <constraint firstItem="NJp-qi-eQG" firstAttribute="top" secondItem="3gM-1G-8qr" secondAttribute="bottom" id="m8o-UK-49B"/>
+                            <constraint firstItem="wAK-F4-ZSe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="mgy-yP-cxr"/>
                             <constraint firstItem="GnH-DR-gei" firstAttribute="top" secondItem="Utf-gO-qII" secondAttribute="bottom" constant="20" id="oWG-rN-trd"/>
                             <constraint firstItem="RSU-0M-aAa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ooY-Dl-4GU"/>
+                            <constraint firstItem="wAK-F4-ZSe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sHF-Am-HQ9"/>
                             <constraint firstItem="Utf-gO-qII" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vxI-gM-2aG"/>
                             <constraint firstItem="Sr9-e0-As1" firstAttribute="top" secondItem="Jmu-Pg-D0w" secondAttribute="bottom" constant="40" id="ySd-uq-vsG"/>
                         </constraints>
@@ -288,12 +296,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Fridge" id="bGv-t6-E0e">
-                        <barButtonItem key="leftBarButtonItem" title="Log out" style="plain" id="rSd-4V-Eu3">
-                            <imageReference key="image" image="rectangle.portrait.and.arrow.right" catalog="system" symbolScale="default"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="gearshape" catalog="system" style="plain" id="fmi-js-VQc">
                             <color key="tintColor" name="buttons"/>
-                            <connections>
-                                <action selector="logout:" destination="0RT-xk-xev" id="d4d-TU-Tum"/>
-                            </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem style="plain" systemItem="add" id="2wa-eu-taX">
@@ -313,8 +317,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="editBtn" destination="nDm-AE-8RO" id="dKH-dU-dkm"/>
+                        <outlet property="settingsBtn" destination="fmi-js-VQc" id="xDQ-ai-i8d"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="TmD-Vq-NOp"/>
                         <segue destination="Jac-gt-Mx0" kind="show" identifier="editIdentifier" id="KZh-i1-AhT"/>
+                        <segue destination="llL-ih-Cxb" kind="show" identifier="aboutIdentifier" id="PrH-ix-B22"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfq-qi-iS9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -484,6 +490,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recipe Search" id="7nK-Ys-aSg">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="gearshape" catalog="system" style="plain" id="HcD-hk-Lqo">
+                            <color key="tintColor" name="buttons"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" style="plain" id="8w2-ft-kyC">
                             <color key="tintColor" name="buttons"/>
                             <connections>
@@ -493,8 +502,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="favouritesButton" destination="8w2-ft-kyC" id="6vC-SY-0wU"/>
+                        <outlet property="settingsButton" destination="HcD-hk-Lqo" id="lDS-gN-wOq"/>
                         <segue destination="Oia-fh-BzA" kind="show" identifier="recipeIdentifier" id="4L4-8H-MUJ"/>
                         <segue destination="W0o-mh-5ww" kind="presentation" identifier="popupIdentifier" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="TAr-Pd-g5a"/>
+                        <segue destination="llL-ih-Cxb" kind="show" identifier="aboutIdentifier" id="d86-9A-jfD"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="a1L-9l-XmJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XiM-14-dl0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -909,6 +921,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Grocery Lists" id="Ro9-Tt-z4U">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="gearshape" catalog="system" style="plain" id="zrh-mD-qhE">
+                            <color key="tintColor" name="buttons"/>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="kgw-ic-y8a">
                             <color key="tintColor" name="buttons"/>
                             <connections>
@@ -917,7 +932,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="settingsButton" destination="zrh-mD-qhE" id="vUa-zD-W1M"/>
                         <segue destination="zds-NS-Gfl" kind="show" identifier="groceryListIdentifier" id="S0b-Yw-MdV"/>
+                        <segue destination="llL-ih-Cxb" kind="show" identifier="aboutIdentifier" id="JIZ-ec-thv"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutIdentifier" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="abd-b5-pHn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXd-ds-8Id" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1063,6 +1081,293 @@
             </objects>
             <point key="canvasLocation" x="4875.5725190839694" y="244.36619718309859"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="IR5-dN-38e">
+            <objects>
+                <viewController id="llL-ih-Cxb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vWh-jx-oMx">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="803"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Fridge.IO" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8T-9R-PnX">
+                                <rect key="frame" x="96.666666666666686" y="125" width="200" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="3oy-f3-ssS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="33"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Fridge" translatesAutoresizingMaskIntoConstraints="NO" id="A5h-wN-qac">
+                                <rect key="frame" x="77.666666666666686" y="54" width="238" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="2yi-mG-Icz"/>
+                                    <constraint firstAttribute="width" constant="238" id="unM-QQ-6zM"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Auy-cE-f7I">
+                                <rect key="frame" x="20" y="221" width="353" height="174"/>
+                                <string key="text">The app was created with a purpose of helping people manage their cooking &amp; grocery shopping life better.  The app keeps tracks of all the groceries that the user has. Based on those items, the app recommends recipes. Grocery lists are also in this app to keep everything you need in one app!                                                                            The app utilises firebase library in order to store all the user's information, including email, password, groceries &amp; grocery lists</string>
+                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="License Link:                                                https://github.com/firebase/firebase-ios-sdk/blob/master/LICENSE" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Mmw-yc-41z">
+                                <rect key="frame" x="20" y="405" width="353" height="74"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="PtF-iF-a5D"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- Full License Text -- " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4G-ir-VKk">
+                                <rect key="frame" x="125.33333333333333" y="489" width="142.66666666666669" height="20"/>
+                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xpe-61-Rei">
+                                <rect key="frame" x="20" y="511" width="353" height="200"/>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="xtz-4J-mZI"/>
+                                </constraints>
+                                <mutableString key="text"> Apache License
+ Version 2.0, January 2004
+http://www.apache.org/licenses/
+
+ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.</mutableString>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KcX-QW-LcF"/>
+                        <color key="backgroundColor" name="Background"/>
+                        <constraints>
+                            <constraint firstItem="Xpe-61-Rei" firstAttribute="leading" secondItem="KcX-QW-LcF" secondAttribute="leading" constant="20" id="34T-Ej-Im5"/>
+                            <constraint firstItem="A5h-wN-qac" firstAttribute="centerX" secondItem="vWh-jx-oMx" secondAttribute="centerX" id="3e3-ee-4py"/>
+                            <constraint firstItem="L8T-9R-PnX" firstAttribute="top" secondItem="A5h-wN-qac" secondAttribute="bottom" constant="10" id="3q4-ui-Nmk"/>
+                            <constraint firstItem="Auy-cE-f7I" firstAttribute="leading" secondItem="vWh-jx-oMx" secondAttribute="leading" constant="20" id="68B-Ra-IO7"/>
+                            <constraint firstItem="Z4G-ir-VKk" firstAttribute="centerX" secondItem="vWh-jx-oMx" secondAttribute="centerX" id="6SY-Pn-ebz"/>
+                            <constraint firstItem="Mmw-yc-41z" firstAttribute="leading" secondItem="KcX-QW-LcF" secondAttribute="leading" constant="20" id="FIn-hk-Ec2"/>
+                            <constraint firstItem="Z4G-ir-VKk" firstAttribute="top" secondItem="Mmw-yc-41z" secondAttribute="bottom" constant="10" id="JIW-1R-iOZ"/>
+                            <constraint firstItem="Xpe-61-Rei" firstAttribute="top" secondItem="Z4G-ir-VKk" secondAttribute="bottom" constant="2" id="K9a-8X-0dL"/>
+                            <constraint firstItem="KcX-QW-LcF" firstAttribute="trailing" secondItem="Xpe-61-Rei" secondAttribute="trailing" constant="20" id="ORe-FT-n8L"/>
+                            <constraint firstItem="KcX-QW-LcF" firstAttribute="trailing" secondItem="Mmw-yc-41z" secondAttribute="trailing" constant="20" id="PjU-fA-lcM"/>
+                            <constraint firstItem="Auy-cE-f7I" firstAttribute="top" secondItem="L8T-9R-PnX" secondAttribute="bottom" constant="10" id="WT3-PM-LT2"/>
+                            <constraint firstItem="Mmw-yc-41z" firstAttribute="top" secondItem="Auy-cE-f7I" secondAttribute="bottom" constant="10" id="WdR-2h-X5W"/>
+                            <constraint firstAttribute="trailing" secondItem="Auy-cE-f7I" secondAttribute="trailing" constant="20" id="YBA-nE-P3R"/>
+                            <constraint firstItem="L8T-9R-PnX" firstAttribute="centerX" secondItem="vWh-jx-oMx" secondAttribute="centerX" id="aHW-XR-Yq8"/>
+                            <constraint firstItem="A5h-wN-qac" firstAttribute="top" secondItem="KcX-QW-LcF" secondAttribute="top" constant="10" id="iHd-Bj-ZvY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="J28-O7-gL5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6W8-KQ-hrn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6643.5114503816794" y="776.76056338028172"/>
+        </scene>
         <!--Recipe Pop Up View Controller-->
         <scene sceneID="MB3-0J-wbM">
             <objects>
@@ -1140,15 +1445,18 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="PrH-ix-B22"/>
         <segue reference="V28-DD-BuN"/>
+        <segue reference="abd-b5-pHn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="buttons"/>
     <resources>
+        <image name="Fridge" width="512" height="512"/>
         <image name="bookmark" catalog="system" width="110" height="128"/>
         <image name="fork.knife" catalog="system" width="94" height="128"/>
         <image name="frying.pan" catalog="system" width="128" height="81"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
-        <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="109"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="Accent">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1160,7 +1468,7 @@
             <color red="0.024000000208616257" green="0.27799999713897705" blue="0.53700000047683716" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="cellColor">
-            <color red="0.7803921568627451" green="0.89803921568627454" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77999997138977051" green="0.89800000190734863" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

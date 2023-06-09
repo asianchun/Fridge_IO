@@ -16,6 +16,13 @@ class AddGroceryViewController: UIViewController {
     @IBOutlet weak var amountField: UITextField!
     @IBOutlet weak var typeControl: UIButton!
     
+    let DAIRY = "Dairy"
+    let FRUITS_AND_VEGETABLES = "Fruits & Veggies"
+    let MEAT = "Meat"
+    let SEAFOOD = "Seafood"
+    let CONDIMENTS = "Condiments"
+    let OTHER = "Other"
+    
     var type: GroceryType?
     
     override func viewDidLoad() {
@@ -69,22 +76,22 @@ class AddGroceryViewController: UIViewController {
     func setupPopup() {
         let optionClosure = {(action: UIAction) in
             switch action.title {
-            case "Dairy":
+            case self.DAIRY:
                 self.type = GroceryType(rawValue: 0)
                 self.dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
-            case "Fruits & Veggies":
+            case self.FRUITS_AND_VEGETABLES:
                 self.type = GroceryType(rawValue: 1)
                 self.dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
-            case "Meat":
+            case self.MEAT:
                 self.type = GroceryType(rawValue: 2)
                 self.dateControl.date = Calendar.current.date(byAdding: .day, value: 10, to: Date())!
-            case "Seafood":
+            case self.SEAFOOD:
                 self.type = GroceryType(rawValue: 3)
                 self.dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
-            case "Condiments":
+            case self.CONDIMENTS:
                 self.type = GroceryType(rawValue: 4)
                 self.dateControl.date = Calendar.current.date(byAdding: .day, value: 365, to: Date())!
-            case "Other":
+            case self.OTHER:
                 self.type = GroceryType(rawValue: 5)
                 self.dateControl.date = Date()
             default:
@@ -93,12 +100,12 @@ class AddGroceryViewController: UIViewController {
         }
         
         typeControl.menu = UIMenu(children: [
-            UIAction(title: "Dairy", state: .on, handler: optionClosure),
-            UIAction(title: "Fruits & Veggies", handler: optionClosure),
-            UIAction(title: "Meat", handler: optionClosure),
-            UIAction(title: "Seafood", handler: optionClosure),
-            UIAction(title: "Condiments", handler: optionClosure),
-            UIAction(title: "Other", handler: optionClosure),
+            UIAction(title: DAIRY, state: .on, handler: optionClosure),
+            UIAction(title: FRUITS_AND_VEGETABLES, handler: optionClosure),
+            UIAction(title: MEAT, handler: optionClosure),
+            UIAction(title: SEAFOOD, handler: optionClosure),
+            UIAction(title: CONDIMENTS, handler: optionClosure),
+            UIAction(title: OTHER, handler: optionClosure),
         ])
         
         typeControl.showsMenuAsPrimaryAction = true
