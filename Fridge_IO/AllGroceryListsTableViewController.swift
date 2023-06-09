@@ -107,6 +107,7 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
             
             content.text = "Tap + to add grocery lists"
         } else {
+            cell.selectionStyle = .default
             tableView.allowsSelection = true
             
             let groceryList = allLists[indexPath.row]

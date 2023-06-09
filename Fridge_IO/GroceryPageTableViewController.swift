@@ -16,13 +16,14 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     var listenerType = ListenerType.groceries
     var allGroceries: [Grocery] = []
     var filteredGroceries: [Grocery] = []
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     @IBOutlet weak var editBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
@@ -143,6 +144,7 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
             
             content.text = "Groceries not found. Tap + to add some"
         } else {
+            groceryCell.selectionStyle = .default
             tableView.allowsSelection = true
             
             let grocery = filteredGroceries[indexPath.row]
@@ -197,6 +199,7 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "editIdentifier", sender: indexPath)
+        searchController.searchBar.selectedScopeButtonIndex = 0
     }
     
     // Override to support rearranging the table view.

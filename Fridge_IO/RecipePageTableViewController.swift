@@ -237,6 +237,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
                 content.text = "No favourite recipes saved."
             }
         } else {
+            cell.selectionStyle = .default
             tableView.allowsSelection = true
             
             let recipe = recipes[indexPath.row]
