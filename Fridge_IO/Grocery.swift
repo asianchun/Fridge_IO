@@ -17,6 +17,7 @@ enum CodingKeys: String, CodingKey {
     case user
 }
 
+//Types of groceries
 enum GroceryType: Int {
     case dairy = 0
     case fruitsAndVegetables = 1
@@ -37,6 +38,7 @@ class Grocery: NSObject, Codable {
     var order: Int?
 }
 
+//Convert the type into an int value and vice versa
 extension Grocery {
     var groceryType: GroceryType {
         get {

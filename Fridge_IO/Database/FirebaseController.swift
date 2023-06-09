@@ -13,22 +13,23 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     var listeners = MulticastDelegate<DatabaseListener>()
     
+    //Variables
     var authController: Auth
     var database: Firestore
-    
     var currentUser: FirebaseAuth.User?
-    var groceries: [Grocery]
-    
     var groceriesRef: CollectionReference?
     var groceryListsRef: CollectionReference?
+    var groceries: [Grocery]
     var groceryLists: [GroceryList]
     
+    //Listeners that store the Firebase snapshotListeners
     var groceryListener: ListenerRegistration?
     var groceryListListener: ListenerRegistration?
     
     override init() {
         FirebaseApp.configure()
         
+        //Initialising firebase auth & firestore
         authController = Auth.auth()
         database = Firestore.firestore()
         
@@ -38,7 +39,9 @@ class FirebaseController: NSObject, DatabaseProtocol {
         super.init()
     }
     
-    //Listener functions
+    // MARK: - Listener functions
+    
+    //Adding a listener
     func addListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
         
@@ -51,17 +54,21 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Remove a listener
     func removeListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
     }
     
-    //Authentication functions
+    // MARK: - Authentication functions
+    
+    //Login
     func login(email: String, password: String) {
         Task {
             do {
                 let authResult = try await authController.signIn(withEmail: email, password: password)
                 currentUser = authResult.user
                 
+                //Tell the login screen that the login was successful
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
                         listener.onAuthChange(success: true, message: nil)
@@ -70,6 +77,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 
                 self.setupGroceryListener()
             } catch {
+                //Tell the login screen that the login was unsuccessful with the error message
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
                         listener.onAuthChange(success: false, message: String(describing: error.localizedDescription))
@@ -79,12 +87,14 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Signup
     func signup(email: String, password: String) {
         Task {
             do {
                 let authResult = try await authController.createUser(withEmail: email, password: password)
                 currentUser = authResult.user
                 
+                //Tell the signup screen that the signup was successful
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
                         listener.onAuthChange(success: true, message: nil)
@@ -93,6 +103,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 
                 self.setupGroceryListener()
             } catch {
+                //Tell the login screen that the login was unsuccessful with the error message
                 listeners.invoke { (listener) in
                     if listener.listenerType == .auth {
                         listener.onAuthChange(success: false, message: String(describing: error.localizedDescription))
@@ -102,6 +113,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Logout
     func logout() {
         do {
             try authController.signOut()
@@ -111,11 +123,14 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Reset password
     func resetPassword(email: String) {
         authController.sendPasswordReset(withEmail: email)
     }
     
-    //Grocery functions
+    // MARK: - Grocery functions
+    
+    //Add grocery
     func addGrocery(name: String, type: GroceryType, expiry: Date, amount: String) -> Grocery {
         let grocery = Grocery()
         grocery.name = name
@@ -136,6 +151,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         return grocery
     }
     
+    //Edit grocery
     func editGrocery(grocery: Grocery, name: String, type: GroceryType, expiry: Date, amount: String) {
         if let groceryID = grocery.id {
             groceriesRef?.document(groceryID).updateData([
@@ -147,6 +163,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Edit the order of the groceries (important for saving the state afrer rearranging groceries)
     func editGroceryOrder(grocery: Grocery, newOrder: Int) {
         if let groceryID = grocery.id {
             groceriesRef?.document(groceryID).updateData([
@@ -155,15 +172,17 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Delete grocery
     func deleteGrocery(grocery: Grocery) {
         if let groceryID = grocery.id {
             groceriesRef?.document(groceryID).delete()
         }
     }
     
+    //Setup the grocery snapshot listener
     func setupGroceryListener() {
         groceriesRef = database.collection("groceries")
-        groceryListener?.remove()
+        groceryListener?.remove() //Reset the listener after every login / signup / app reset
 
         groceryListener = (groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
             guard let querySnapshot = querySnapshot else {
@@ -177,6 +196,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         setupGroceryListListener()
     }
     
+    //Convert the snapshot into grocery class used accross the whole application
     func parseGroceriesSnapshot(snapshot: QuerySnapshot) {
         snapshot.documentChanges.forEach { (change) in
             var parsedGrocery: Grocery?
@@ -193,12 +213,13 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 return
             }
             
+            //Only parse the groceries that belong to the current user
             if grocery.user == currentUser?.uid {
-                removeNotificationOn(grocery)
+                removeNotificationOn(grocery) //Reset the notification creation to remove duplication
                 
                 if change.type == .added {
                     groceries.append(grocery)
-                    requestNotificationsOn(grocery)
+                    requestNotificationsOn(grocery) //Create the notification for the grocery
                 } else if change.type == .modified {
                     groceries[grocery.order!] = grocery
                     requestNotificationsOn(grocery)
@@ -208,10 +229,12 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
         }
         
+        //Sort the groceries by order
         groceries.sort {
             $0.order! < $1.order!
         }
         
+        //Send the updates to the relevant viewController
         listeners.invoke { (listener) in
             if listener.listenerType == .groceries {
                 listener.onGroceriesChange(change: .update, groceries: groceries)
@@ -219,55 +242,9 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
-    //Grocery List functions
-    func setupGroceryListListener() {
-        groceryListsRef = database.collection("groceryLists")
-        groceryListListener?.remove()
-
-        groceryListListener = (groceryListsRef?.addSnapshotListener() { (querySnapshot, error) in
-            guard let querySnapshot = querySnapshot else {
-                print("Failed to fetch documents with error: \(String(describing: error))")
-                return
-            }
-            
-            self.parseGroceryListsSnapshot(snapshot: querySnapshot)
-        })!
-    }
+    // MARK: - Grocery List functions
     
-    func parseGroceryListsSnapshot(snapshot: QuerySnapshot) {
-        snapshot.documentChanges.forEach { (change) in
-            var parsedGroceryList: GroceryList?
-            
-            do {
-                parsedGroceryList = try change.document.data(as: GroceryList.self)
-            } catch {
-                print("Unable to decode grocery. Is the hero malformed?")
-                return
-            }
-            
-            guard let groceryList = parsedGroceryList else {
-                print("Document doesn't exist")
-                return
-            }
-            
-            if groceryList.user == currentUser?.uid {
-                if change.type == .added {
-                    groceryLists.append(groceryList)
-                } else if change.type == .modified {
-                    groceryLists[Int(change.oldIndex)] = groceryList
-                } else if change.type == .removed {
-                    groceryLists.remove(at: Int(change.oldIndex))
-                }
-            }
-        }
-        
-        listeners.invoke { (listener) in
-            if listener.listenerType == .groceryLists {
-                listener.onGroceryListsChange(change: .update, groceryLists: groceryLists)
-            }
-        }
-    }
-    
+    //Add grocery list
     func addGroceryList(name: String, listItems: [String]) -> GroceryList {
         let groceryList = GroceryList()
         groceryList.name = name
@@ -285,6 +262,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         return groceryList
     }
     
+    //Edit grocery list
     func editGroceryList(groceryList: GroceryList, listItems: [String]) {
         if let listID = groceryList.id {
             groceryListsRef?.document(listID).updateData([
@@ -293,13 +271,68 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //Delete grocery list
     func deleteGroceryList(groceryList: GroceryList) {
         if let listID = groceryList.id {
             groceryListsRef?.document(listID).delete()
         }
     }
     
-    //Notifcation setup
+    //Setup the grocery list snapshot listener
+    func setupGroceryListListener() {
+        groceryListsRef = database.collection("groceryLists")
+        groceryListListener?.remove() //Reset the listener after every login / signup / app reset
+
+        groceryListListener = (groceryListsRef?.addSnapshotListener() { (querySnapshot, error) in
+            guard let querySnapshot = querySnapshot else {
+                print("Failed to fetch documents with error: \(String(describing: error))")
+                return
+            }
+            
+            self.parseGroceryListsSnapshot(snapshot: querySnapshot)
+        })!
+    }
+    
+    //Convert the snapshot into grocery list class used accross the whole application
+    func parseGroceryListsSnapshot(snapshot: QuerySnapshot) {
+        snapshot.documentChanges.forEach { (change) in
+            var parsedGroceryList: GroceryList?
+            
+            do {
+                parsedGroceryList = try change.document.data(as: GroceryList.self)
+            } catch {
+                print("Unable to decode grocery. Is the hero malformed?")
+                return
+            }
+            
+            guard let groceryList = parsedGroceryList else {
+                print("Document doesn't exist")
+                return
+            }
+            
+            //Only parse the grocery lists that belong to the current user
+            if groceryList.user == currentUser?.uid {
+                if change.type == .added {
+                    groceryLists.append(groceryList)
+                } else if change.type == .modified {
+                    groceryLists[Int(change.oldIndex)] = groceryList
+                } else if change.type == .removed {
+                    groceryLists.remove(at: Int(change.oldIndex))
+                }
+            }
+        }
+        
+        //Send the updates to the relevant viewController
+        listeners.invoke { (listener) in
+            if listener.listenerType == .groceryLists {
+                listener.onGroceryListsChange(change: .update, groceryLists: groceryLists)
+            }
+        }
+    }
+    
+    // MARK: - Notifcation setup
+    
+    //Create notification
     func requestNotificationsOn(_ grocery: Grocery) {
         // Create a notification content object
         let notificationContent = UNMutableNotificationContent()
@@ -312,8 +345,8 @@ class FirebaseController: NSObject, DatabaseProtocol {
         let date = Calendar.current.date(byAdding: .day, value: -1, to: grocery.expiry!)
         
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date!)
-        dateComponents.hour = 17
-        dateComponents.minute = 25 //For testing purposes
+        dateComponents.hour = 10
+        dateComponents.minute = 00
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
 
@@ -325,6 +358,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
     
+    //Remove notification
     func removeNotificationOn(_ grocery: Grocery) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [grocery.id!])
     }

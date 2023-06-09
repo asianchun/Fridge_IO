@@ -1135,7 +1135,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="xtz-4J-mZI"/>
                                 </constraints>
-                                <mutableString key="text"> Apache License
+                                <string key="text"> Apache License
  Version 2.0, January 2004
 http://www.apache.org/licenses/
 
@@ -1335,7 +1335,7 @@ http://www.apache.org/licenses/
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
-   limitations under the License.</mutableString>
+   limitations under the License.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1446,8 +1446,8 @@ http://www.apache.org/licenses/
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="PrH-ix-B22"/>
-        <segue reference="V28-DD-BuN"/>
-        <segue reference="abd-b5-pHn"/>
+        <segue reference="cva-N0-DlO"/>
+        <segue reference="TmD-Vq-NOp"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="buttons"/>
     <resources>

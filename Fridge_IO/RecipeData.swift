@@ -8,8 +8,8 @@
 import UIKit
 
 class RecipeData: NSObject, Decodable, Encodable {
-    //All the needed variables
     
+    //All the needed variables from the API
     var name: String?
     var imageURL: String?
     var source: String?
@@ -41,11 +41,12 @@ class RecipeData: NSObject, Decodable, Encodable {
     }
     
     required init(from decoder: Decoder) throws {
+        //Decode the recipes from an API
         if decoder.codingPath.count == 2 {
             //Get the root container
             let rootContainer = try decoder.container(keyedBy: RootKeys.self)
 
-            //Get the recipe container for most info
+            //Get the recipe container for all the info
             let recipeContainer = try rootContainer.nestedContainer(keyedBy: RecipeKeys.self, forKey: .recipe)
             
             name = try recipeContainer.decode(String.self, forKey: .name)
@@ -71,7 +72,7 @@ class RecipeData: NSObject, Decodable, Encodable {
                     ingredients?.append(ingredient.food)
                 }
             }
-        } else {
+        } else { //Decode recipes from the Propertly lists
             let rootContainer = try decoder.container(keyedBy: CodingKeys.self)
             
             name = try rootContainer.decode(String.self, forKey: .name)

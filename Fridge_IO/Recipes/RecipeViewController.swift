@@ -9,6 +9,11 @@ import UIKit
 
 class RecipeViewController: UIViewController {
     
+    //Link to the database and delegate
+    weak var favouritesDelegate: FavouritesDelegate?
+    weak var databaseController: DatabaseProtocol?
+    
+    //Outlets
     @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var urlText: UITextView!
@@ -21,19 +26,19 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var contentViewHC: NSLayoutConstraint!
     @IBOutlet weak var favouritesButton: UIBarButtonItem!
     
-    weak var favouritesDelegate: FavouritesDelegate?
-    weak var databaseController: DatabaseProtocol?
-    
+    //Other variables
     var recipe: RecipeData?
     var indicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Setup the indicator
         indicator.style = UIActivityIndicatorView.Style.large
         indicator.translatesAutoresizingMaskIntoConstraints = false
         imageContainer.addSubview(indicator)
         
+        //Constrain the indicator
         NSLayoutConstraint.activate([
             indicator.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor)
@@ -42,6 +47,7 @@ class RecipeViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
 
+        //Populate the view with data
         navigationItem.title = recipe?.name ?? ""
         imageView.layer.cornerRadius = 8.0
         imageView.layer.borderWidth = 1
@@ -88,6 +94,9 @@ class RecipeViewController: UIViewController {
         }
     }
     
+    // MARK: - Functions
+    
+    //Add recipe to favourites
     @IBAction func addToFavourites(_ sender: Any) {
         var favourites = [RecipeData]()
         
@@ -95,6 +104,7 @@ class RecipeViewController: UIViewController {
             return
         }
 
+        //Take all the recipes currently in the property list
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentDirectory = paths[0]
         let fileURL = documentDirectory.appendingPathComponent("\(userID)myData.plist")
@@ -111,6 +121,7 @@ class RecipeViewController: UIViewController {
         if favouritesButton.tintColor == .systemYellow {
             favouritesButton.tintColor = .systemBlue
             
+            //Remove the recipe from the list of favourite recipes
             for (index, favourite) in favourites.enumerated() {
                 if favourite.name == recipe?.name {
                     favourites.remove(at: index)
@@ -118,14 +129,17 @@ class RecipeViewController: UIViewController {
                 }
             }
             
+            //Tell the delegate that the favourite has been removed
             favouritesDelegate?.favouritesChanged(favourites)
             
         } else { //Favourite
             favouritesButton.tintColor = .systemYellow
             
+            //Add the recipe to the list of favourite recipes
             favourites.append(recipe!)
         }
         
+        //Put the new list of recipes into the property list
         let encoder = PropertyListEncoder()
         encoder.outputFormat = .xml
 
@@ -137,20 +151,26 @@ class RecipeViewController: UIViewController {
         }
     }
     
+    //Ask the user for confirmation
+    //Adding the recipe to the grocery lists
     @IBAction func addToGroceryList(_ sender: Any) {
         displayMessage(title: "Add to Grocery List", message: "Are you sure you want to add '\(recipe?.name ?? "")' to your grocery list?")
     }
     
+    //Displays a message with options
     func displayMessage(title: String, message: String) {
+        //Create a success message
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let messageController = UIAlertController(title: "Success", message: "Recipe successfully added to your grocery list", preferredStyle: .alert)
         
         messageController.addAction(UIAlertAction(title: "Dismiss", style: .default,
         handler: nil))
         
+        //If they want to add, we add the new grocery list with the recipe's ingredients
         alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
             let _ = self.databaseController?.addGroceryList(name: (self.recipe?.name!)!, listItems: (self.recipe?.ingredientLines!)!)
             
+            //Show the success message
             self.present(messageController, animated: true, completion: nil)
         }))
         
@@ -158,14 +178,4 @@ class RecipeViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

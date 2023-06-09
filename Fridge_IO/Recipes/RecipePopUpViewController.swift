@@ -9,25 +9,30 @@ import UIKit
 
 class RecipePopUpViewController: UIViewController {
 
+    //Outlets
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var imageView: UIImageView!
     
+    //Other variables
     var recipe: RecipeData?
     var indicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //UI changes
         popupView.layer.cornerRadius = 10.0
         imageView.layer.cornerRadius = 10.0
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = UIColor(named: "imageBorder")?.cgColor
         view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
         
+        //Setup the indicator
         indicator.style = UIActivityIndicatorView.Style.large
         indicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(indicator)
         
+        //Constrain the indicator
         NSLayoutConstraint.activate([
             indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -58,6 +63,9 @@ class RecipePopUpViewController: UIViewController {
         }
     }
     
+    // MARK: - Functions
+    
+    //Dismiss the popup when an area outside the popup is pressed
     @IBAction func dismissPopup(_ sender: Any) {
         self.dismiss(animated: true)
     }

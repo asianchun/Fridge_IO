@@ -9,45 +9,57 @@ import UIKit
 
 class AllGroceryListsTableViewController: UITableViewController, DatabaseListener {
     
+    //Link to the database
     weak var databaseController: DatabaseProtocol?
     
+    //Outlets
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
+    
+    //Constants
     let CELL_LIST = "listCell"
     let ABOUT = "About Fridge.IO"
     let LOGOUT = "Log Out"
     
+    //Other variables
     var allLists: [GroceryList] = []
     var listenerType = ListenerType.groceryLists
-
-    @IBOutlet weak var settingsButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSettings()
+        setupSettings() //Setup settings
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
     }
     
-    //Setup listeners
+    // MARK: - Listener functions
+    
+    //Setup listener
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
     }
     
+    //Remove listener
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         databaseController?.removeListener(listener: self)
     }
     
+    //Listens to the changes to the grocery lists in the database and updates this controller and the view accordingly
     func onGroceryListsChange(change: DatabaseChange, groceryLists: [GroceryList]) {
         allLists = groceryLists
         tableView.reloadData()
     }
 
+    // MARK: - Functions
+    
+    //Add grocery list to the database
     @IBAction func addGroceryList(_ sender: Any) {
         displayMessage(title: "New Grocery List", message: "Enter a name for the grocery list")
     }
     
+    //Display message to create a new grocery list
     func displayMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -62,6 +74,7 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
                 groceryListName = "Default"
             }
             
+            //Check if the list with that name exists
             for list in self.allLists {
                 if list.name == groceryListName {
                     self.displayError(title: "Error", message: "Grocery list already exists")
@@ -77,6 +90,7 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
         self.present(alertController, animated: true, completion: nil)
     }
     
+    //Display error message
     func displayError(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -86,6 +100,7 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
     }
 
     //Settings
+    //https://www.youtube.com/watch?v=4yZR6AC1PIU
     func setupSettings() {
         let optionClosure = {(action: UIAction) in
             switch action.title {
@@ -113,7 +128,7 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
         ])
     }
     
-    // MARK: - Table view data source
+    // MARK: - Table view data setup
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -127,12 +142,12 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
         }
     }
 
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_LIST, for: indexPath)
         
         var content = cell.defaultContentConfiguration()
         
+        //The cell is not selectable when there are no grocery lists
         if allLists.isEmpty {
             cell.selectionStyle = .none
             tableView.allowsSelection = false
@@ -154,6 +169,7 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
         return cell
     }
     
+    //Open the specific grocery list when pressed
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "groceryListIdentifier", sender: indexPath)
     }
@@ -169,21 +185,6 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
             databaseController?.deleteGroceryList(groceryList: groceryList)
         }
     }
-    
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: - Navigation
 
@@ -198,7 +199,8 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
         }
     }
 
-    //Useless
+    // MARK: - Useless functions for this Controller
+    
     func onAuthChange(success: Bool, message: String?) {
         //Do nothing
     }
@@ -206,5 +208,4 @@ class AllGroceryListsTableViewController: UITableViewController, DatabaseListene
     func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
         //Do nothing
     }
-
 }

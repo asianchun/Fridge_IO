@@ -1,21 +1,24 @@
 //
-//  EditGroceryViewController.swift
+//  AddGroceriesViewController.swift
 //  Fridge_IO
 //
-//  Created by Hong Yi on 10/5/2023.
+//  Created by Hong Yi on 2/5/2023.
 //
 
 import UIKit
 
-class EditGroceryViewController: UIViewController {
-    
-    weak var databaseController: DatabaseProtocol?
+class AddGroceryViewController: UIViewController {
 
+    //Link to the database
+    weak var databaseController: DatabaseProtocol?
+    
+    //Outlets
     @IBOutlet weak var dateControl: UIDatePicker!
-    @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var amountField: UITextField!
     @IBOutlet weak var typeControl: UIButton!
     
+    //Constants
     let DAIRY = "Dairy"
     let FRUITS_AND_VEGETABLES = "Fruits & Veggies"
     let MEAT = "Meat"
@@ -23,35 +26,39 @@ class EditGroceryViewController: UIViewController {
     let CONDIMENTS = "Condiments"
     let OTHER = "Other"
     
-    var grocery: Grocery?
+    //Other variables
     var type: GroceryType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupPopup()
-
-        navigationItem.title = "Edit \(grocery?.name ?? "")"
-        nameTextField.text = grocery?.name ?? ""
-        amountTextField.text = grocery?.amount ?? ""
-        dateControl.date = grocery?.expiry ?? Date()
-        
-        dateControl.semanticContentAttribute = .forceRightToLeft
-        dateControl.subviews.first?.semanticContentAttribute = .forceRightToLeft
+        setupPopup() //Setup the multiple selection menu
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
         
+        //Add constraints for date
+        dateControl.minimumDate = Date()
+        dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
+        dateControl.semanticContentAttribute = .forceRightToLeft
+        dateControl.subviews.first?.semanticContentAttribute = .forceRightToLeft
+        
+        //UI changes
         nameTextField.layer.borderWidth = 1
         nameTextField.layer.cornerRadius = 5
         nameTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
         
-        amountTextField.layer.borderWidth = 1
-        amountTextField.layer.cornerRadius = 5
-        amountTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        amountField.layer.borderWidth = 1
+        amountField.layer.cornerRadius = 5
+        amountField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        type = GroceryType(rawValue: 0)
     }
     
-    @IBAction func save(_ sender: Any) {
-        guard let name = nameTextField.text, let amount = amountTextField.text, let type = type else {
+    // MARK: - Functions
+    
+    //Add grocery and save it in the database
+    @IBAction func add(_ sender: Any) {
+        guard let name = nameTextField.text, let amount = amountField.text, let type = type else {
             return
         }
         
@@ -71,73 +78,52 @@ class EditGroceryViewController: UIViewController {
             return
         }
         
-        databaseController?.editGrocery(grocery: grocery!, name: name, type: type, expiry: date, amount: amount)
+        let _ = databaseController?.addGrocery(name: name, type: type, expiry: date, amount: amount)
         navigationController?.popViewController(animated: true)
     }
     
+    //Setup the choice popup menu
+    //https://www.youtube.com/watch?v=4yZR6AC1PIU
     func setupPopup() {
         let optionClosure = {(action: UIAction) in
             switch action.title {
             case self.DAIRY:
                 self.type = GroceryType(rawValue: 0)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
             case self.FRUITS_AND_VEGETABLES:
                 self.type = GroceryType(rawValue: 1)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
             case self.MEAT:
                 self.type = GroceryType(rawValue: 2)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 10, to: Date())!
             case self.SEAFOOD:
                 self.type = GroceryType(rawValue: 3)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
             case self.CONDIMENTS:
                 self.type = GroceryType(rawValue: 4)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 365, to: Date())!
             case self.OTHER:
                 self.type = GroceryType(rawValue: 5)
+                self.dateControl.date = Date()
             default:
                 print("Error")
             }
         }
         
-        
         typeControl.menu = UIMenu(children: [
-            createAction(DAIRY, handler: optionClosure),
-            createAction(FRUITS_AND_VEGETABLES, handler: optionClosure),
-            createAction(MEAT, handler: optionClosure),
-            createAction(SEAFOOD, handler: optionClosure),
-            createAction(CONDIMENTS, handler: optionClosure),
-            createAction(OTHER, handler: optionClosure)
+            UIAction(title: DAIRY, state: .on, handler: optionClosure),
+            UIAction(title: FRUITS_AND_VEGETABLES, handler: optionClosure),
+            UIAction(title: MEAT, handler: optionClosure),
+            UIAction(title: SEAFOOD, handler: optionClosure),
+            UIAction(title: CONDIMENTS, handler: optionClosure),
+            UIAction(title: OTHER, handler: optionClosure),
         ])
         
         typeControl.showsMenuAsPrimaryAction = true
         typeControl.changesSelectionAsPrimaryAction = true
     }
     
-    func createAction(_ name: String, handler: @escaping UIActionHandler) -> UIAction {
-        let action = UIAction(title: name, handler: handler)
-        var tempType: GroceryType?
-        
-        switch name {
-        case DAIRY:
-             tempType = GroceryType(rawValue: 0)
-        case FRUITS_AND_VEGETABLES:
-            tempType = GroceryType(rawValue: 1)
-        case MEAT:
-            tempType = GroceryType(rawValue: 2)
-        case SEAFOOD:
-            tempType = GroceryType(rawValue: 3)
-        case CONDIMENTS:
-            tempType = GroceryType(rawValue: 4)
-        case OTHER:
-            tempType = GroceryType(rawValue: 5)
-        default:
-            print("Error")
-        }
-        
-        if tempType == GroceryType(rawValue: grocery?.type ?? 0) {
-            action.state = .on
-            type = tempType
-        }
-        
-        return action
-    }
-    
+    //Display various messages
     func displayMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message,
         preferredStyle: .alert)

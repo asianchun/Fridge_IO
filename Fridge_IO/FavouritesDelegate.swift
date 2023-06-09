@@ -7,6 +7,7 @@
 
 import Foundation
 
+//Protocol that sends the new favourites, if they have changed
 protocol FavouritesDelegate: AnyObject {
     func favouritesChanged(_ newFavourites: [RecipeData])
 }

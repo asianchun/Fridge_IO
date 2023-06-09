@@ -9,6 +9,7 @@ import UIKit
 
 class RecipePageTableViewController: UITableViewController, UISearchBarDelegate, FavouritesDelegate {
 
+    //Status enum that is used to show different messages depending on the current status of the page
     enum Status {
         case standard
         case notFound
@@ -16,25 +17,30 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         case noFavourites
     }
     
+    //Link to the database
     weak var databaseController: DatabaseProtocol?
     
+    //Outlets
+    @IBOutlet weak var favouritesButton: UIBarButtonItem!
+    @IBOutlet weak var settingsButton: UIBarButtonItem!
+    
+    //Constants
     let CELL_RECIPE = "recipeCell"
     let ABOUT = "About Fridge.IO"
     let LOGOUT = "Log Out"
     
+    //Other variables
     var recipes = [RecipeData]()
     var previousRecipes = [RecipeData]()
     var indicator = UIActivityIndicatorView()
     var allGroceries: [Grocery]?    
     var status: Status = .standard
     
-    @IBOutlet weak var favouritesButton: UIBarButtonItem!
-    @IBOutlet weak var settingsButton: UIBarButtonItem!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSettings()
+        setupSettings() //Setup settings
         
+        //Setup search bar
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -42,10 +48,12 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
+        //Setup the indicator
         indicator.style = UIActivityIndicatorView.Style.large
         indicator.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(indicator)
         
+        //Constrain the indicator
         NSLayoutConstraint.activate([
             indicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             indicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
@@ -57,13 +65,15 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         allGroceries = databaseController?.groceries
     }
     
-    // MARK: - Search bar function
+    // MARK: - Search bar functions
     
+    //Finish Editing (on enter press)
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text, !searchText.isEmpty else {
             return
         }
         
+        //Reset the whole search
         recipes.removeAll()
         status = .loading
         tableView.reloadData()
@@ -80,14 +90,16 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         }
     }
     
+    //Cancel search -> reset to show all groceries again
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         status = .standard
         indicator.stopAnimating()
         tableView.reloadData()
     }
     
-    //MARK: - Favourites button
+    //MARK: - Functions
     
+    //Show favourites
     @IBAction func showFavourites(_ sender: Any) {
         //Hide favourites
         if favouritesButton.tintColor == .systemYellow {
@@ -105,6 +117,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
                 return
             }
             
+            //Retrieve the recipes from the property lists
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentDirectory = paths[0]
             let fileURL = documentDirectory.appendingPathComponent("\(userID)myData.plist")
@@ -123,20 +136,14 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         tableView.reloadData()
     }
     
-    func favouritesChanged(_ newFavourites: [RecipeData]) {
-        if favouritesButton.tintColor == .systemYellow {
-            recipes = newFavourites
-            tableView.reloadData()
-        }
-    }
-    
     //Settings
+    //https://www.youtube.com/watch?v=4yZR6AC1PIU
     func setupSettings() {
         let optionClosure = {(action: UIAction) in
             switch action.title {
-            case self.ABOUT:
+            case self.ABOUT: //Open the about page
                 self.performSegue(withIdentifier: "aboutIdentifier", sender: nil)
-            case self.LOGOUT:
+            case self.LOGOUT: //Logout the user and send back to the login screen
                 let alertController = UIAlertController(title: "Log Out", message: "Are you sure you want to logout?", preferredStyle: .alert)
                 
                 alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
@@ -158,8 +165,20 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         ])
     }
     
+    // MARK: - Delegate function
+    
+    //Updates view if one of the favourite recipes has been unfavourited
+    func favouritesChanged(_ newFavourites: [RecipeData]) {
+        if favouritesButton.tintColor == .systemYellow {
+            recipes = newFavourites
+            tableView.reloadData()
+        }
+    }
+    
     // MARK: - Api call
     
+    //Call the API
+    //https://developer.edamam.com/edamam-recipe-api
     func requestRecipes(_ ingredients: String) async {
         var searchURLComponents = URLComponents()
         searchURLComponents.scheme = "https"
@@ -203,6 +222,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
                         for result in results {
                             var matching = 0
                             
+                            //This checks how many recipe ingredients match with the groceries that the user has in the fridge
                             for grocery in self.allGroceries! {
                                 for ingredient in result.ingredients! {
                                     if ingredient.lowercased().contains(grocery.name?.lowercased() ?? ""){
@@ -211,15 +231,15 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
                                 }
                             }
                             
+                            //Only display recipes that have at least 2 matching ingredients
                             if matching >= 2 && !self.recipes.contains(result) {
                                 self.recipes.append(result)
                                 self.tableView.reloadData()
                             }
-                            //Another way to reload data
-                            //self.tableView.insertRows(at: [IndexPath(row: self.newBooks.count - 1, section: 0)], with: .fade)
                         }
                     }
                     
+                    //Keep calling the API until there are atleast 20 recipes shown
                     if recipes.count < 20 {
                         await requestRecipes(ingredients)
                     }
@@ -236,12 +256,10 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
     // MARK: - Table view setup
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if recipes.isEmpty {
             return 1
         } else {
@@ -258,6 +276,7 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
             cell.selectionStyle = .none
             tableView.allowsSelection = false
             
+            //Different message based on the status of the page
             switch status {
             case .standard:
                 content.text = "Search to find some new recipes!"
@@ -290,12 +309,15 @@ class RecipePageTableViewController: UITableViewController, UISearchBarDelegate,
         return cell
     }
     
+    //Open the specific recipe
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "recipeIdentifier", sender: indexPath)
     }
     
     //MARK: - Long Tap Gesture
     
+    //Handle the gesture and show the popup based on the recipe that handled the gesture
+    //https://stackoverflow.com/questions/37770240/how-to-make-tableviewcell-handle-both-tap-and-longpress
     @IBAction func handleLongPress(recognizer: UILongPressGestureRecognizer) {
         if recognizer.state == .began {
             let touchPoint = recognizer.location(in: tableView)

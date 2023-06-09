@@ -9,6 +9,9 @@ import UIKit
 
 class SignUpScreenViewController: UIViewController, DatabaseListener {
 
+    //Link to the database
+    weak var databaseController: DatabaseProtocol?
+    
     //Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var confirmEmailTextField: UITextField!
@@ -18,7 +21,6 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
     
     //Other variables
     var listenerType = ListenerType.auth
-    weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,7 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
         
+        //UI changes
         emailTextField.layer.borderWidth = 1
         emailTextField.layer.cornerRadius = 5
         emailTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
@@ -43,16 +46,21 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         confirmPasswordTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
     }
     
+    // MARK: - Listener functions
+    
+    //Setup listener
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
     }
     
+    //Remove listener
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         databaseController?.removeListener(listener: self)
     }
     
+    //Listens to the results of signup
     func onAuthChange(success: Bool, message: String?) {
         DispatchQueue.main.async {
             if success {
@@ -62,6 +70,8 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
             }
         }
     }
+    
+    // MARK: - Functions
     
     //Sign Up
     @IBAction func signup(_ sender: Any) {
@@ -101,6 +111,8 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
             return (false, "", "")
         }
         
+        //Make sure email is in a correct format
+        //https://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
         let emailValidationRegex = "^[\\p{L}0-9!#$%&'*+\\/=?^_`{|}~-][\\p{L}0-9.!#$%&'*+\\/=?^_`{|}~-]{0,63}@[\\p{L}0-9-]+(?:\\.[\\p{L}0-9-]{2,7})*$"
         
         let emailValidationPredicate = NSPredicate(format: "SELF MATCHES %@", emailValidationRegex)
@@ -113,7 +125,7 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         }
     }
     
-    //Display message function
+    //Display various messages
     func displayMessage(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message,
         preferredStyle: .alert)
@@ -124,7 +136,8 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    //Useless
+    // MARK: - Useless functions for this Controller
+    
     func onGroceriesChange(change: DatabaseChange, groceries: [Grocery]) {
         //Do nothing
     }
@@ -132,15 +145,4 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
     func onGroceryListsChange(change: DatabaseChange, groceryLists: [GroceryList]) {
         //Do nothing
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

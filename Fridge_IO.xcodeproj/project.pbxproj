@@ -103,8 +103,8 @@
 				36ED925C29F7998400DE3CBC /* Database */,
 				363C40F429F2499F00878662 /* AppDelegate.swift */,
 				363C40F629F2499F00878662 /* SceneDelegate.swift */,
-				363C40FA29F2499F00878662 /* Main.storyboard */,
 				363C40FD29F249A000878662 /* Assets.xcassets */,
+				363C40FA29F2499F00878662 /* Main.storyboard */,
 				363C40FF29F249A000878662 /* LaunchScreen.storyboard */,
 				36ED925A29F798A600DE3CBC /* GoogleService-Info.plist */,
 				363C410229F249A000878662 /* Info.plist */,
@@ -112,20 +112,52 @@
 				36AA81672A1CC69D00D0672E /* GroceryList.swift */,
 				36A887302A0A1E5000AB6A3D /* VolumeData.swift */,
 				36A887322A0A1E7000AB6A3D /* RecipeData.swift */,
-				363C40F829F2499F00878662 /* LoginScreenViewController.swift */,
-				363C410829F2830100878662 /* SignUpScreenViewController.swift */,
-				36188AB529F8B87500C73670 /* GroceryPageTableViewController.swift */,
-				36E20E8A2A01460F00A4FEB0 /* AddGroceryViewController.swift */,
-				36A887362A0B47B000AB6A3D /* EditGroceryViewController.swift */,
-				36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */,
-				36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */,
-				36A887342A0B467500AB6A3D /* RecipeViewController.swift */,
-				36AA81652A1CC49700D0672E /* AllGroceryListsTableViewController.swift */,
-				36AA81612A1C5B9A00D0672E /* GroceryListTableViewController.swift */,
-				36AA81632A1C724700D0672E /* GroceryListTableViewCell.swift */,
+				36793E5A2A3333970047FD40 /* Auth */,
+				36793E5B2A3335E80047FD40 /* Fridge */,
+				36793E5C2A333A400047FD40 /* Recipes */,
+				36793E5D2A333F780047FD40 /* GroceryList */,
 				36D5CDF82A14736B006C2FD0 /* FavouritesDelegate.swift */,
 			);
 			path = Fridge_IO;
+			sourceTree = "<group>";
+		};
+		36793E5A2A3333970047FD40 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				363C40F829F2499F00878662 /* LoginScreenViewController.swift */,
+				363C410829F2830100878662 /* SignUpScreenViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		36793E5B2A3335E80047FD40 /* Fridge */ = {
+			isa = PBXGroup;
+			children = (
+				36188AB529F8B87500C73670 /* GroceryPageTableViewController.swift */,
+				36E20E8A2A01460F00A4FEB0 /* AddGroceryViewController.swift */,
+				36A887362A0B47B000AB6A3D /* EditGroceryViewController.swift */,
+			);
+			path = Fridge;
+			sourceTree = "<group>";
+		};
+		36793E5C2A333A400047FD40 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				36E20E862A00E4F800A4FEB0 /* RecipePageTableViewController.swift */,
+				36D5CDF02A13576B006C2FD0 /* RecipePopUpViewController.swift */,
+				36A887342A0B467500AB6A3D /* RecipeViewController.swift */,
+			);
+			path = Recipes;
+			sourceTree = "<group>";
+		};
+		36793E5D2A333F780047FD40 /* GroceryList */ = {
+			isa = PBXGroup;
+			children = (
+				36AA81652A1CC49700D0672E /* AllGroceryListsTableViewController.swift */,
+				36AA81612A1C5B9A00D0672E /* GroceryListTableViewController.swift */,
+				36AA81632A1C724700D0672E /* GroceryListTableViewCell.swift */,
+			);
+			path = GroceryList;
 			sourceTree = "<group>";
 		};
 		36ED925C29F7998400DE3CBC /* Database */ = {
