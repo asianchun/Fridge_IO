@@ -71,16 +71,22 @@ class AddGroceryViewController: UIViewController {
             switch action.title {
             case "Dairy":
                 self.type = GroceryType(rawValue: 0)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 5, to: Date())!
             case "Fruits & Veggies":
                 self.type = GroceryType(rawValue: 1)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
             case "Meat":
                 self.type = GroceryType(rawValue: 2)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 10, to: Date())!
             case "Seafood":
                 self.type = GroceryType(rawValue: 3)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 7, to: Date())!
             case "Condiments":
                 self.type = GroceryType(rawValue: 4)
+                self.dateControl.date = Calendar.current.date(byAdding: .day, value: 365, to: Date())!
             case "Other":
                 self.type = GroceryType(rawValue: 5)
+                self.dateControl.date = Date()
             default:
                 print("Error")
             }

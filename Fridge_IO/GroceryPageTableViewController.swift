@@ -142,7 +142,6 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
             tableView.allowsSelection = false
             
             content.text = "Groceries not found. Tap + to add some"
-            content.secondaryText = ""
         } else {
             tableView.allowsSelection = true
             
@@ -153,7 +152,16 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
                 dateFormatter.dateFormat = "dd.MM.yyyy"
                 
                 content.text = "\(name) x\(amount)"
-                content.secondaryText = "Expiry Date: \(dateFormatter.string(from: date))"
+                
+                let datesEqual = Calendar.current.isDate(date, equalTo: Date(), toGranularity: .day)
+                
+                if datesEqual {
+                    content.secondaryText = "Expiry Date: \(dateFormatter.string(from: date)) -> EXPIRES TODAY"
+                } else if date < Date() {
+                    content.secondaryText = "Expiry Date: \(dateFormatter.string(from: date)) -> EXPIRED"
+                } else {
+                    content.secondaryText = "Expiry Date: \(dateFormatter.string(from: date))"
+                }
             }
             
             let backgroundView = UIView()

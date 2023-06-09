@@ -26,9 +26,7 @@ class EditGroceryViewController: UIViewController {
         navigationItem.title = "Edit \(grocery?.name ?? "")"
         nameTextField.text = grocery?.name ?? ""
         amountTextField.text = grocery?.amount ?? ""
-        //typeSegmentedControl.selectedSegmentIndex = grocery?.type ?? 0
         dateControl.date = grocery?.expiry ?? Date()
-        dateControl.minimumDate = Date()
         
         dateControl.semanticContentAttribute = .forceRightToLeft
         dateControl.subviews.first?.semanticContentAttribute = .forceRightToLeft
@@ -106,7 +104,7 @@ class EditGroceryViewController: UIViewController {
     
     func createAction(_ name: String, handler: @escaping UIActionHandler) -> UIAction {
         let action = UIAction(title: name, handler: handler)
-        var tempType = GroceryType(rawValue: 0)
+        var tempType: GroceryType?
         
         switch name {
         case "Dairy":
@@ -127,6 +125,7 @@ class EditGroceryViewController: UIViewController {
         
         if tempType == GroceryType(rawValue: grocery?.type ?? 0) {
             action.state = .on
+            type = tempType
         }
         
         return action

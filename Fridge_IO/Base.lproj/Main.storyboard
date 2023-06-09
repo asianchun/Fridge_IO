@@ -399,7 +399,7 @@
                                     </children>
                                 </menu>
                                 <state key="normal" title="Item 1"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Item 1">
+                                <buttonConfiguration key="configuration" style="gray" title="Pick a type">
                                     <color key="baseForegroundColor" name="Accent"/>
                                 </buttonConfiguration>
                             </button>
