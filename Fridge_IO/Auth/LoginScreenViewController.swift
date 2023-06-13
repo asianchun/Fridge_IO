@@ -49,7 +49,7 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
             if (user != nil) {
                 self.performSegue(withIdentifier: "loginIdentifier", sender: nil)
                 self.databaseController?.currentUser = user
-                self.databaseController?.setupGroceryListener()
+                self.databaseController?.setupUsersListener()
             }
         })
     }

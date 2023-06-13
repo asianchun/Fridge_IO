@@ -14,7 +14,6 @@ enum CodingKeys: String, CodingKey {
     case type
     case expiry
     case amount
-    case user
 }
 
 //Types of groceries
@@ -34,7 +33,6 @@ class Grocery: NSObject, Codable {
     var type: Int?
     var expiry: Date?
     var amount: String?
-    var user: String?
     var order: Int?
 }
 

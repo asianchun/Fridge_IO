@@ -15,6 +15,7 @@
 		363C40FE29F249A000878662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 363C40FD29F249A000878662 /* Assets.xcassets */; };
 		363C410129F249A000878662 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 363C40FF29F249A000878662 /* LaunchScreen.storyboard */; };
 		363C410929F2830100878662 /* SignUpScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363C410829F2830100878662 /* SignUpScreenViewController.swift */; };
+		369D4E0C2A381C5500D54079 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369D4E0B2A381C5500D54079 /* User.swift */; };
 		36A887312A0A1E5000AB6A3D /* VolumeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887302A0A1E5000AB6A3D /* VolumeData.swift */; };
 		36A887332A0A1E7000AB6A3D /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887322A0A1E7000AB6A3D /* RecipeData.swift */; };
 		36A887352A0B467500AB6A3D /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A887342A0B467500AB6A3D /* RecipeViewController.swift */; };
@@ -48,6 +49,7 @@
 		363C410029F249A000878662 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		363C410229F249A000878662 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		363C410829F2830100878662 /* SignUpScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreenViewController.swift; sourceTree = "<group>"; };
+		369D4E0B2A381C5500D54079 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		36A887302A0A1E5000AB6A3D /* VolumeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeData.swift; sourceTree = "<group>"; };
 		36A887322A0A1E7000AB6A3D /* RecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
 		36A887342A0B467500AB6A3D /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				363C410229F249A000878662 /* Info.plist */,
 				36E20E882A0101B300A4FEB0 /* Grocery.swift */,
 				36AA81672A1CC69D00D0672E /* GroceryList.swift */,
+				369D4E0B2A381C5500D54079 /* User.swift */,
 				36A887302A0A1E5000AB6A3D /* VolumeData.swift */,
 				36A887322A0A1E7000AB6A3D /* RecipeData.swift */,
 				36793E5A2A3333970047FD40 /* Auth */,
@@ -260,6 +263,7 @@
 				36A887332A0A1E7000AB6A3D /* RecipeData.swift in Sources */,
 				36AA81622A1C5B9A00D0672E /* GroceryListTableViewController.swift in Sources */,
 				363C410929F2830100878662 /* SignUpScreenViewController.swift in Sources */,
+				369D4E0C2A381C5500D54079 /* User.swift in Sources */,
 				36ED926229F799F500DE3CBC /* MulticastDelegate.swift in Sources */,
 				36D5CDF92A14736B006C2FD0 /* FavouritesDelegate.swift in Sources */,
 				36E20E872A00E4F800A4FEB0 /* RecipePageTableViewController.swift in Sources */,

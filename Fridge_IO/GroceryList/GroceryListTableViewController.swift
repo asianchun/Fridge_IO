@@ -70,7 +70,11 @@ class GroceryListTableViewController: UITableViewController {
     //Deselect current entry when pressing on the empty area
     //Here is where we need the current entry retrieved from beginEditing()
     @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
-        if let cell = tableView.cellForRow(at: currentIndex! as IndexPath) as? GroceryListTableViewCell {
+        guard let index = currentIndex else {
+            return
+        }
+        
+        if let cell = tableView.cellForRow(at: index as IndexPath) as? GroceryListTableViewCell {
             if let textField = cell.listTextField {
                 textField.resignFirstResponder()
             }

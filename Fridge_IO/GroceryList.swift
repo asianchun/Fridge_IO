@@ -12,7 +12,6 @@ enum GroceryListCodingKeys: String, CodingKey {
     case id
     case name
     case listItems
-    case user
 }
 
 class GroceryList: NSObject, Codable {
@@ -20,5 +19,4 @@ class GroceryList: NSObject, Codable {
     @DocumentID var id: String?
     var name: String?
     var listItems: [String]?
-    var user: String?
 }
