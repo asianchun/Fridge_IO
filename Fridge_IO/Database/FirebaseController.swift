@@ -106,7 +106,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 do {
                     if let userRef = try usersRef?.addDocument(from: user) {
                         user.id = userRef.documentID
-                        
                         setupUsersListener()
                     }
                 } catch {
@@ -250,7 +249,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 print("Failed to fetch documents with error: \(String(describing: error))")
                 return
             }
-            
             self.parseGroceriesSnapshot(snapshot: querySnapshot)
         })!
         

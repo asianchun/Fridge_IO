@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -394,7 +395,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iFn-7V-Oj5">
-                                <rect key="frame" x="20" y="202.66666666666666" width="87" height="34"/>
+                                <rect key="frame" x="20" y="202.66666666666666" width="85.666666666666671" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="V4J-KN-nF3"/>
                                 </constraints>
@@ -1028,7 +1029,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AeJ-dN-cfE">
-                                <rect key="frame" x="20" y="202.66666666666666" width="87" height="34"/>
+                                <rect key="frame" x="20" y="202.66666666666666" width="85.666666666666671" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="Rlv-AG-soS"/>
                                 </constraints>
@@ -1445,9 +1446,9 @@ http://www.apache.org/licenses/
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="PrH-ix-B22"/>
+        <segue reference="JIZ-ec-thv"/>
         <segue reference="cva-N0-DlO"/>
-        <segue reference="TmD-Vq-NOp"/>
+        <segue reference="abd-b5-pHn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="buttons"/>
     <resources>
@@ -1456,7 +1457,7 @@ http://www.apache.org/licenses/
         <image name="fork.knife" catalog="system" width="94" height="128"/>
         <image name="frying.pan" catalog="system" width="128" height="81"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
-        <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
+        <image name="list.bullet.clipboard" catalog="system" width="98" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="Accent">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1471,10 +1472,10 @@ http://www.apache.org/licenses/
             <color red="0.77999997138977051" green="0.89800000190734863" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
