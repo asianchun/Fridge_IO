@@ -45,7 +45,7 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
+                self.view.frame.origin.y -= 200
             }
         }
     }
@@ -89,6 +89,10 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
                 self.displayMessage(title: "Error", message: message!)
             }
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Tap Gesture

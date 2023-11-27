@@ -13,6 +13,7 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
     weak var databaseController: DatabaseProtocol?
     
     //Outlets
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var confirmEmailTextField: UITextField!
    
@@ -44,26 +45,6 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         confirmPasswordTextField.layer.borderWidth = 1
         confirmPasswordTextField.layer.cornerRadius = 5
         confirmPasswordTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
-        
-        //Add a notification centre
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    //Adjust the screen when keyboard is open
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-
-    //Reset the screen when the keyboard closes
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
     }
     
     // MARK: - Listener functions
@@ -78,6 +59,10 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         databaseController?.removeListener(listener: self)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //Listens to the results of signup
@@ -96,6 +81,7 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
     //Deselect current entry when pressing on the empty area
     @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
+        self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     
@@ -181,6 +167,20 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
                 }
                 
                 databaseController?.signup(email: email, password: password)
+            }
+        }
+    }
+    
+    @IBAction func onChangeResponder(_ sender: Any) {
+        if let textField = sender as? UITextField {
+            if textField == emailTextField {
+                scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            } else if textField == confirmEmailTextField {
+                scrollView.setContentOffset(CGPoint(x: 0, y: 50), animated: true)
+            } else if textField == passwordTextField {
+                scrollView.setContentOffset(CGPoint(x: 0, y: 100), animated: true)
+            } else if textField == confirmPasswordTextField {
+                scrollView.setContentOffset(CGPoint(x: 0, y: 150), animated: true)
             }
         }
     }
