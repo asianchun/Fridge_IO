@@ -35,6 +35,26 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
         passwordTextField.layer.borderWidth = 1
         passwordTextField.layer.cornerRadius = 5
         passwordTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        //Add a notification centre
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //Adjust the screen when keyboard is open
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    //Reset the screen when the keyboard closes
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     // MARK: - Listener functions
@@ -69,6 +89,13 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
                 self.displayMessage(title: "Error", message: message!)
             }
         }
+    }
+    
+    // MARK: - Tap Gesture
+    
+    //Deselect current entry when pressing on the empty area
+    @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     // MARK: - Functions
@@ -143,6 +170,23 @@ class LoginScreenViewController: UIViewController, DatabaseListener {
         handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //Do the login after pressing enter
+    @IBAction func onEnter(_ sender: Any) {
+        if let textField = sender as? UITextField {
+            if textField == emailTextField {
+                passwordTextField.becomeFirstResponder()
+            } else if textField == passwordTextField {
+                let (emailIsValid, email, password) = validateFields()
+                
+                if !emailIsValid {
+                    return
+                }
+                
+                databaseController?.login(email: email, password: password)
+            }
+        }
     }
     
     // MARK: - Useless functions for this Controller

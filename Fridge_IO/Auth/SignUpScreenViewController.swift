@@ -44,6 +44,26 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         confirmPasswordTextField.layer.borderWidth = 1
         confirmPasswordTextField.layer.cornerRadius = 5
         confirmPasswordTextField.layer.borderColor = UIColor(named: "buttons")?.cgColor
+        
+        //Add a notification centre
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //Adjust the screen when keyboard is open
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+
+    //Reset the screen when the keyboard closes
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     // MARK: - Listener functions
@@ -70,6 +90,14 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
             }
         }
     }
+    
+    // MARK: - Tap Gesture
+    
+    //Deselect current entry when pressing on the empty area
+    @IBAction func handleTap(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     
     // MARK: - Functions
     
@@ -134,6 +162,27 @@ class SignUpScreenViewController: UIViewController, DatabaseListener {
         handler: nil))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //Do the login after pressing enter
+    @IBAction func onEnter(_ sender: Any) {
+        if let textField = sender as? UITextField {
+            if textField == emailTextField {
+                confirmEmailTextField.becomeFirstResponder()
+            } else if textField == confirmEmailTextField {
+                passwordTextField.becomeFirstResponder()
+            } else if textField == passwordTextField {
+                confirmPasswordTextField.becomeFirstResponder()
+            } else if textField == confirmPasswordTextField {
+                let (emailIsValid, email, password) = validateFields()
+                
+                if !emailIsValid {
+                    return
+                }
+                
+                databaseController?.signup(email: email, password: password)
+            }
+        }
     }
     
     // MARK: - Useless functions for this Controller

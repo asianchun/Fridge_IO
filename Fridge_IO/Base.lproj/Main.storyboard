@@ -54,24 +54,36 @@
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <connections>
+                                    <action selector="onEnter:" destination="k57-xl-XAk" eventType="primaryActionTriggered" id="OmA-7o-AEu"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="******" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bpm-1c-AJh">
                                 <rect key="frame" x="20" y="487" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <action selector="onEnter:" destination="k57-xl-XAk" eventType="primaryActionTriggered" id="Dc3-5l-Dk4"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="******" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s3q-PY-vCa">
                                 <rect key="frame" x="20" y="400" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <action selector="onEnter:" destination="k57-xl-XAk" eventType="primaryActionTriggered" id="Xrs-DJ-8R6"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="example@mail.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fwa-b7-VWe">
                                 <rect key="frame" x="20" y="226" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <connections>
+                                    <action selector="onEnter:" destination="k57-xl-XAk" eventType="primaryActionTriggered" id="aWg-Qm-N81"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wgj-bc-WML">
                                 <rect key="frame" x="153.66666666666666" y="571" width="86" height="37"/>
@@ -126,6 +138,9 @@
                             <constraint firstItem="Fwa-b7-VWe" firstAttribute="top" secondItem="oSJ-iA-J95" secondAttribute="bottom" constant="10" id="yPj-vC-jJ5"/>
                             <constraint firstItem="yO5-3y-Yiq" firstAttribute="top" secondItem="Fwa-b7-VWe" secondAttribute="bottom" constant="20" id="zDe-Dk-86n"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="BDj-jN-jMQ" appends="YES" id="guk-da-CGY"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Lbj-1g-cFM"/>
                     <connections>
@@ -137,6 +152,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0pw-Tq-y8T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="BDj-jN-jMQ">
+                    <connections>
+                        <action selector="handleTapWithRecognizer:" destination="k57-xl-XAk" id="JtH-o4-sr7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="133.58778625954199" y="719.71830985915494"/>
         </scene>
@@ -165,12 +185,18 @@
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <connections>
+                                    <action selector="onEnter:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="76K-so-xfR"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="******" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3gM-1G-8qr">
                                 <rect key="frame" x="20" y="416.33333333333331" width="353" height="34"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <fontDescription key="fontDescription" name="GillSans-Light" family="Gill Sans" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <action selector="onEnter:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="tyd-i2-cCa"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7k0-V4-p6s">
                                 <rect key="frame" x="163.66666666666666" y="520.33333333333337" width="65.666666666666657" height="37"/>
@@ -243,6 +269,9 @@
                             <constraint firstItem="Utf-gO-qII" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="vxI-gM-2aG"/>
                             <constraint firstItem="Sr9-e0-As1" firstAttribute="top" secondItem="Jmu-Pg-D0w" secondAttribute="bottom" constant="40" id="ySd-uq-vsG"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="f92-sp-kmb" appends="YES" id="fcm-8O-hef"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="JgX-ki-3cZ"/>
                     <connections>
@@ -252,6 +281,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="f92-sp-kmb">
+                    <connections>
+                        <action selector="handleTapWithRecognizer:" destination="BYZ-38-t0r" id="3uZ-Rf-1I4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="135.1145038167939" y="3.5211267605633805"/>
         </scene>
