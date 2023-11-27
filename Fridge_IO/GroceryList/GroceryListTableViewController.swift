@@ -21,6 +21,7 @@ class GroceryListTableViewController: UITableViewController {
     //Other variables
     var groceryList: GroceryList?
     var currentIndex: NSIndexPath?
+    var firstOpen = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class GroceryListTableViewController: UITableViewController {
     //Add new grocery list entry on + press
     @IBAction func addListEntry(_ sender: Any) {
         groceryList?.listItems!.append("")
+        firstOpen = false
         tableView.reloadData()
     }
     
@@ -62,6 +64,7 @@ class GroceryListTableViewController: UITableViewController {
     //Add new grocery list entry on enter
     @IBAction func onEnter(_ sender: Any) {
         groceryList?.listItems!.append("")
+        firstOpen = false
         tableView.reloadData()
     }
     
@@ -112,8 +115,10 @@ class GroceryListTableViewController: UITableViewController {
             listCell.listTextField.text = listValue
             
             //Automatically select and start editing the last / the newly created entry
-            if indexPath.row == (groceryList?.listItems!.count)! - 1 {
-                listCell.listTextField.becomeFirstResponder()
+            if indexPath.row == (groceryList?.listItems!.count)! - 1 && !firstOpen {
+                DispatchQueue.main.async {
+                    listCell.listTextField.becomeFirstResponder()
+                }
             }
 
             return listCell
@@ -143,7 +148,7 @@ class GroceryListTableViewController: UITableViewController {
         let acceptAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             tableView.reloadData()
             self.groceryList?.listItems!.remove(at: indexPath.row)
-            
+            self.firstOpen = true
             tableView.reloadData()
             completionHandler(true)
         }
