@@ -80,8 +80,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
                         listener.onAuthChange(success: true, message: nil)
                     }
                 }
-                
-                self.setupGroceryListener()
             } catch {
                 //Tell the login screen that the login was unsuccessful with the error message
                 listeners.invoke { (listener) in
@@ -119,8 +117,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
                         listener.onAuthChange(success: true, message: nil)
                     }
                 }
-                
-                self.setupGroceryListener()
             } catch {
                 //Tell the login screen that the login was unsuccessful with the error message
                 listeners.invoke { (listener) in
@@ -165,6 +161,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     }
     
     func parseUsersSnaphot(snapshot: QuerySnapshot) {
+        print("operation 1")
         snapshot.documentChanges.forEach { (change) in
             var parsedUser: User?
             
@@ -243,6 +240,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     //Setup the grocery snapshot listener
     func setupGroceryListener() {
+        print("operation 2")
         groceryListener?.remove() //Reset the listener after every login / signup / app reset
 
         groceryListener = (groceriesRef?.addSnapshotListener() { (querySnapshot, error) in
