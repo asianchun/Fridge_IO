@@ -182,6 +182,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
             
             //Setup the user's grocery and grocery list collections
             if user.userID == currentUser?.uid {
+                print("Made it here")
                 groceriesRef = database.collection("users/\(user.id!)/groceries")
                 groceryListsRef = database.collection("users/\(user.id!)/groceryLists")
                 
