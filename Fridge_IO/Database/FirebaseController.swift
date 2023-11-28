@@ -144,6 +144,39 @@ class FirebaseController: NSObject, DatabaseProtocol {
         authController.sendPasswordReset(withEmail: email)
     }
     
+    //Delete user
+    func deleteUser(completion: @escaping () -> Void) {
+        let userID = currentUser?.uid ?? ""
+        
+        //Clear all user data from the database
+        usersRef?.whereField("userID", isEqualTo: userID).getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    // Document found, delete it
+                    let documentID = document.documentID
+                    self.usersRef?.document(documentID).delete() { error in
+                        if let error = error {
+                            print("Error deleting document: \(error)")
+                        } else {
+                            print("Document successfully deleted")
+                        }
+                    }
+                }
+            }
+        }
+        
+        //Delete the user from the database
+        currentUser?.delete { error in
+            if let error = error {
+              print(error)
+            } else {
+                completion()
+            }
+        }
+    }
+    
     // MARK: - Users functions
     
     func setupUsersListener() {

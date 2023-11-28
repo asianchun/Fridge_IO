@@ -40,6 +40,7 @@ protocol DatabaseProtocol: AnyObject {
     func signup(email: String, password: String)
     func logout()
     func resetPassword(email: String)
+    func deleteUser(completion: @escaping () -> Void)
     
     //User functions
     func setupUsersListener()

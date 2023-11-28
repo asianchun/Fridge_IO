@@ -19,6 +19,7 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
     //Constants
     let CELL_GROCERY = "groceryCell"
     let ABOUT = "About Fridge.IO"
+    let DELETE_ACCOUNT = "Delete Account"
     let LOGOUT = "Log Out"
     
     //Other variables
@@ -129,14 +130,28 @@ class GroceryPageTableViewController: UITableViewController, UISearchBarDelegate
                 alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
                 
                 self.present(alertController, animated: true, completion: nil)
+            case self.DELETE_ACCOUNT:
+                let alertController = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account?", preferredStyle: .alert)
+                
+                alertController.addAction(UIAlertAction(title: "Yes", style: .default, handler: { action in
+                    self.databaseController?.deleteUser(completion: {
+                        self.databaseController?.logout()
+                        self.performSegue(withIdentifier: "logoutIdentifier", sender: self)
+                    })
+                }))
+                
+                alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                
+                self.present(alertController, animated: true, completion: nil)
             default:
                 print("Error")
             }
         }
         
         settingsBtn.menu = UIMenu(children: [
-            UIAction(title: ABOUT, handler: optionClosure),
             UIAction(title: LOGOUT, handler: optionClosure),
+            UIAction(title: ABOUT, handler: optionClosure),
+            UIAction(title: DELETE_ACCOUNT, handler: optionClosure),
         ])
     }
     
