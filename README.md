@@ -16,7 +16,7 @@ Welcome to the Fridge App for iOS! This app is designed to help you manage your 
 
 To use the Fridge-IO on your iOS device, follow these steps:
 
-1. Download and install the app from the App Store [here](#).
+1. Download and install the app from the App Store [here](#https://apps.apple.com/us/app/fridge-io/id6473154554).
 2. Launch the app and sign up for a new account or log in if you already have one.
 3. Start adding groceries to your virtual fridge and explore the app's features.
 
